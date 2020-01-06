@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('体弱儿童登记列表')" />
+    <th:block th:include="include :: header('提醒与预警列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,29 +11,29 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>姓名：</p>
-                                <input type="text" name="xm"/>
+                                <p>年龄别体重评价：</p>
+                                <input type="text" name="lnbtz"/>
                             </li>
                             <li>
-                                <p>性别：</p>
-                                <input type="text" name="xbdm"/>
+                                <p>年龄别身高评价：</p>
+                                <input type="text" name="lnbsg"/>
                             </li>
                             <li>
-                                <p>母亲姓名：</p>
-                                <input type="text" name="mqxm"/>
+                                <p>身高别体重评价：</p>
+                                <input type="text" name="sgbtzpj"/>
                             </li>
                             <li>
-                                <p>母亲证件号码：</p>
-                                <input type="text" name="mqsfzjhm"/>
+                                <p>儿童神经精神发育筛查：</p>
+                                <input type="text" name="sjjsfyjg"/>
+                            </li>
+                            <!--<li>
+                                <p>检查人员：</p>
+                                <input type="text" name="jcry"/>
                             </li>
                             <li>
-                                <p>联系方式：</p>
-                                <input type="text" name="lxfs"/>
-                            </li>
-                            <li>
-                                <p>现住址：</p>
-                                <input type="text" name="xzz"/>
-                            </li>
+                                <p>检查机构：</p>
+                                <input type="text" name="jcjg"/>
+                            </li>-->
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -44,21 +44,18 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="tretgl:tretdj:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="etjktj:txyyj:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="tretgl:tretdj:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="etjktj:txyyj:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tretgl:tretdj:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="etjktj:txyyj:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="etjktj:txyyj:export">
                     <i class="fa fa-download"></i> 导出
                  </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
-                    <i class="fa fa-download"></i> 打印
-                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -67,9 +64,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('tretgl:tretdj:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('tretgl:tretdj:remove')}]];
-        var prefix = ctx + "tretgl/tretdj";
+        var editFlag = [[${@permission.hasPermi('etjktj:txyyj:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('etjktj:txyyj:remove')}]];
+        var prefix = ctx + "etjktj/txyyj";
         var xbdmDatas = [[${@dict.getType('sys_user_sex')}]];
 
         $(function() {
@@ -79,17 +76,17 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "体弱儿童登记",
+                modalName: "儿童健康体检医学指导",
                 columns: [{
                     checkbox: true
                 },
                 {
-                    field : 'id', 
+                    field : 'id',
                     title : '主键',
                     visible: false
                 },
                 {
-                    field : 'xm', 
+                    field : 'xm',
                     title : '姓名'
                 },
                 {
@@ -100,25 +97,41 @@
                     }
                 },
                 {
-                    field : 'csrq', 
+                    field : 'csrq',
                     title : '出生日期'
                 },
                 {
-                    field : 'mqxm', 
+                    field : 'mqxm',
                     title : '母亲姓名'
                 },
                 {
-                    field : 'mqsfzjhm', 
-                    title : '母亲证件号码'
+                    field : 'lnbtz', 
+                    title : '年龄别体重评价'
                 },
                 {
-                    field : 'lxfs', 
-                    title : '联系方式'
+                    field : 'lnbsg', 
+                    title : '年龄别身高评价'
                 },
                 {
-                    field : 'xzz', 
-                    title : '现住址'
+                    field : 'sgbtzpj', 
+                    title : '身高别体重评价'
                 },
+                {
+                    field : 'sjjsfyjg', 
+                    title : '儿童神经精神发育筛查'
+                },
+                /*{
+                    field : 'jcrq', 
+                    title : '检查日期'
+                },
+                {
+                    field : 'jcry', 
+                    title : '检查人员'
+                },
+                {
+                    field : 'jcjg', 
+                    title : '检查机构'
+                },*/
                 {
                     title: '操作',
                     align: 'center',

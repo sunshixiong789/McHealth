@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('体弱儿童登记列表')" />
+    <th:block th:include="include :: header('报告卡登记列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -16,23 +16,29 @@
                             </li>
                             <li>
                                 <p>性别：</p>
-                                <input type="text" name="xbdm"/>
+                                <select name="xbdm" th:with="type=${@dict.getType('sys_user_sex')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>出生日期：</p>
+                                <input type="text" class="time-input"  placeholder="出生日期" name="csrq"/>
                             </li>
                             <li>
                                 <p>母亲姓名：</p>
                                 <input type="text" name="mqxm"/>
                             </li>
                             <li>
-                                <p>母亲证件号码：</p>
+                                <p>证件类别：</p>
+                                <select name="mqsfzj" th:with="type=${@dict.getType('sys_user_paperwork')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>证件号码：</p>
                                 <input type="text" name="mqsfzjhm"/>
-                            </li>
-                            <li>
-                                <p>联系方式：</p>
-                                <input type="text" name="lxfs"/>
-                            </li>
-                            <li>
-                                <p>现住址：</p>
-                                <input type="text" name="xzz"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -44,21 +50,18 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="tretgl:tretdj:add">
+                <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="swbg:bgksb:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="tretgl:tretdj:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="swbg:bgksb:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tretgl:tretdj:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="swbg:bgksb:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="swbg:bgksb:export">
                     <i class="fa fa-download"></i> 导出
                  </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
-                    <i class="fa fa-download"></i> 打印
-                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -67,10 +70,11 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('tretgl:tretdj:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('tretgl:tretdj:remove')}]];
-        var prefix = ctx + "tretgl/tretdj";
+        var editFlag = [[${@permission.hasPermi('swbg:bgksb:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('swbg:bgksb:remove')}]];
         var xbdmDatas = [[${@dict.getType('sys_user_sex')}]];
+        var mqsfzjDatas = [[${@dict.getType('sys_user_paperwork')}]];
+        var prefix = ctx + "swbg/bgksb";
 
         $(function() {
             var options = {
@@ -79,7 +83,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "体弱儿童登记",
+                modalName: "报告卡登记",
                 columns: [{
                     checkbox: true
                 },
@@ -93,10 +97,10 @@
                     title : '姓名'
                 },
                 {
-                    field : 'xbdm',
+                    field : 'xbdm', 
                     title : '性别',
                     formatter: function(value, row, index) {
-                        return $.table.selectDictLabel(xbdmDatas, value);
+                       return $.table.selectDictLabel(xbdmDatas, value);
                     }
                 },
                 {
@@ -107,17 +111,52 @@
                     field : 'mqxm', 
                     title : '母亲姓名'
                 },
+                // {
+                //     field : 'mqsfzj',
+                //     title : '证件类别',
+                //     formatter: function(value, row, index) {
+                //        return $.table.selectDictLabel(mqsfzjDatas, value);
+                //     }
+                // },
                 {
                     field : 'mqsfzjhm', 
-                    title : '母亲证件号码'
+                    title : '证件号码'
                 },
+                // {
+                //     field : 'dzsheng',
+                //     title : '地址-省/直辖市/自治区'
+                // },
+                // {
+                //     field : 'dzshi',
+                //     title : '地址-市/地区'
+                // },
+                // {
+                //     field : 'dzxian',
+                //     title : '地址-区/县'
+                // },
+                // {
+                //     field : 'dzxiang',
+                //     title : '地址-乡镇/街道办事处'
+                // },
+                // {
+                //     field : 'dzcun',
+                //     title : '地址-村/街/路'
+                // },
+                // {
+                //     field : 'dzmp',
+                //     title : '地址-门牌'
+                // },
                 {
                     field : 'lxfs', 
                     title : '联系方式'
                 },
                 {
-                    field : 'xzz', 
+                    field : 'xzz',
                     title : '现住址'
+                },
+                {
+                    field : 'djrq',
+                    title : '登记日期'
                 },
                 {
                     title: '操作',

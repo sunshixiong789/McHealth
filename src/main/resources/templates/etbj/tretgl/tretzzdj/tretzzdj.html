@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('体弱儿童登记列表')" />
+    <th:block th:include="include :: header('体弱儿童转诊登记列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -44,21 +44,18 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="tretgl:tretdj:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="tretgl:tretzzdj:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="tretgl:tretdj:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="tretgl:tretzzdj:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tretgl:tretdj:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tretgl:tretzzdj:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretzzdj:export">
                     <i class="fa fa-download"></i> 导出
                  </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
-                    <i class="fa fa-download"></i> 打印
-                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -67,9 +64,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('tretgl:tretdj:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('tretgl:tretdj:remove')}]];
-        var prefix = ctx + "tretgl/tretdj";
+        var editFlag = [[${@permission.hasPermi('tretgl:tretzzdj:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('tretgl:tretzzdj:remove')}]];
+        var prefix = ctx + "tretgl/tretzzdj";
         var xbdmDatas = [[${@dict.getType('sys_user_sex')}]];
 
         $(function() {

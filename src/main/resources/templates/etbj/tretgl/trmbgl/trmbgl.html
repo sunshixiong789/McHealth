@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('体弱儿童登记列表')" />
+    <th:block th:include="include :: header('体弱儿童模板管理列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,28 +11,22 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>姓名：</p>
-                                <input type="text" name="xm"/>
+                                <p>喂养方式：</p>
+                                <select name="wyfs" th:with="type=${@dict.getType('sys_et_wyfs')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
-                                <p>性别：</p>
-                                <input type="text" name="xbdm"/>
+                                <p>随诊月龄：</p>
+                                <input type="text" name="szyl"/>
                             </li>
                             <li>
-                                <p>母亲姓名：</p>
-                                <input type="text" name="mqxm"/>
-                            </li>
-                            <li>
-                                <p>母亲证件号码：</p>
-                                <input type="text" name="mqsfzjhm"/>
-                            </li>
-                            <li>
-                                <p>联系方式：</p>
-                                <input type="text" name="lxfs"/>
-                            </li>
-                            <li>
-                                <p>现住址：</p>
-                                <input type="text" name="xzz"/>
+                                <p>体弱原因：</p>
+                                <select name="tryy" th:with="type=${@dict.getType('sys_et_ettryy')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -44,21 +38,18 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="tretgl:tretdj:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="tretgl:trmbgl:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="tretgl:tretdj:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="tretgl:trmbgl:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tretgl:tretdj:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tretgl:trmbgl:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:trmbgl:export">
                     <i class="fa fa-download"></i> 导出
                  </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="tretgl:tretdj:export">
-                    <i class="fa fa-download"></i> 打印
-                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -67,10 +58,12 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('tretgl:tretdj:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('tretgl:tretdj:remove')}]];
-        var prefix = ctx + "tretgl/tretdj";
+        var editFlag = [[${@permission.hasPermi('tretgl:trmbgl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('tretgl:trmbgl:remove')}]];
+        var wyfsDatas = [[${@dict.getType('sys_et_wyfs')}]];
+        var tryyDatas = [[${@dict.getType('sys_et_ettryy')}]];
         var xbdmDatas = [[${@dict.getType('sys_user_sex')}]];
+        var prefix = ctx + "tretgl/trmbgl";
 
         $(function() {
             var options = {
@@ -79,7 +72,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "体弱儿童登记",
+                modalName: "体弱儿童问询记录",
                 columns: [{
                     checkbox: true
                 },
@@ -89,7 +82,7 @@
                     visible: false
                 },
                 {
-                    field : 'xm', 
+                    field : 'xm',
                     title : '姓名'
                 },
                 {
@@ -100,24 +93,34 @@
                     }
                 },
                 {
-                    field : 'csrq', 
+                    field : 'csrq',
                     title : '出生日期'
                 },
                 {
-                    field : 'mqxm', 
+                    field : 'mqxm',
                     title : '母亲姓名'
                 },
                 {
-                    field : 'mqsfzjhm', 
-                    title : '母亲证件号码'
+                    field : 'wyfs', 
+                    title : '喂养方式',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(wyfsDatas, value);
+                    }
                 },
                 {
-                    field : 'lxfs', 
-                    title : '联系方式'
+                    field : 'szyl', 
+                    title : '随诊月龄'
                 },
                 {
-                    field : 'xzz', 
-                    title : '现住址'
+                    field : 'tryy', 
+                    title : '体弱原因',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(tryyDatas, value);
+                    }
+                },
+                {
+                    field : 'jdrq', 
+                    title : '建档日期'
                 },
                 {
                     title: '操作',
