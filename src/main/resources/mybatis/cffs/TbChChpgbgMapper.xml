@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.chjc.chpgbg.mapper.TbChChpgbgMapper">
+    
+    <resultMap type="TbChChpgbg" id="TbChChpgbgResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mz"    column="mz"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="jarq"    column="jarq"    />
+        <result property="jadwmc"    column="jadwmc"    />
+        <result property="jafs"    column="jafs"    />
+        <result property="jaryxm"    column="jaryxm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="chjcdjid"    column="chjcdjid"    />
+    </resultMap>
+
+    <sql id="selectTbChChpgbgVo">
+        select id, xm, csrq, mz, mqsfzjhm, jarq, jadwmc, jafs, jaryxm, lxfs, djrq, chjcdjid from tb_ch_chpgbg
+    </sql>
+
+    <select id="selectTbChChpgbgList" parameterType="TbChChpgbg" resultMap="TbChChpgbgResult">
+        <include refid="selectTbChChpgbgVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mz != null  and mz != ''"> and mz = #{mz}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="jarq != null "> and jarq = #{jarq}</if>
+            <if test="jadwmc != null  and jadwmc != ''"> and jadwmc = #{jadwmc}</if>
+            <if test="jafs != null  and jafs != ''"> and jafs = #{jafs}</if>
+            <if test="jaryxm != null  and jaryxm != ''"> and jaryxm = #{jaryxm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="chjcdjid != null "> and chjcdjid = #{chjcdjid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChChpgbgById" parameterType="Long" resultMap="TbChChpgbgResult">
+        <include refid="selectTbChChpgbgVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChChpgbg" parameterType="TbChChpgbg" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_chpgbg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mz != null  and mz != ''">mz,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="jarq != null ">jarq,</if>
+            <if test="jadwmc != null  and jadwmc != ''">jadwmc,</if>
+            <if test="jafs != null  and jafs != ''">jafs,</if>
+            <if test="jaryxm != null  and jaryxm != ''">jaryxm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="djrq != null ">djrq,</if>
+            <if test="chjcdjid != null ">chjcdjid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mz != null  and mz != ''">#{mz},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="jarq != null ">#{jarq},</if>
+            <if test="jadwmc != null  and jadwmc != ''">#{jadwmc},</if>
+            <if test="jafs != null  and jafs != ''">#{jafs},</if>
+            <if test="jaryxm != null  and jaryxm != ''">#{jaryxm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="djrq != null ">#{djrq},</if>
+            <if test="chjcdjid != null ">#{chjcdjid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChChpgbg" parameterType="TbChChpgbg">
+        update tb_ch_chpgbg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mz != null  and mz != ''">mz = #{mz},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="jarq != null ">jarq = #{jarq},</if>
+            <if test="jadwmc != null  and jadwmc != ''">jadwmc = #{jadwmc},</if>
+            <if test="jafs != null  and jafs != ''">jafs = #{jafs},</if>
+            <if test="jaryxm != null  and jaryxm != ''">jaryxm = #{jaryxm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="djrq != null ">djrq = #{djrq},</if>
+            <if test="chjcdjid != null ">chjcdjid = #{chjcdjid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChChpgbgById" parameterType="Long">
+        delete from tb_ch_chpgbg where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChChpgbgByIds" parameterType="String">
+        delete from tb_ch_chpgbg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

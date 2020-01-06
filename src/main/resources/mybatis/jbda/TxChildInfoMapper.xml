@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.jbda.etda.mapper.TxChildInfoMapper">
+    
+    <resultMap type="TxChildInfo" id="TxChildInfoResult">
+        <result property="healthFileId"    column="HEALTH_FILE_ID"    />
+        <result property="cardid"    column="cardID"    />
+        <result property="childName"    column="CHILD_NAME"    />
+        <result property="birthday"    column="BIRTHDAY"    />
+        <result property="age"    column="AGE"    />
+        <result property="gender"    column="GENDER"    />
+        <result property="nationality"    column="NATIONALITY"    />
+        <result property="fatherName"    column="FATHER_NAME"    />
+        <result property="fatherJob"    column="FATHER_JOB"    />
+        <result property="motherName"    column="MOTHER_NAME"    />
+        <result property="motherJob"    column="MOTHER_JOB"    />
+        <result property="address"    column="ADDRESS"    />
+        <result property="phone"    column="PHONE"    />
+        <result property="creatTime"    column="CREAT_TIME"    />
+        <result property="nursery"    column="NURSERY"    />
+        <result property="nurseryTime"    column="NURSERY_TIME"    />
+        <result property="fatherId"    column="FATHER_ID"    />
+        <result property="motherId"    column="MOTHER_ID"    />
+    </resultMap>
+
+    <sql id="selectTxChildInfoVo">
+        select HEALTH_FILE_ID, cardID, CHILD_NAME, BIRTHDAY, AGE, GENDER, NATIONALITY, FATHER_NAME, FATHER_JOB, MOTHER_NAME, MOTHER_JOB, ADDRESS, PHONE, CREAT_TIME, NURSERY, NURSERY_TIME, FATHER_ID, MOTHER_ID from tx_child_info
+    </sql>
+
+    <select id="selectTxChildInfoList" parameterType="TxChildInfo" resultMap="TxChildInfoResult">
+        <include refid="selectTxChildInfoVo"/>
+        <where>  
+            <if test="cardid != null  and cardid != ''"> and cardID = #{cardid}</if>
+            <if test="childName != null  and childName != ''"> and CHILD_NAME like concat('%', #{childName}, '%')</if>
+            <if test="birthday != null "> and BIRTHDAY = #{birthday}</if>
+            <if test="age != null  and age != ''"> and AGE = #{age}</if>
+            <if test="gender != null  and gender != ''"> and GENDER = #{gender}</if>
+            <if test="nationality != null  and nationality != ''"> and NATIONALITY = #{nationality}</if>
+            <if test="fatherName != null  and fatherName != ''"> and FATHER_NAME like concat('%', #{fatherName}, '%')</if>
+            <if test="fatherJob != null  and fatherJob != ''"> and FATHER_JOB = #{fatherJob}</if>
+            <if test="motherName != null  and motherName != ''"> and MOTHER_NAME like concat('%', #{motherName}, '%')</if>
+            <if test="motherJob != null  and motherJob != ''"> and MOTHER_JOB = #{motherJob}</if>
+            <if test="address != null  and address != ''"> and ADDRESS = #{address}</if>
+            <if test="phone != null  and phone != ''"> and PHONE = #{phone}</if>
+            <if test="creatTime != null "> and CREAT_TIME = #{creatTime}</if>
+            <if test="nursery != null  and nursery != ''"> and NURSERY = #{nursery}</if>
+            <if test="nurseryTime != null "> and NURSERY_TIME = #{nurseryTime}</if>
+            <if test="fatherId != null  and fatherId != ''"> and FATHER_ID = #{fatherId}</if>
+            <if test="motherId != null  and motherId != ''"> and MOTHER_ID = #{motherId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTxChildInfoById" parameterType="Long" resultMap="TxChildInfoResult">
+        <include refid="selectTxChildInfoVo"/>
+        where HEALTH_FILE_ID = #{healthFileId}
+    </select>
+        
+    <insert id="insertTxChildInfo" parameterType="TxChildInfo" useGeneratedKeys="true" keyProperty="healthFileId">
+        insert into tx_child_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cardid != null  and cardid != ''">cardID,</if>
+            <if test="childName != null  and childName != ''">CHILD_NAME,</if>
+            <if test="birthday != null ">BIRTHDAY,</if>
+            <if test="age != null  and age != ''">AGE,</if>
+            <if test="gender != null  and gender != ''">GENDER,</if>
+            <if test="nationality != null  and nationality != ''">NATIONALITY,</if>
+            <if test="fatherName != null  and fatherName != ''">FATHER_NAME,</if>
+            <if test="fatherJob != null  and fatherJob != ''">FATHER_JOB,</if>
+            <if test="motherName != null  and motherName != ''">MOTHER_NAME,</if>
+            <if test="motherJob != null  and motherJob != ''">MOTHER_JOB,</if>
+            <if test="address != null  and address != ''">ADDRESS,</if>
+            <if test="phone != null  and phone != ''">PHONE,</if>
+            <if test="creatTime != null ">CREAT_TIME,</if>
+            <if test="nursery != null  and nursery != ''">NURSERY,</if>
+            <if test="nurseryTime != null ">NURSERY_TIME,</if>
+            <if test="fatherId != null  and fatherId != ''">FATHER_ID,</if>
+            <if test="motherId != null  and motherId != ''">MOTHER_ID,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="childName != null  and childName != ''">#{childName},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="age != null  and age != ''">#{age},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="nationality != null  and nationality != ''">#{nationality},</if>
+            <if test="fatherName != null  and fatherName != ''">#{fatherName},</if>
+            <if test="fatherJob != null  and fatherJob != ''">#{fatherJob},</if>
+            <if test="motherName != null  and motherName != ''">#{motherName},</if>
+            <if test="motherJob != null  and motherJob != ''">#{motherJob},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="phone != null  and phone != ''">#{phone},</if>
+            <if test="creatTime != null ">#{creatTime},</if>
+            <if test="nursery != null  and nursery != ''">#{nursery},</if>
+            <if test="nurseryTime != null ">#{nurseryTime},</if>
+            <if test="fatherId != null  and fatherId != ''">#{fatherId},</if>
+            <if test="motherId != null  and motherId != ''">#{motherId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTxChildInfo" parameterType="TxChildInfo">
+        update tx_child_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cardid != null  and cardid != ''">cardID = #{cardid},</if>
+            <if test="childName != null  and childName != ''">CHILD_NAME = #{childName},</if>
+            <if test="birthday != null ">BIRTHDAY = #{birthday},</if>
+            <if test="age != null  and age != ''">AGE = #{age},</if>
+            <if test="gender != null  and gender != ''">GENDER = #{gender},</if>
+            <if test="nationality != null  and nationality != ''">NATIONALITY = #{nationality},</if>
+            <if test="fatherName != null  and fatherName != ''">FATHER_NAME = #{fatherName},</if>
+            <if test="fatherJob != null  and fatherJob != ''">FATHER_JOB = #{fatherJob},</if>
+            <if test="motherName != null  and motherName != ''">MOTHER_NAME = #{motherName},</if>
+            <if test="motherJob != null  and motherJob != ''">MOTHER_JOB = #{motherJob},</if>
+            <if test="address != null  and address != ''">ADDRESS = #{address},</if>
+            <if test="phone != null  and phone != ''">PHONE = #{phone},</if>
+            <if test="creatTime != null ">CREAT_TIME = #{creatTime},</if>
+            <if test="nursery != null  and nursery != ''">NURSERY = #{nursery},</if>
+            <if test="nurseryTime != null ">NURSERY_TIME = #{nurseryTime},</if>
+            <if test="fatherId != null  and fatherId != ''">FATHER_ID = #{fatherId},</if>
+            <if test="motherId != null  and motherId != ''">MOTHER_ID = #{motherId},</if>
+        </trim>
+        where HEALTH_FILE_ID = #{healthFileId}
+    </update>
+
+    <delete id="deleteTxChildInfoById" parameterType="Long">
+        delete from tx_child_info where HEALTH_FILE_ID = #{healthFileId}
+    </delete>
+
+    <delete id="deleteTxChildInfoByIds" parameterType="String">
+        delete from tx_child_info where HEALTH_FILE_ID in 
+        <foreach item="healthFileId" collection="array" open="(" separator="," close=")">
+            #{healthFileId}
+        </foreach>
+    </delete>
+    
+</mapper>

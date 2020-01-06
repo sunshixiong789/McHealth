@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.etjktj.jktjpgbg.mapper.TbEtJktjpgbgMapper">
+    
+    <resultMap type="TbEtJktjpgbg" id="TbEtJktjpgbgResult">
+        <result property="id"    column="id"    />
+        <result property="djid"    column="djid"    />
+        <result property="tgjcid"    column="tgjcid"    />
+        <result property="sysjlid"    column="sysjlid"    />
+        <result property="clyj"    column="clyj"    />
+        <result property="jafs"    column="jafs"    />
+        <result property="jarq"    column="jarq"    />
+        <result property="jajg"    column="jajg"    />
+        <result property="jary"    column="jary"    />
+    </resultMap>
+
+    <sql id="selectTbEtJktjpgbgVo">
+        select id, djid, tgjcid, sysjlid, clyj, jafs, jarq, jajg, jary from tb_et_jktjpgbg
+    </sql>
+
+    <select id="selectTbEtJktjpgbgList" parameterType="TbEtJktjpgbgVo" resultType="TbEtJktjpgbgVo">
+        select bg.id, bg.djid, bg.tgjcid, bg.sysjlid, bg.clyj, bg.jafs, bg.jarq, bg.jajg, bg.jary, dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_jktjpgbg bg inner join tb_et_jktjdj dj on bg.djid=dj.id
+        <where>  
+            <if test="djid != null "> and bg.djid = #{djid}</if>
+            <if test="tgjcid != null "> and bg.tgjcid = #{tgjcid}</if>
+            <if test="sysjlid != null "> and bg.sysjlid = #{sysjlid}</if>
+            <if test="clyj != null  and clyj != ''"> and bg.clyj = #{clyj}</if>
+            <if test="jafs != null  and jafs != ''"> and bg.jafs = #{jafs}</if>
+            <if test="jarq != null "> and bg.jarq = #{jarq}</if>
+            <if test="jajg != null  and jajg != ''"> and bg.jajg = #{jajg}</if>
+            <if test="jary != null  and jary != ''"> and bg.jary = #{jary}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtJktjpgbgById" parameterType="Long" resultType="TbEtJktjpgbgVo">
+      select bg.id, bg.djid, bg.tgjcid, bg.sysjlid, bg.clyj, bg.jafs, bg.jarq, bg.jajg, bg.jary, dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+      from tb_et_jktjpgbg bg inner join tb_et_jktjdj dj on bg.djid=dj.id
+        where bg.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtJktjpgbg" parameterType="TbEtJktjpgbg">
+        insert into tb_et_jktjpgbg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="djid != null ">djid,</if>
+            <if test="tgjcid != null ">tgjcid,</if>
+            <if test="sysjlid != null ">sysjlid,</if>
+            <if test="clyj != null  and clyj != ''">clyj,</if>
+            <if test="jafs != null  and jafs != ''">jafs,</if>
+            <if test="jarq != null ">jarq,</if>
+            <if test="jajg != null  and jajg != ''">jajg,</if>
+            <if test="jary != null  and jary != ''">jary,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="djid != null ">#{djid},</if>
+            <if test="tgjcid != null ">#{tgjcid},</if>
+            <if test="sysjlid != null ">#{sysjlid},</if>
+            <if test="clyj != null  and clyj != ''">#{clyj},</if>
+            <if test="jafs != null  and jafs != ''">#{jafs},</if>
+            <if test="jarq != null ">#{jarq},</if>
+            <if test="jajg != null  and jajg != ''">#{jajg},</if>
+            <if test="jary != null  and jary != ''">#{jary},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtJktjpgbg" parameterType="TbEtJktjpgbg">
+        update tb_et_jktjpgbg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clyj != null  and clyj != ''">clyj = #{clyj},</if>
+            <if test="jafs != null  and jafs != ''">jafs = #{jafs},</if>
+            <if test="jarq != null ">jarq = #{jarq},</if>
+            <if test="jajg != null  and jajg != ''">jajg = #{jajg},</if>
+            <if test="jary != null  and jary != ''">jary = #{jary},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtJktjpgbgById" parameterType="Long">
+        delete from tb_et_jktjpgbg where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtJktjpgbgByIds" parameterType="String">
+        delete from tb_et_jktjpgbg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

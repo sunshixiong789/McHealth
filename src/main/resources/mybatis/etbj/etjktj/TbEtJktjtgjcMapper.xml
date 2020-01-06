@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.etjktj.jktjtgjc.mapper.TbEtJktjtgjcMapper">
+    
+    <resultMap type="TbEtJktjtgjc" id="TbEtJktjtgjcResult">
+        <result property="id"    column="id"    />
+        <result property="djid"    column="djid"    />
+        <result property="fmfs"    column="fmfs"    />
+        <result property="csyz"    column="csyz"    />
+        <result property="tz"    column="tz"    />
+        <result property="sc"    column="sc"    />
+        <result property="pfz"    column="pfz"    />
+        <result property="csqxbz"    column="csqxbz"    />
+        <result property="csqxlb"    column="csqxlb"    />
+        <result property="jbscjg"    column="jbscjg"    />
+        <result property="ycbs"    column="ycbs"    />
+        <result property="hzbrgx"    column="hzbrgx"    />
+        <result property="gms"    column="gms"    />
+        <result property="ttyl"    column="ttyl"    />
+        <result property="fsyl"    column="fsyl"    />
+        <result property="dzyl"    column="dzyl"    />
+        <result property="pxyl"    column="pxyl"    />
+        <result property="aobxx"    column="aobxx"    />
+        <result property="rhxx"    column="rhxx"    />
+    </resultMap>
+
+    <sql id="selectTbEtJktjtgjcVo">
+        select id, djid, fmfs, csyz, tz, sc, pfz, csqxbz, csqxlb, jbscjg, ycbs, hzbrgx, gms, ttyl, fsyl, dzyl, pxyl, aobxx, rhxx from tb_et_jktjtgjc
+    </sql>
+
+    <select id="selectTbEtJktjtgjcList" parameterType="TbEtJktjtgjcVo" resultType="TbEtJktjtgjcVo">
+        select jc.id, jc.djid, jc.fmfs, jc.csyz, jc.tz, jc.sc, jc.pfz, jc.csqxbz, jc.csqxlb, jc.jbscjg, jc.ycbs, jc.hzbrgx, jc.gms, jc.ttyl, jc.fsyl, jc.dzyl, jc.pxyl, jc.aobxx, jc.rhxx,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_jktjtgjc jc inner join tb_et_jktjdj dj on jc.djid=dj.id
+        <where>  
+            <if test="djid != null "> and jc.djid = #{djid}</if>
+            <if test="fmfs != null "> and jc.fmfs = #{fmfs}</if>
+            <if test="csyz != null "> and jc.csyz = #{csyz}</if>
+            <if test="tz != null "> and jc.tz = #{tz}</if>
+            <if test="sc != null "> and jc.sc = #{sc}</if>
+            <if test="pfz != null "> and jc.pfz = #{pfz}</if>
+            <if test="csqxbz != null "> and jc.csqxbz = #{csqxbz}</if>
+            <if test="csqxlb != null "> and jc.csqxlb = #{csqxlb}</if>
+            <if test="jbscjg != null "> and jc.jbscjg = #{jbscjg}</if>
+            <if test="ycbs != null  and ycbs != ''"> and jc.ycbs = #{ycbs}</if>
+            <if test="hzbrgx != null  and hzbrgx != ''"> and jc.hzbrgx = #{hzbrgx}</if>
+            <if test="gms != null  and gms != ''"> and jc.gms = #{gms}</if>
+            <if test="ttyl != null "> and jc.ttyl = #{ttyl}</if>
+            <if test="fsyl != null "> and jc.fsyl = #{fsyl}</if>
+            <if test="dzyl != null "> and jc.dzyl = #{dzyl}</if>
+            <if test="pxyl != null "> and jc.pxyl = #{pxyl}</if>
+            <if test="aobxx != null "> and jc.aobxx = #{aobxx}</if>
+            <if test="rhxx != null "> and jc.rhxx = #{rhxx}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtJktjtgjcById" parameterType="Long" resultType="TbEtJktjtgjcVo">
+      select jc.id, jc.djid, jc.fmfs, jc.csyz, jc.tz, jc.sc, jc.pfz, jc.csqxbz, jc.csqxlb, jc.jbscjg, jc.ycbs, jc.hzbrgx, jc.gms, jc.ttyl, jc.fsyl, jc.dzyl, jc.pxyl, jc.aobxx, jc.rhxx,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_jktjtgjc jc inner join tb_et_jktjdj dj on jc.djid=dj.id
+        where jc.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtJktjtgjc" parameterType="TbEtJktjtgjc" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_et_jktjtgjc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">djid,</if>
+            <if test="fmfs != null ">fmfs,</if>
+            <if test="csyz != null ">csyz,</if>
+            <if test="tz != null ">tz,</if>
+            <if test="sc != null ">sc,</if>
+            <if test="pfz != null ">pfz,</if>
+            <if test="csqxbz != null ">csqxbz,</if>
+            <if test="csqxlb != null ">csqxlb,</if>
+            <if test="jbscjg != null ">jbscjg,</if>
+            <if test="ycbs != null  and ycbs != ''">ycbs,</if>
+            <if test="hzbrgx != null  and hzbrgx != ''">hzbrgx,</if>
+            <if test="gms != null  and gms != ''">gms,</if>
+            <if test="ttyl != null ">ttyl,</if>
+            <if test="fsyl != null ">fsyl,</if>
+            <if test="dzyl != null ">dzyl,</if>
+            <if test="pxyl != null ">pxyl,</if>
+            <if test="aobxx != null ">aobxx,</if>
+            <if test="rhxx != null ">rhxx,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">#{djid},</if>
+            <if test="fmfs != null ">#{fmfs},</if>
+            <if test="csyz != null ">#{csyz},</if>
+            <if test="tz != null ">#{tz},</if>
+            <if test="sc != null ">#{sc},</if>
+            <if test="pfz != null ">#{pfz},</if>
+            <if test="csqxbz != null ">#{csqxbz},</if>
+            <if test="csqxlb != null ">#{csqxlb},</if>
+            <if test="jbscjg != null ">#{jbscjg},</if>
+            <if test="ycbs != null  and ycbs != ''">#{ycbs},</if>
+            <if test="hzbrgx != null  and hzbrgx != ''">#{hzbrgx},</if>
+            <if test="gms != null  and gms != ''">#{gms},</if>
+            <if test="ttyl != null ">#{ttyl},</if>
+            <if test="fsyl != null ">#{fsyl},</if>
+            <if test="dzyl != null ">#{dzyl},</if>
+            <if test="pxyl != null ">#{pxyl},</if>
+            <if test="aobxx != null ">#{aobxx},</if>
+            <if test="rhxx != null ">#{rhxx},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtJktjtgjc" parameterType="TbEtJktjtgjc">
+        update tb_et_jktjtgjc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="djid != null ">djid = #{djid},</if>
+            <if test="fmfs != null ">fmfs = #{fmfs},</if>
+            <if test="csyz != null ">csyz = #{csyz},</if>
+            <if test="tz != null ">tz = #{tz},</if>
+            <if test="sc != null ">sc = #{sc},</if>
+            <if test="pfz != null ">pfz = #{pfz},</if>
+            <if test="csqxbz != null ">csqxbz = #{csqxbz},</if>
+            <if test="csqxlb != null ">csqxlb = #{csqxlb},</if>
+            <if test="jbscjg != null ">jbscjg = #{jbscjg},</if>
+            <if test="ycbs != null  and ycbs != ''">ycbs = #{ycbs},</if>
+            <if test="hzbrgx != null  and hzbrgx != ''">hzbrgx = #{hzbrgx},</if>
+            <if test="gms != null  and gms != ''">gms = #{gms},</if>
+            <if test="ttyl != null ">ttyl = #{ttyl},</if>
+            <if test="fsyl != null ">fsyl = #{fsyl},</if>
+            <if test="dzyl != null ">dzyl = #{dzyl},</if>
+            <if test="pxyl != null ">pxyl = #{pxyl},</if>
+            <if test="aobxx != null ">aobxx = #{aobxx},</if>
+            <if test="rhxx != null ">rhxx = #{rhxx},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtJktjtgjcById" parameterType="Long">
+        delete from tb_et_jktjtgjc where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtJktjtgjcByIds" parameterType="String">
+        delete from tb_et_jktjtgjc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改新生儿访视记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-xsefsjl-edit" th:object="${tbEtXsefsjl}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <input name="fsdjid" th:field="*{fsdjid}" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">母亲姓名：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text"  readonly th:field="*{mqxm}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">联系方式：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" readonly th:field="*{lxfs}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">现住址：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text"  readonly th:value="${tbEtXsefsjl.xzz}" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="xm" readonly th:field="*{xm}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="csrq" readonly th:value="${#dates.format(tbEtXsefsjl.csrq, 'yyyy-MM-dd')}">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">体重：</label>
+                <div class="col-sm-8">
+                    <input name="tz" th:field="*{tz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身长：</label>
+                <div class="col-sm-8">
+                    <input name="sc" th:field="*{sc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">头围：</label>
+                <div class="col-sm-8">
+                    <input name="tw" th:field="*{tw}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">黄疸部位：</label>
+                <div class="col-sm-8">
+                    <select name="hddm" class="form-control m-b" th:with="type=${@dict.getType('sys_et_hdcd')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{hddm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">喂养方式代码：</label>
+                <div class="col-sm-8">
+                    <select name="wyfs" class="form-control m-b" th:with="type=${@dict.getType('sys_et_wyfs')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{wyfs}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">小便性状代码：</label>
+                <div class="col-sm-8">
+                    <select name="xbzkdm" class="form-control m-b" th:with="type=${@dict.getType('sys_et_xbxz')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{xbzkdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">小便状况：</label>
+                <div class="col-sm-8">
+                    <input name="xbzk" th:field="*{xbzk}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">大便性状代码：</label>
+                <div class="col-sm-8">
+                    <select name="dbzkdm" class="form-control m-b" th:with="type=${@dict.getType('sys_et_dbxz')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{dbzkdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">大便状况：</label>
+                <div class="col-sm-8">
+                    <input name="dbzk" th:field="*{dbzk}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">有无特殊情况：</label>
+                <div class="col-sm-8">
+                    <select name="tsqk" class="form-control m-b" th:with="type=${@dict.getType('sys_has_not')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">特殊情况：</label>
+                <div class="col-sm-8">
+                    <input name="tsqksm" th:field="*{tsqksm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">有无并发症：</label>
+                <div class="col-sm-8">
+                    <select name="bfz" class="form-control m-b" th:with="type=${@dict.getType('sys_has_not')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{bfz}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">并发症代码：</label>
+                <div class="col-sm-8">
+                    <select name="bfzdm" class="form-control m-b" th:with="type=${@dict.getType('sys_et_bfz')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{bfzdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">指导意见：</label>
+                <div class="col-sm-8">
+                    <input name="zdyj" th:field="*{zdyj}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">访视日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="fsrq" th:value="${#dates.format(tbEtXsefsjl.fsrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="jgmc" th:field="*{jgmc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">访视医生姓名：</label>
+                <div class="col-sm-8">
+                    <input name="ysxm" th:field="*{ysxm}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "xsesf/xsefsjl";
+        $("#form-xsefsjl-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-xsefsjl-edit').serialize());
+            }
+        }
+
+        $("input[name='fsrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

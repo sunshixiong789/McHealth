@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.hqbjfw.hqbjfwzdjl.mapper.TbFbHqbjfwzdjlMapper">
+    
+    <resultMap type="TbFbHqbjfwzdjl" id="TbFbHqbjfwzdjlResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="hqbjfwdjid"    column="hqbjfwdjid"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="dfjlbid"    column="dfjlbid"    />
+        <result property="dfxm"    column="dfxm"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="jbzddm"    column="jbzddm"    />
+        <result property="hqyxjcjgdm"    column="hqyxjcjgdm"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcryxm"    column="jcryxm"    />
+        <result property="jcjgmc"    column="jcjgmc"    />
+        <result property="tbrq"    column="tbrq"    />
+        <result property="szysxm"    column="szysxm"    />
+        <result property="zjysxm"    column="zjysxm"    />
+        <result property="cjrq"    column="cjrq"    />
+    </resultMap>
+
+    <sql id="selectTbFbHqbjfwzdjlVo">
+        select id, xm, hqbjfwdjid, cardid, dfjlbid, dfxm, birthday, jbzddm, hqyxjcjgdm, jcrq, jcryxm, jcjgmc, tbrq, szysxm, zjysxm, cjrq from tb_fb_hqbjfwzdjl
+    </sql>
+
+    <select id="selectTbFbHqbjfwzdjlList" parameterType="TbFbHqbjfwzdjl" resultMap="TbFbHqbjfwzdjlResult">
+        <include refid="selectTbFbHqbjfwzdjlVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="hqbjfwdjid != null "> and hqbjfwdjid = #{hqbjfwdjid}</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="dfjlbid != null "> and dfjlbid = #{dfjlbid}</if>
+            <if test="dfxm != null  and dfxm != ''"> and dfxm = #{dfxm}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="jbzddm != null  and jbzddm != ''"> and jbzddm = #{jbzddm}</if>
+            <if test="hqyxjcjgdm != null  and hqyxjcjgdm != ''"> and hqyxjcjgdm = #{hqyxjcjgdm}</if>
+            <if test="jcrq != null "> and jcrq = #{jcrq}</if>
+            <if test="jcryxm != null  and jcryxm != ''"> and jcryxm = #{jcryxm}</if>
+            <if test="jcjgmc != null  and jcjgmc != ''"> and jcjgmc = #{jcjgmc}</if>
+            <if test="tbrq != null "> and tbrq = #{tbrq}</if>
+            <if test="szysxm != null  and szysxm != ''"> and szysxm = #{szysxm}</if>
+            <if test="zjysxm != null  and zjysxm != ''"> and zjysxm = #{zjysxm}</if>
+            <if test="cjrq != null "> and cjrq = #{cjrq}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbFbHqbjfwzdjlById" parameterType="Long" resultMap="TbFbHqbjfwzdjlResult">
+        <include refid="selectTbFbHqbjfwzdjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbFbHqbjfwzdjl" parameterType="TbFbHqbjfwzdjl" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fb_hqbjfwzdjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="hqbjfwdjid != null ">hqbjfwdjid,</if>
+            <if test="cardid != null  and cardid != ''">cardid,</if>
+            <if test="dfjlbid != null ">dfjlbid,</if>
+            <if test="dfxm != null  and dfxm != ''">dfxm,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="jbzddm != null  and jbzddm != ''">jbzddm,</if>
+            <if test="hqyxjcjgdm != null  and hqyxjcjgdm != ''">hqyxjcjgdm,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm,</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc,</if>
+            <if test="tbrq != null ">tbrq,</if>
+            <if test="szysxm != null  and szysxm != ''">szysxm,</if>
+            <if test="zjysxm != null  and zjysxm != ''">zjysxm,</if>
+            <if test="cjrq != null ">cjrq,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="hqbjfwdjid != null ">#{hqbjfwdjid},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="dfjlbid != null ">#{dfjlbid},</if>
+            <if test="dfxm != null  and dfxm != ''">#{dfxm},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="jbzddm != null  and jbzddm != ''">#{jbzddm},</if>
+            <if test="hqyxjcjgdm != null  and hqyxjcjgdm != ''">#{hqyxjcjgdm},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcryxm != null  and jcryxm != ''">#{jcryxm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">#{jcjgmc},</if>
+            <if test="tbrq != null ">#{tbrq},</if>
+            <if test="szysxm != null  and szysxm != ''">#{szysxm},</if>
+            <if test="zjysxm != null  and zjysxm != ''">#{zjysxm},</if>
+            <if test="cjrq != null ">#{cjrq},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbFbHqbjfwzdjl" parameterType="TbFbHqbjfwzdjl">
+        update tb_fb_hqbjfwzdjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="hqbjfwdjid != null ">hqbjfwdjid = #{hqbjfwdjid},</if>
+            <if test="cardid != null  and cardid != ''">cardid = #{cardid},</if>
+            <if test="dfjlbid != null ">dfjlbid = #{dfjlbid},</if>
+            <if test="dfxm != null  and dfxm != ''">dfxm = #{dfxm},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="jbzddm != null  and jbzddm != ''">jbzddm = #{jbzddm},</if>
+            <if test="hqyxjcjgdm != null  and hqyxjcjgdm != ''">hqyxjcjgdm = #{hqyxjcjgdm},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm = #{jcryxm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc = #{jcjgmc},</if>
+            <if test="tbrq != null ">tbrq = #{tbrq},</if>
+            <if test="szysxm != null  and szysxm != ''">szysxm = #{szysxm},</if>
+            <if test="zjysxm != null  and zjysxm != ''">zjysxm = #{zjysxm},</if>
+            <if test="cjrq != null ">cjrq = #{cjrq},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbHqbjfwzdjlById" parameterType="Long">
+        delete from tb_fb_hqbjfwzdjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbHqbjfwzdjlByIds" parameterType="String">
+        delete from tb_fb_hqbjfwzdjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

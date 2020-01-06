@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.gwycf.gwycfyxjcjl.mapper.TbChGwycfyxjcjlMapper">
+    
+    <resultMap type="TbChGwycfyxjcjl" id="TbChGwycfyxjcjlResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="mqsfzjlbdm"    column="mqsfzjlbdm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="fzjcjg"    column="fzjcjg"    />
+        <result property="fzjcxmmc"    column="fzjcxmmc"    />
+        <result property="jcryxm"    column="jcryxm"    />
+        <result property="jcjgmc"    column="jcjgmc"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="gwycfdjid"    column="gwycfdjid"    />
+    </resultMap>
+
+    <sql id="selectTbChGwycfyxjcjlVo">
+        select id, xm, csrq, mqsfzjhm, mqsfzjlbdm, lxfs, fzjcjg, fzjcxmmc, jcryxm, jcjgmc, jcrq, djrq, gwycfdjid from tb_ch_gwycfyxjcjl
+    </sql>
+
+    <select id="selectTbChGwycfyxjcjlList" parameterType="TbChGwycfyxjcjl" resultMap="TbChGwycfyxjcjlResult">
+        <include refid="selectTbChGwycfyxjcjlVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''"> and mqsfzjlbdm = #{mqsfzjlbdm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="fzjcjg != null  and fzjcjg != ''"> and fzjcjg = #{fzjcjg}</if>
+            <if test="fzjcxmmc != null  and fzjcxmmc != ''"> and fzjcxmmc = #{fzjcxmmc}</if>
+            <if test="jcryxm != null  and jcryxm != ''"> and jcryxm = #{jcryxm}</if>
+            <if test="jcjgmc != null  and jcjgmc != ''"> and jcjgmc = #{jcjgmc}</if>
+            <if test="jcrq != null "> and jcrq = #{jcrq}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="gwycfdjid != null "> and gwycfdjid = #{gwycfdjid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChGwycfyxjcjlById" parameterType="Long" resultMap="TbChGwycfyxjcjlResult">
+        <include refid="selectTbChGwycfyxjcjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChGwycfyxjcjl" parameterType="TbChGwycfyxjcjl" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_gwycfyxjcjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="fzjcjg != null  and fzjcjg != ''">fzjcjg,</if>
+            <if test="fzjcxmmc != null  and fzjcxmmc != ''">fzjcxmmc,</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm,</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="djrq != null ">djrq,</if>
+            <if test="gwycfdjid != null ">gwycfdjid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">#{mqsfzjlbdm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="fzjcjg != null  and fzjcjg != ''">#{fzjcjg},</if>
+            <if test="fzjcxmmc != null  and fzjcxmmc != ''">#{fzjcxmmc},</if>
+            <if test="jcryxm != null  and jcryxm != ''">#{jcryxm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">#{jcjgmc},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="djrq != null ">#{djrq},</if>
+            <if test="gwycfdjid != null ">#{gwycfdjid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChGwycfyxjcjl" parameterType="TbChGwycfyxjcjl">
+        update tb_ch_gwycfyxjcjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm = #{mqsfzjlbdm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="fzjcjg != null  and fzjcjg != ''">fzjcjg = #{fzjcjg},</if>
+            <if test="fzjcxmmc != null  and fzjcxmmc != ''">fzjcxmmc = #{fzjcxmmc},</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm = #{jcryxm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc = #{jcjgmc},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="djrq != null ">djrq = #{djrq},</if>
+            <if test="gwycfdjid != null ">gwycfdjid = #{gwycfdjid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChGwycfyxjcjlById" parameterType="Long">
+        delete from tb_ch_gwycfyxjcjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChGwycfyxjcjlByIds" parameterType="String">
+        delete from tb_ch_gwycfyxjcjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

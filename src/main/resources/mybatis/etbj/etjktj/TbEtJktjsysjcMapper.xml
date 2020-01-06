@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.etjktj.jktjsysjc.mapper.TbEtJktjsysjcMapper">
+    
+    <resultMap type="TbEtJktjsysjc" id="TbEtJktjsysjcResult">
+        <result property="id"    column="id"    />
+        <result property="djid"    column="djid"    />
+        <result property="xhdbz"    column="xhdbz"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcry"    column="jcry"    />
+        <result property="jcjg"    column="jcjg"    />
+        <result property="tgjcid"    column="tgjcid"    />
+    </resultMap>
+
+    <sql id="selectTbEtJktjsysjcVo">
+        select id, djid, xhdbz, jcrq, jcry, jcjg, tgjcid from tb_et_jktjsysjc
+    </sql>
+
+    <select id="selectTbEtJktjsysjcList" parameterType="TbEtJktjsysjcVo" resultType="TbEtJktjsysjcVo">
+        select jc.id, jc.djid, jc.xhdbz, jc.jcrq, jc.jcry, jc.jcjg, jc.tgjcid,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_jktjsysjc jc inner join tb_et_jktjdj dj on jc.djid=dj.id
+        <where>  
+            <if test="djid != null "> and jc.djid = #{djid}</if>
+            <if test="xhdbz != null  and xhdbz != ''"> and jc.xhdbz = #{xhdbz}</if>
+            <if test="jcrq != null "> and jc.jcrq = #{jcrq}</if>
+            <if test="jcry != null  and jcry != ''"> and jc.jcry = #{jcry}</if>
+            <if test="jcjg != null  and jcjg != ''"> and jc.jcjg = #{jcjg}</if>
+            <if test="tgjcid != null "> and jc.tgjcid = #{tgjcid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtJktjsysjcById" parameterType="Long" resultType="TbEtJktjsysjcVo">
+        select jc.id, jc.djid, jc.xhdbz, jc.jcrq, jc.jcry, jc.jcjg, jc.tgjcid,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_jktjsysjc jc inner join tb_et_jktjdj dj on jc.djid=dj.id
+        where jc.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtJktjsysjc" parameterType="TbEtJktjsysjc" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_et_jktjsysjc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">djid,</if>
+            <if test="xhdbz != null  and xhdbz != ''">xhdbz,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcry != null  and jcry != ''">jcry,</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg,</if>
+            <if test="tgjcid != null ">tgjcid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">#{djid},</if>
+            <if test="xhdbz != null  and xhdbz != ''">#{xhdbz},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">#{jcry},</if>
+            <if test="jcjg != null  and jcjg != ''">#{jcjg},</if>
+            <if test="tgjcid != null ">#{tgjcid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtJktjsysjc" parameterType="TbEtJktjsysjc">
+        update tb_et_jktjsysjc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="djid != null ">djid = #{djid},</if>
+            <if test="xhdbz != null  and xhdbz != ''">xhdbz = #{xhdbz},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">jcry = #{jcry},</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg = #{jcjg},</if>
+            <if test="tgjcid != null ">tgjcid = #{tgjcid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtJktjsysjcById" parameterType="Long">
+        delete from tb_et_jktjsysjc where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtJktjsysjcByIds" parameterType="String">
+        delete from tb_et_jktjsysjc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

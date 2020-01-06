@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增计划生育技术服务')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-jhsydj-add">
+            <input name="jkdaid" type="hidden" id="jkdaid">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" id="xm" readonly class="form-control" type="text" onclick="listetda()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="birthday" readonly id="birthday" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">身份证号：</label>
+                <div class="col-sm-8">
+                    <input name="cardid" id="cardid" readonly class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术类别：</label>
+                <div class="col-sm-8">
+                    <input name="ssdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">术前检查描述：</label>
+                <div class="col-sm-8">
+                    <input name="sqms" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术记录描述：</label>
+                <div class="col-sm-8">
+                    <input name="ssjlms" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术并发症：</label>
+                <div class="col-sm-8">
+                    <input name="ssbfz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">特殊情况描述：</label>
+                <div class="col-sm-8">
+                    <input name="tsqkms" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">处理意见：</label>
+                <div class="col-sm-8">
+                    <input name="clyj" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">医生姓名：</label>
+                <div class="col-sm-8">
+                    <input name="ysxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="ssrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术出血量：</label>
+                <div class="col-sm-8">
+                    <input name="sscxl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">清宫日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="qgrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">胚囊排出日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="pnpcrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">药物用法：</label>
+                <div class="col-sm-8">
+                    <input name="ywyf" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">病理检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="bljcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">腹痛程度：</label>
+                <div class="col-sm-8">
+                    <select name="ftcd" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_ftcd')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">腹泻次数：</label>
+                <div class="col-sm-8">
+                    <input name="fxcs" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">呕吐次数：</label>
+                <div class="col-sm-8">
+                    <input name="otcs" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">药流药物类别：</label>
+                <div class="col-sm-8">
+                    <select name="ylywlb" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_ywlclb')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">流产方法：</label>
+                <div class="col-sm-8">
+                    <select name="lcff" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_lcff')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">胚囊直径：</label>
+                <div class="col-sm-8">
+                    <input name="pnzj" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">输卵管结扎部位：</label>
+                <div class="col-sm-8">
+                    <select name="jzbw" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_slgzzbw')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">输卵管结扎方式：</label>
+                <div class="col-sm-8">
+                    <select name="jzfs" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_slgjzff')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">皮下埋植剂异常：</label>
+                <div class="col-sm-8">
+                    <select name="pxmzyc" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_yz')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">皮下埋植部位：</label>
+                <div class="col-sm-8">
+                    <select name="pxmzbw" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_pxmzbw')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">皮下埋植年限：</label>
+                <div class="col-sm-8">
+                    <input name="pxmznx" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">皮下埋植时期：</label>
+                <div class="col-sm-8">
+                    <select name="pxmzsq" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_pxmzsq')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫内节育器种类：</label>
+                <div class="col-sm-8">
+                    <select name="gnjyqzl" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_gnjyqzl')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫内节育器异常描述：</label>
+                <div class="col-sm-8">
+                    <input name="gnjyqycms" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫内节育器异常：</label>
+                <div class="col-sm-8">
+                    <select name="gnjyqyc" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_yz')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫内节育器放置时期：</label>
+                <div class="col-sm-8">
+                    <input name="gnjyqfzsq" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫内节育器放置年限：</label>
+                <div class="col-sm-8">
+                    <input name="gnjyqfznx" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">血β-绒毛膜促性腺激素值：</label>
+                <div class="col-sm-8">
+                    <input name="rmcxxjs" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">尿妊娠试验结果代码：</label>
+                <div class="col-sm-8">
+                    <select name="nrssyjg" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_nrscsjg')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">右侧卵巢检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="yclcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">左侧卵巢检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="zclcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">右侧输卵管检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="ycslgjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">左侧输卵管检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="zcslgjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">子宫大小：</label>
+                <div class="col-sm-8">
+                    <select name="zgdx" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_zgdx')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">子宫位置：</label>
+                <div class="col-sm-8">
+                    <select name="zgwz" class="form-control m-b" th:with="type=${@dict.getType('sys_fn_zgwz')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "jhsy/jhsydj"
+        $("#form-jhsydj-add").validate({
+            focusCleanup: true
+        });
+
+        function listetda(){
+            localStorage.removeItem("selectEtda")
+            var title="选择妇女信息";
+            var url="/jbda/fnda/listfnda";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectEtda");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return
+            }
+            var data=JSON.parse(json);
+
+            $("#xm").val(data[0].name);
+            $("#jkdaid").val(data[0].healthFileId);
+            $("#cardid").val(data[0].cardid);
+            $("#birthday").val(data[0].birthday);
+            layer.close(index);
+        }
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-jhsydj-add').serialize());
+            }
+        }
+
+        $("input[name='ssrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='qgrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='pnpcrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

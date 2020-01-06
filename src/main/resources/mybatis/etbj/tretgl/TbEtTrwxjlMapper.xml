@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.tretgl.trwxjl.mapper.TbEtTrwxjlMapper">
+    
+    <resultMap type="TbEtTrwxjl" id="TbEtTrwxjlResult">
+        <result property="id"    column="id"    />
+        <result property="djid"    column="djid"    />
+        <result property="wyfs"    column="wyfs"    />
+        <result property="szyl"    column="szyl"    />
+        <result property="tryy"    column="tryy"    />
+        <result property="jdrq"    column="jdrq"    />
+    </resultMap>
+
+    <sql id="selectTbEtTrwxjlVo">
+        select id, djid, wyfs, szyl, tryy, jdrq from tb_et_trwxjl
+    </sql>
+
+    <select id="selectTbEtTrwxjlList" parameterType="TbEtTrwxjlVo" resultType="TbEtTrwxjlVo">
+        select jl.id, jl.djid, jl.wyfs, jl.szyl, jl.tryy, jl.jdrq,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_trwxjl jl inner join tb_et_tretdj dj  on jl.djid=dj.id
+        <where>  
+            <if test="djid != null "> and jl.djid = #{djid}</if>
+            <if test="wyfs != null "> and jl.wyfs = #{wyfs}</if>
+            <if test="szyl != null "> and jl.szyl = #{szyl}</if>
+            <if test="tryy != null "> and jl.tryy = #{tryy}</if>
+            <if test="jdrq != null "> and jl.jdrq = #{jdrq}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtTrwxjlById" parameterType="Long" resultType="TbEtTrwxjlVo">
+        select jl.id, jl.djid, jl.wyfs, jl.szyl, jl.tryy, jl.jdrq,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_trwxjl jl inner join tb_et_tretdj dj  on jl.djid=dj.id
+        where jl.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtTrwxjl" parameterType="TbEtTrwxjl" useGeneratedKeys="true">
+        insert into tb_et_trwxjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">djid,</if>
+            <if test="wyfs != null ">wyfs,</if>
+            <if test="szyl != null ">szyl,</if>
+            <if test="tryy != null ">tryy,</if>
+            <if test="jdrq != null ">jdrq,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">#{djid},</if>
+            <if test="wyfs != null ">#{wyfs},</if>
+            <if test="szyl != null ">#{szyl},</if>
+            <if test="tryy != null ">#{tryy},</if>
+            <if test="jdrq != null ">#{jdrq},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtTrwxjl" parameterType="TbEtTrwxjl">
+        update tb_et_trwxjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="djid != null ">djid = #{djid},</if>
+            <if test="wyfs != null ">wyfs = #{wyfs},</if>
+            <if test="szyl != null ">szyl = #{szyl},</if>
+            <if test="tryy != null ">tryy = #{tryy},</if>
+            <if test="jdrq != null ">jdrq = #{jdrq},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtTrwxjlById" parameterType="Long">
+        delete from tb_et_trwxjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtTrwxjlByIds" parameterType="String">
+        delete from tb_et_trwxjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

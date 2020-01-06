@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改高危孕产妇登记')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-gwycfdj-edit" th:object="${tbChGwycfdj}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" th:field="*{xm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="csrq" th:value="${#dates.format(tbChGwycfdj.csrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">民族：</label>
+                <div class="col-sm-8">
+                    <input name="mz" th:field="*{mz}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">文化程度：</label>
+                <div class="col-sm-8">
+                    <input name="whcd" th:field="*{whcd}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input name="mqsfzjhm" th:field="*{mqsfzjhm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">行政区划代码：</label>
+                <div class="col-sm-8">
+                    <input name="xzqhdm" th:field="*{xzqhdm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址-省/直辖市、自治区：</label>
+                <div class="col-sm-8">
+                    <input name="dzsheng" th:field="*{dzsheng}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址-市/地区：</label>
+                <div class="col-sm-8">
+                    <input name="dzshi" th:field="*{dzshi}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址-区/县：</label>
+                <div class="col-sm-8">
+                    <input name="dzxian" th:field="*{dzxian}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址-乡镇/街道办事处：</label>
+                <div class="col-sm-8">
+                    <input name="dzxiang" th:field="*{dzxiang}" class="form-control" type="text" readonly >
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址-村/街/路/弄：</label>
+                <div class="col-sm-8">
+                    <input name="dzcun" th:field="*{dzcun}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址-门牌号码：</label>
+                <div class="col-sm-8">
+                    <input name="dzmp" th:field="*{dzmp}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">邮政编码：</label>
+                <div class="col-sm-8">
+                    <input name="yzbm" th:field="*{yzbm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系方式：</label>
+                <div class="col-sm-8">
+                    <input name="lxfs" th:field="*{lxfs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">登记日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="djrq" th:value="${#dates.format(tbChGwycfdj.djrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+          <!--  <div class="form-group">
+                <label class="col-sm-3 control-label">档案ID：</label>
+                <div class="col-sm-8">
+                    <input name="healthfileid" th:field="*{healthfileid}" class="form-control" type="text">
+                </div>
+            </div>-->
+            <input type="hidden" name="healthfileid" id="healthfileid">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="dzlbdm" th:field="*{dzlbdm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="mqsfzjlbdm" th:field="*{mqsfzjlbdm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">职业类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="zylbdm" th:field="*{zylbdm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系电话-类别：</label>
+                <div class="col-sm-8">
+                    <input name="lxdhlb" th:field="*{lxdhlb}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工作单位名称：</label>
+                <div class="col-sm-8">
+                    <input name="gzdwmc" th:field="*{gzdwmc}" class="form-control" type="text" >
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系电话-类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="lxdhlbdm" th:field="*{lxdhlbdm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cffs/gwycfdj";
+        $("#form-gwycfdj-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-gwycfdj-edit').serialize());
+            }
+        }
+
+        $("input[name='csrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='djrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

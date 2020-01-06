@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增妇女病普查辅助检查记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-fnbpcfzjcjl-add">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">妇女病普查登记ID：</label>
+                <div class="col-sm-8">
+                    <input name="fnbpcdjid" id="hqbjfwdjid" placeholder="请选择妇女信息"  onclick="listetda()"  readonly class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" id="xm" readonly class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input name="cardid" id="cardid" readonly class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <input name="birthday" id="birthday" readonly class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乳腺X线检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="rxxxjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乳腺B超检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="rxbcjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道镜检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="ydjjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道分泌物性状描述：</label>
+                <div class="col-sm-8">
+                    <input name="ydfmwxzms" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道细胞学诊断结果代码：</label>
+                <div class="col-sm-8">
+                    <input name="ydxbxzdjgdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">滴虫检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'dcjcjgdm_' + dict.dictCode}" name="dcjcjgdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'dcjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">念珠菌检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'nzjjcjgdm_' + dict.dictCode}" name="nzjjcjgdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'nzjjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道分泌物清洁度代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('ydfmwqjddm')}">
+                        <input type="radio" th:id="${'ydfmwqjddm_' + dict.dictCode}" name="ydfmwqjddm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'ydfmwqjddm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">淋球菌检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="lqjjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">梅毒血清学实验结果代码：</label>
+                <div class="col-sm-8">
+                    <input name="mdxqxsyjgdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">其他：</label>
+                <div class="col-sm-8">
+                    <input name="qt" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="jcrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)人员代码：</label>
+                <div class="col-sm-8">
+                    <input name="jcrydm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="jcryxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)机构代码：</label>
+                <div class="col-sm-8">
+                    <input name="jcjgdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="jcjgmc" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "fnbpc/fnbpcfzjcjl"
+        $("#form-fnbpcfzjcjl-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-fnbpcfzjcjl-add').serialize());
+            }
+        }
+
+        $("input[name='jcrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function listetda(){
+            localStorage.removeItem("selectEtda")
+            var title="选择妇女登记信息";
+            var url="/hqbjfw/hqbjfwdj/listhqbjfwdj";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectEtda");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return
+            }
+            var data=JSON.parse(json);
+
+            $("#xm").val(data[0].xm);
+            $("#hqbjfwdjid").val(data[0].id);
+            $("#cardid").val(data[0].cardid);
+            $("#birthday").val(data[0].birthday);
+
+            layer.close(index);
+        }
+    </script>
+</body>
+</html>

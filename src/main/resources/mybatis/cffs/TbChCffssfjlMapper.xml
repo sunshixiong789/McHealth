@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cffs.cffssfjl.mapper.TbChCffssfjlMapper">
+    
+    <resultMap type="TbChCffssfjl" id="TbChCffssfjlResult">
+        <result property="chId"    column="ch_id"    />
+        <result property="healthfileid"    column="healthFileId"    />
+        <result property="chName"    column="ch_name"    />
+        <result property="chFsrq"    column="ch_fsrq"    />
+        <result property="chFsryxm"    column="ch_fsryxm"    />
+        <result property="chFsjgmc"    column="ch_fsjgmc"    />
+        <result property="chChts"    column="ch_chts"    />
+        <result property="chTw"    column="ch_tw"    />
+        <result property="chSsy"    column="ch_ssy"    />
+        <result property="chSzy"    column="ch_szy"    />
+        <result property="chRtjcjg"    column="ch_rtjcjg"    />
+        <result property="chRzldm"    column="ch_rzldm"    />
+        <result property="chGdgd"    column="ch_gdgd"    />
+        <result property="chSkyhzkdm"    column="ch_skyhzkdm"    />
+        <result property="chElzk"    column="ch_elzk"    />
+        <result property="chDbzkjl"    column="ch_dbzkjl"    />
+        <result property="chXbzkjl"    column="ch_xbzkjl"    />
+        <result property="chTsqkjl"    column="ch_tsqkjl"    />
+        <result property="chXjnr"    column="ch_xjnr"    />
+        <result property="chTbrq"    column="ch_tbrq"    />
+    </resultMap>
+
+    <sql id="selectTbChCffssfjlVo">
+        select ch_id, healthFileId, ch_name, ch_fsrq, ch_fsryxm, ch_fsjgmc, ch_chts, ch_tw, ch_ssy, ch_szy, ch_rtjcjg, ch_rzldm, ch_gdgd, ch_skyhzkdm, ch_elzk, ch_dbzkjl, ch_xbzkjl, ch_tsqkjl, ch_xjnr, ch_tbrq from tb_ch_cffssfjl
+    </sql>
+
+    <select id="selectTbChCffssfjlList" parameterType="TbChCffssfjl" resultMap="TbChCffssfjlResult">
+        <include refid="selectTbChCffssfjlVo"/>
+        <where>  
+            <if test="healthfileid != null "> and healthFileId = #{healthfileid}</if>
+            <if test="chName != null  and chName != ''"> and ch_name like concat('%', #{chName}, '%')</if>
+            <if test="chFsrq != null "> and ch_fsrq = #{chFsrq}</if>
+            <if test="chFsryxm != null  and chFsryxm != ''"> and ch_fsryxm = #{chFsryxm}</if>
+            <if test="chFsjgmc != null and chFsjgmc!= ''"> and ch_fsjgmc = #{chFsjgmc}</if>
+            <if test="chChts != null "> and ch_chts = #{chChts}</if>
+            <if test="chTw != null  and chTw != ''"> and ch_tw = #{chTw}</if>
+            <if test="chSsy != null  and chSsy != ''"> and ch_ssy = #{chSsy}</if>
+            <if test="chSzy != null  and chSzy != ''"> and ch_szy = #{chSzy}</if>
+            <if test="chRtjcjg != null  and chRtjcjg != ''"> and ch_rtjcjg = #{chRtjcjg}</if>
+            <if test="chRzldm != null  and chRzldm != ''"> and ch_rzldm = #{chRzldm}</if>
+            <if test="chGdgd != null  and chGdgd != ''"> and ch_gdgd = #{chGdgd}</if>
+            <if test="chSkyhzkdm != null  and chSkyhzkdm != ''"> and ch_skyhzkdm = #{chSkyhzkdm}</if>
+            <if test="chElzk != null  and chElzk != ''"> and ch_elzk = #{chElzk}</if>
+            <if test="chDbzkjl != null  and chDbzkjl != ''"> and ch_dbzkjl = #{chDbzkjl}</if>
+            <if test="chXbzkjl != null  and chXbzkjl != ''"> and ch_xbzkjl = #{chXbzkjl}</if>
+            <if test="chTsqkjl != null  and chTsqkjl != ''"> and ch_tsqkjl = #{chTsqkjl}</if>
+            <if test="chXjnr != null  and chXjnr != ''"> and ch_xjnr = #{chXjnr}</if>
+            <if test="chTbrq != null "> and ch_tbrq = #{chTbrq}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChCffssfjlById" parameterType="Long" resultMap="TbChCffssfjlResult">
+        <include refid="selectTbChCffssfjlVo"/>
+        where ch_id = #{chId}
+    </select>
+        
+    <insert id="insertTbChCffssfjl" parameterType="TbChCffssfjl" useGeneratedKeys="true" keyProperty="chId">
+        insert into tb_ch_cffssfjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="healthfileid != null and healthfileid!= ''">healthFileId,</if>
+            <if test="chName != null  and chName != ''">ch_name,</if>
+            <if test="chFsrq != null ">ch_fsrq,</if>
+            <if test="chFsryxm != null  and chFsryxm != ''">ch_fsryxm,</if>
+            <if test="chFsjgmc != null and chFsjgmc!= ''">ch_fsjgmc,</if>
+            <if test="chChts != null ">ch_chts,</if>
+            <if test="chTw != null  and chTw != ''">ch_tw,</if>
+            <if test="chSsy != null  and chSsy != ''">ch_ssy,</if>
+            <if test="chSzy != null  and chSzy != ''">ch_szy,</if>
+            <if test="chRtjcjg != null  and chRtjcjg != ''">ch_rtjcjg,</if>
+            <if test="chRzldm != null  and chRzldm != ''">ch_rzldm,</if>
+            <if test="chGdgd != null  and chGdgd != ''">ch_gdgd,</if>
+            <if test="chSkyhzkdm != null  and chSkyhzkdm != ''">ch_skyhzkdm,</if>
+            <if test="chElzk != null  and chElzk != ''">ch_elzk,</if>
+            <if test="chDbzkjl != null  and chDbzkjl != ''">ch_dbzkjl,</if>
+            <if test="chXbzkjl != null  and chXbzkjl != ''">ch_xbzkjl,</if>
+            <if test="chTsqkjl != null  and chTsqkjl != ''">ch_tsqkjl,</if>
+            <if test="chXjnr != null  and chXjnr != ''">ch_xjnr,</if>
+            <if test="chTbrq != null ">ch_tbrq,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="healthfileid != null and healthfileid!= ''">#{healthfileid},</if>
+            <if test="chName != null  and chName != ''">#{chName},</if>
+            <if test="chFsrq != null ">#{chFsrq},</if>
+            <if test="chFsryxm != null  and chFsryxm != ''">#{chFsryxm},</if>
+            <if test="chFsjgmc != null and chFsjgmc!= ''">#{chFsjgmc},</if>
+            <if test="chChts != null ">#{chChts},</if>
+            <if test="chTw != null  and chTw != ''">#{chTw},</if>
+            <if test="chSsy != null  and chSsy != ''">#{chSsy},</if>
+            <if test="chSzy != null  and chSzy != ''">#{chSzy},</if>
+            <if test="chRtjcjg != null  and chRtjcjg != ''">#{chRtjcjg},</if>
+            <if test="chRzldm != null  and chRzldm != ''">#{chRzldm},</if>
+            <if test="chGdgd != null  and chGdgd != ''">#{chGdgd},</if>
+            <if test="chSkyhzkdm != null  and chSkyhzkdm != ''">#{chSkyhzkdm},</if>
+            <if test="chElzk != null  and chElzk != ''">#{chElzk},</if>
+            <if test="chDbzkjl != null  and chDbzkjl != ''">#{chDbzkjl},</if>
+            <if test="chXbzkjl != null  and chXbzkjl != ''">#{chXbzkjl},</if>
+            <if test="chTsqkjl != null  and chTsqkjl != ''">#{chTsqkjl},</if>
+            <if test="chXjnr != null  and chXjnr != ''">#{chXjnr},</if>
+            <if test="chTbrq != null ">#{chTbrq},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChCffssfjl" parameterType="TbChCffssfjl">
+        update tb_ch_cffssfjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="healthfileid != null ">healthFileId = #{healthfileid},</if>
+            <if test="chName != null  and chName != ''">ch_name = #{chName},</if>
+            <if test="chFsrq != null ">ch_fsrq = #{chFsrq},</if>
+            <if test="chFsryxm != null  and chFsryxm != ''">ch_fsryxm = #{chFsryxm},</if>
+            <if test="chFsjgmc != null and chFsjgmc!= ''">ch_fsjgmc = #{chFsjgmc},</if>
+            <if test="chChts != null ">ch_chts = #{chChts},</if>
+            <if test="chTw != null  and chTw != ''">ch_tw = #{chTw},</if>
+            <if test="chSsy != null  and chSsy != ''">ch_ssy = #{chSsy},</if>
+            <if test="chSzy != null  and chSzy != ''">ch_szy = #{chSzy},</if>
+            <if test="chRtjcjg != null  and chRtjcjg != ''">ch_rtjcjg = #{chRtjcjg},</if>
+            <if test="chRzldm != null  and chRzldm != ''">ch_rzldm = #{chRzldm},</if>
+            <if test="chGdgd != null  and chGdgd != ''">ch_gdgd = #{chGdgd},</if>
+            <if test="chSkyhzkdm != null  and chSkyhzkdm != ''">ch_skyhzkdm = #{chSkyhzkdm},</if>
+            <if test="chElzk != null  and chElzk != ''">ch_elzk = #{chElzk},</if>
+            <if test="chDbzkjl != null  and chDbzkjl != ''">ch_dbzkjl = #{chDbzkjl},</if>
+            <if test="chXbzkjl != null  and chXbzkjl != ''">ch_xbzkjl = #{chXbzkjl},</if>
+            <if test="chTsqkjl != null  and chTsqkjl != ''">ch_tsqkjl = #{chTsqkjl},</if>
+            <if test="chXjnr != null  and chXjnr != ''">ch_xjnr = #{chXjnr},</if>
+            <if test="chTbrq != null ">ch_tbrq = #{chTbrq},</if>
+        </trim>
+        where ch_id = #{chId}
+    </update>
+
+    <delete id="deleteTbChCffssfjlById" parameterType="Long">
+        delete from tb_ch_cffssfjl where ch_id = #{chId}
+    </delete>
+
+    <delete id="deleteTbChCffssfjlByIds" parameterType="String">
+        delete from tb_ch_cffssfjl where ch_id in 
+        <foreach item="chId" collection="array" open="(" separator="," close=")">
+            #{chId}
+        </foreach>
+    </delete>
+    
+</mapper>

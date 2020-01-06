@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.xsejbsc.sysjyjl.mapper.TbEtSysjyjlMapper">
+    
+    <resultMap type="TbEtSysjyjl" id="TbEtSysjyjlResult">
+        <result property="id"    column="id"    />
+        <result property="scxm"    column="scxm"    />
+        <result property="scff"    column="scff"    />
+        <result property="scjg"    column="scjg"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcry"    column="jcry"    />
+        <result property="jcjg"    column="jcjg"    />
+        <result property="tzrq"    column="tzrq"    />
+        <result property="djid"    column="djid"    />
+    </resultMap>
+
+    <sql id="selectTbEtSysjyjlVo">
+        select id, scxm, scff, scjg, jcrq, jcry, jcjg, tzrq, djid from tb_et_sysjyjl
+    </sql>
+
+    <select id="selectTbEtSysjyjlList" parameterType="TbEtSysjyjl" resultType="com.imedcare.project.etbj.xsejbsc.sysjyjl.domain.TbEtSysjyjlVo">
+        select jl.id, jl.scxm, jl.scff, jl.scjg, jl.jcrq, jl.jcry, jl.jcjg, jl.tzrq,dj.xm,jl.djid,dj.csrq,dj.bbbh
+        from tb_et_sysjyjl jl inner join tb_et_xsejbscdj dj on
+        jl.djid=dj.id
+        <where>  
+            <if test="scxm != null "> and jl.scxm = #{scxm}</if>
+            <if test="scff != null "> and jl.scff = #{scff}</if>
+            <if test="scjg != null  and scjg != ''"> and jl.scjg = #{scjg}</if>
+            <if test="jcrq != null "> and jl.jcrq = #{jcrq}</if>
+            <if test="jcry != null  and jcry != ''"> and jl.jcry = #{jcry}</if>
+            <if test="jcjg != null  and jcjg != ''"> and jl.jcjg = #{jcjg}</if>
+            <if test="tzrq != null "> and jl.tzrq = #{tzrq}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtSysjyjlById" parameterType="Long" resultType="com.imedcare.project.etbj.xsejbsc.sysjyjl.domain.TbEtSysjyjlVo">
+         select jl.id, jl.scxm, jl.scff, jl.scjg, jl.jcrq, jl.jcry, jl.jcjg, jl.tzrq,dj.xm,dj.csrq,dj.bbbh
+        from tb_et_sysjyjl jl inner join tb_et_xsejbscdj dj on
+        jl.djid=dj.id
+        where jl.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtSysjyjl" parameterType="TbEtSysjyjl" useGeneratedKeys="true">
+        insert into tb_et_sysjyjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="scxm != null ">scxm,</if>
+            <if test="scff != null ">scff,</if>
+            <if test="scjg != null  and scjg != ''">scjg,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcry != null  and jcry != ''">jcry,</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg,</if>
+            <if test="tzrq != null ">tzrq,</if>
+            <if test="djid != null ">djid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="scxm != null ">#{scxm},</if>
+            <if test="scff != null ">#{scff},</if>
+            <if test="scjg != null  and scjg != ''">#{scjg},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">#{jcry},</if>
+            <if test="jcjg != null  and jcjg != ''">#{jcjg},</if>
+            <if test="tzrq != null ">#{tzrq},</if>
+            <if test="djid != null ">#{djid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtSysjyjl" parameterType="TbEtSysjyjl">
+        update tb_et_sysjyjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="scxm != null ">scxm = #{scxm},</if>
+            <if test="scff != null ">scff = #{scff},</if>
+            <if test="scjg != null  and scjg != ''">scjg = #{scjg},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">jcry = #{jcry},</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg = #{jcjg},</if>
+            <if test="tzrq != null ">tzrq = #{tzrq},</if>
+            <if test="djid != null ">djid = #{djid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtSysjyjlById" parameterType="Long">
+        delete from tb_et_sysjyjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtSysjyjlByIds" parameterType="String">
+        delete from tb_et_sysjyjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    
+</mapper>

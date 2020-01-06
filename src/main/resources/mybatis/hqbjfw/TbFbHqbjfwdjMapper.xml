@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.hqbjfw.hqbjfwdj.mapper.TbFbHqbjfwdjMapper">
+
+    <resultMap type="TbFbHqbjfwdj" id="TbFbHqbjfwdjResult">
+        <result property="id"    column="id"    />
+        <result property="jkdaid"    column="jkdaid"    />
+        <result property="xm"    column="xm"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="dfjlbid"    column="dfjlbid"    />
+        <result property="dfxm"    column="dfxm"    />
+        <result property="txrq"    column="txrq"    />
+        <result property="deleteFlag"    column="delete_flag"    />
+    </resultMap>
+
+    <sql id="selectTbFbHqbjfwdjVo">
+        select id, jkdaid, xm, cardid, birthday, dfjlbid, dfxm, txrq, delete_flag from tb_fb_hqbjfwdj
+    </sql>
+
+    <select id="selectTbFbHqbjfwdjList" parameterType="TbFbHqbjfwdj" resultMap="TbFbHqbjfwdjResult">
+        <include refid="selectTbFbHqbjfwdjVo"/>
+        <where>
+            <if test="jkdaid != null "> and jkdaid = #{jkdaid}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="dfjlbid != null "> and dfjlbid = #{dfjlbid}</if>
+            <if test="dfxm != null  and dfxm != ''"> and dfxm = #{dfxm}</if>
+            <if test="txrq != null "> and txrq = #{txrq}</if>
+            <if test="deleteFlag != null  and deleteFlag != ''"> and delete_flag = #{deleteFlag}</if>
+        </where>
+    </select>
+
+    <select id="selectTbFbHqbjfwdjById" parameterType="Long" resultMap="TbFbHqbjfwdjResult">
+        <include refid="selectTbFbHqbjfwdjVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTbFbHqbjfwdj" parameterType="TbFbHqbjfwdj" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fb_hqbjfwdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jkdaid != null ">jkdaid,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="cardid != null  and cardid != ''">cardid,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="dfjlbid != null ">dfjlbid,</if>
+            <if test="dfxm != null  and dfxm != ''">dfxm,</if>
+            <if test="txrq != null ">txrq,</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">delete_flag,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jkdaid != null ">#{jkdaid},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="dfjlbid != null ">#{dfjlbid},</if>
+            <if test="dfxm != null  and dfxm != ''">#{dfxm},</if>
+            <if test="txrq != null ">#{txrq},</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">#{deleteFlag},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTbFbHqbjfwdj" parameterType="TbFbHqbjfwdj">
+        update tb_fb_hqbjfwdj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="jkdaid != null ">jkdaid = #{jkdaid},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="cardid != null  and cardid != ''">cardid = #{cardid},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="dfjlbid != null ">dfjlbid = #{dfjlbid},</if>
+            <if test="dfxm != null  and dfxm != ''">dfxm = #{dfxm},</if>
+            <if test="txrq != null ">txrq = #{txrq},</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">delete_flag = #{deleteFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbHqbjfwdjById" parameterType="Long">
+        delete from tb_fb_hqbjfwdj where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbHqbjfwdjByIds" parameterType="String">
+        delete from tb_fb_hqbjfwdj where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

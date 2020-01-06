@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.xsejbsc.zyyxzh.mapper.TbEtZyyxzhMapper">
+    
+    <resultMap type="TbEtZyyxzh" id="TbEtZyyxzhResult">
+        <result property="id"    column="id"    />
+        <result property="zhrq"    column="zhrq"    />
+        <result property="tzxs"    column="tzxs"    />
+        <result property="tzdar"    column="tzdar"    />
+        <result property="tzgx"    column="tzgx"    />
+        <result property="sysjlid"    column="sysjlid"    />
+        <result property="djid"    column="djid"    />
+    </resultMap>
+
+    <sql id="selectTbEtZyyxzhVo">
+        select id, zhrq, tzxs, tzdar, tzgx, sysjlid, djid from tb_et_zyyxzh
+    </sql>
+
+    <select id="selectTbEtZyyxzhList" parameterType="TbEtZyyxzhVo" resultType="com.imedcare.project.etbj.xsejbsc.zyyxzh.domain.TbEtZyyxzhVo">
+        select zh.id, zh.zhrq, zh.tzxs, zh.tzdar, zh.tzgx,jl.scxm, zh.sysjlid, zh.djid,jl.scjg,dj.bbbh,dj.xm,dj.csrq
+        from tb_et_zyyxzh zh inner join tb_et_sysjyjl jl on jl.id=zh.sysjlid
+        inner join  tb_et_xsejbscdj dj on dj.id=zh.djid
+        <where>  
+            <if test="zhrq != null "> and zh.zhrq = #{zhrq}</if>
+            <if test="tzxs != null "> and zh.tzxs = #{tzxs}</if>
+            <if test="tzdar != null  and tzdar != ''"> and zh.tzdar = #{tzdar}</if>
+            <if test="tzgx != null  and tzgx != ''"> and zh.tzgx = #{tzgx}</if>
+            <if test="sysjlid != null "> and zh.sysjlid = #{sysjlid}</if>
+            <if test="djid != null "> and zh.djid = #{djid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtZyyxzhById" parameterType="Long" resultType="com.imedcare.project.etbj.xsejbsc.zyyxzh.domain.TbEtZyyxzhVo">
+        select zh.id, zh.zhrq, zh.tzxs, zh.tzdar, zh.tzgx,jl.scxm,jl.scjg,dj.bbbh,dj.xm,dj.csrq
+        from tb_et_zyyxzh zh inner join tb_et_sysjyjl jl on jl.id=zh.sysjlid
+        inner join  tb_et_xsejbscdj dj on dj.id=zh.djid
+        where zh.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtZyyxzh" parameterType="TbEtZyyxzh" useGeneratedKeys="true">
+        insert into tb_et_zyyxzh
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="zhrq != null ">zhrq,</if>
+            <if test="tzxs != null ">tzxs,</if>
+            <if test="tzdar != null  and tzdar != ''">tzdar,</if>
+            <if test="tzgx != null  and tzgx != ''">tzgx,</if>
+            <if test="sysjlid != null ">sysjlid,</if>
+            <if test="djid != null ">djid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="zhrq != null ">#{zhrq},</if>
+            <if test="tzxs != null ">#{tzxs},</if>
+            <if test="tzdar != null  and tzdar != ''">#{tzdar},</if>
+            <if test="tzgx != null  and tzgx != ''">#{tzgx},</if>
+            <if test="sysjlid != null ">#{sysjlid},</if>
+            <if test="djid != null ">#{djid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtZyyxzh" parameterType="TbEtZyyxzh">
+        update tb_et_zyyxzh
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhrq != null ">zhrq = #{zhrq},</if>
+            <if test="tzxs != null ">tzxs = #{tzxs},</if>
+            <if test="tzdar != null  and tzdar != ''">tzdar = #{tzdar},</if>
+            <if test="tzgx != null  and tzgx != ''">tzgx = #{tzgx},</if>
+            <if test="sysjlid != null ">sysjlid = #{sysjlid},</if>
+            <if test="djid != null ">djid = #{djid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtZyyxzhById" parameterType="Long">
+        delete from tb_et_zyyxzh where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtZyyxzhByIds" parameterType="String">
+        delete from tb_et_zyyxzh where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

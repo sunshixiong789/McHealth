@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('婚前保健服务实验室检验记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li>
+                                <p>婚前保健服务登记id：</p>
+                                <input type="text" name="hqbjfwdjid"/>
+                            </li>
+                            <li>
+                                <p>身份证号：</p>
+                                <input type="text" name="cardid"/>
+                            </li>
+                            <li class="select-time">
+                                <p>生日：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginBirthday]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endBirthday]"/>
+                            </li>
+                            <li>
+                                <p>对方记录表编号：</p>
+                                <input type="text" name="dfjlbid"/>
+                            </li>
+                            <li>
+                                <p>对方姓名：</p>
+                                <input type="text" name="dfxm"/>
+                            </li>
+                            <li>
+                                <p>白细胞分类结果：</p>
+                                <input type="text" name="bxbfljg"/>
+                            </li>
+                            <li>
+                                <p>白细胞计数值(G/L)：</p>
+                                <input type="text" name="bxbjsz"/>
+                            </li>
+                            <li>
+                                <p>红细胞计数值(G/L)：</p>
+                                <input type="text" name="hxbjsz"/>
+                            </li>
+                            <li>
+                                <p>血红蛋白值(G/L)：</p>
+                                <input type="text" name="xhdbz"/>
+                            </li>
+                            <li>
+                                <p>血小板计数值(G/L)：</p>
+                                <input type="text" name="xxbjsz"/>
+                            </li>
+                            <li>
+                                <p>尿比重：</p>
+                                <input type="text" name="nbz"/>
+                            </li>
+                            <li>
+                                <p>尿蛋白定量检测值(mg/24h)：</p>
+                                <input type="text" name="ndbdljcz"/>
+                            </li>
+                            <li>
+                                <p>尿糖定量检测(mmol/L)：</p>
+                                <input type="text" name="ntdljc"/>
+                            </li>
+                            <li>
+                                <p>尿液酸碱度：</p>
+                                <input type="text" name="nysjd"/>
+                            </li>
+                            <li>
+                                <p>血清谷丙转氨酶值(U/L)：</p>
+                                <input type="text" name="xqgbzamz"/>
+                            </li>
+                            <li>
+                                <p>乙型肝炎病毒表面抗原检测结果代码：</p>
+                                <select name="yxgybdbmkyjcjgdm" th:with="type=${@dict.getType('sys_fn_jc')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>淋球菌检查结果：</p>
+                                <input type="text" name="lqjjcjg"/>
+                            </li>
+                            <li>
+                                <p>梅毒血清学实验结果代码：</p>
+                                <select name="mdxqxsyjgdm" th:with="type=${@dict.getType('sys_fn_jc')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>HIV抗体检测结果代码：</p>
+                                <select name="hivktjcjgdm" th:with="type=${@dict.getType('sys_fn_jc')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>滴虫检测结果代码：</p>
+                                <select name="dcjcjgdm" th:with="type=${@dict.getType('sys_fn_jc')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>念珠菌检测结果代码：</p>
+                                <select name="nzjjcjgdm" th:with="type=${@dict.getType('sys_fn_jc')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>阴道分泌物性状描述：</p>
+                                <input type="text" name="ydfmwxzms"/>
+                            </li>
+                            <li>
+                                <p>阴道分泌物清洁度代码：</p>
+                                <input type="text" name="ydfmwqjddm"/>
+                            </li>
+                            <li class="select-time">
+                                <p>检查(测)日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcrq]"/>
+                            </li>
+                            <li>
+                                <p>检查(测)人员姓名：</p>
+                                <input type="text" name="jcryxm"/>
+                            </li>
+                            <li>
+                                <p>检查(测)机构名称：</p>
+                                <input type="text" name="jcjgmc"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="hqbjfw:hqbjfwsysjyjl:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="hqbjfw:hqbjfwsysjyjl:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="hqbjfw:hqbjfwsysjyjl:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="hqbjfw:hqbjfwsysjyjl:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('hqbjfw:hqbjfwsysjyjl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('hqbjfw:hqbjfwsysjyjl:remove')}]];
+        var yxgybdbmkyjcjgdmDatas = [[${@dict.getType('sys_fn_jc')}]];
+        var mdxqxsyjgdmDatas = [[${@dict.getType('sys_fn_jc')}]];
+        var hivktjcjgdmDatas = [[${@dict.getType('sys_fn_jc')}]];
+        var dcjcjgdmDatas = [[${@dict.getType('sys_fn_jc')}]];
+        var nzjjcjgdmDatas = [[${@dict.getType('sys_fn_jc')}]];
+        var prefix = ctx + "hqbjfw/hqbjfwsysjyjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "婚前保健服务实验室检验记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : 'null',
+                    visible: false
+                },
+                {
+                    field : 'xm', 
+                    title : '姓名'
+                },
+                {
+                    field : 'hqbjfwdjid', 
+                    title : '婚前保健服务登记id'
+                },
+                {
+                    field : 'cardid', 
+                    title : '身份证号'
+                },
+                {
+                    field : 'birthday', 
+                    title : '生日'
+                },
+                {
+                    field : 'dfjlbid', 
+                    title : '对方记录表编号'
+                },
+                {
+                    field : 'dfxm', 
+                    title : '对方姓名'
+                },
+                {
+                    field : 'bxbfljg', 
+                    title : '白细胞分类结果'
+                },
+                {
+                    field : 'bxbjsz', 
+                    title : '白细胞计数值(G/L)'
+                },
+                {
+                    field : 'hxbjsz', 
+                    title : '红细胞计数值(G/L)'
+                },
+                {
+                    field : 'xhdbz', 
+                    title : '血红蛋白值(G/L)'
+                },
+                {
+                    field : 'xxbjsz', 
+                    title : '血小板计数值(G/L)'
+                },
+                {
+                    field : 'nbz', 
+                    title : '尿比重'
+                },
+                {
+                    field : 'ndbdljcz', 
+                    title : '尿蛋白定量检测值(mg/24h)'
+                },
+                {
+                    field : 'ntdljc', 
+                    title : '尿糖定量检测(mmol/L)'
+                },
+                {
+                    field : 'nysjd', 
+                    title : '尿液酸碱度'
+                },
+                {
+                    field : 'xqgbzamz', 
+                    title : '血清谷丙转氨酶值(U/L)'
+                },
+                {
+                    field : 'yxgybdbmkyjcjgdm', 
+                    title : '乙型肝炎病毒表面抗原检测结果代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(yxgybdbmkyjcjgdmDatas, value);
+                    }
+                },
+                {
+                    field : 'lqjjcjg', 
+                    title : '淋球菌检查结果'
+                },
+                {
+                    field : 'mdxqxsyjgdm', 
+                    title : '梅毒血清学实验结果代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(mdxqxsyjgdmDatas, value);
+                    }
+                },
+                {
+                    field : 'hivktjcjgdm', 
+                    title : 'HIV抗体检测结果代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(hivktjcjgdmDatas, value);
+                    }
+                },
+                {
+                    field : 'dcjcjgdm', 
+                    title : '滴虫检测结果代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(dcjcjgdmDatas, value);
+                    }
+                },
+                {
+                    field : 'nzjjcjgdm', 
+                    title : '念珠菌检测结果代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(nzjjcjgdmDatas, value);
+                    }
+                },
+                {
+                    field : 'ydfmwxzms', 
+                    title : '阴道分泌物性状描述'
+                },
+                {
+                    field : 'ydfmwqjddm', 
+                    title : '阴道分泌物清洁度代码'
+                },
+                {
+                    field : 'jcrq', 
+                    title : '检查(测)日期'
+                },
+                {
+                    field : 'jcryxm', 
+                    title : '检查(测)人员姓名'
+                },
+                {
+                    field : 'jcjgmc', 
+                    title : '检查(测)机构名称'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

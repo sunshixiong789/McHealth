@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('产后42天体格检查记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <!--<li>
+                                <p>产后42天检查登记id：</p>
+                                <input type="text" name="chjcdjid"/>
+                            </li>-->
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li>
+                                <p>体温：</p>
+                                <input type="text" name="tw"/>
+                            </li>
+                            <li>
+                                <p>收缩压：</p>
+                                <input type="text" name="ssy"/>
+                            </li>
+                            <li>
+                                <p>舒张压：</p>
+                                <input type="text" name="szy"/>
+                            </li>
+                            <!--<li>
+                                <p>乳头检查结果：</p>
+                                <input type="text" name="rrjcjg"/>
+                            </li>
+                            <li>
+                                <p>甲状腺检查结果：</p>
+                                <input type="text" name="jzxjcjg"/>
+                            </li>
+                            <li>
+                                <p>心脏听诊结果：</p>
+                                <input type="text" name="xztzjg"/>
+                            </li>
+                            <li>
+                                <p>肺部听诊结果：</p>
+                                <input type="text" name="fbtzjg"/>
+                            </li>
+                            <li>
+                                <p>宫颈检查结果：</p>
+                                <input type="text" name="gjjcjg"/>
+                            </li>
+                            <li>
+                                <p>阴道检查结果：</p>
+                                <input type="text" name="ydjcjg"/>
+                            </li>
+                            <li>
+                                <p>子宫检查结果：</p>
+                                <input type="text" name="zgjcjg"/>
+                            </li>
+                            <li>
+                                <p>左侧附件检查结果代码：</p>
+                                <input type="text" name="zcfjjcjgdm"/>
+                            </li>
+                            <li>
+                                <p>右侧附件检查结果代码：</p>
+                                <input type="text" name="ycfjjcjgdm"/>
+                            </li>
+                            <li>
+                                <p>左侧乳腺检查结果代码：</p>
+                                <input type="text" name="zcrxjcjgdm"/>
+                            </li>
+                            <li>
+                                <p>右侧乳腺检查结果代码：</p>
+                                <input type="text" name="ycrxjcjgdm"/>
+                            </li>
+                            <li>
+                                <p>外阴检查结果：</p>
+                                <input type="text" name="wyjcjg"/>
+                            </li>
+                            <li>
+                                <p>伤口愈合状况代码：</p>
+                                <input type="text" name="skyhzkdm"/>
+                            </li>
+                            <li>
+                                <p>恶露状况：</p>
+                                <input type="text" name="elzk"/>
+                            </li>
+                            <li>
+                                <p>检查（测）人员姓名：</p>
+                                <input type="text" name="jcryxm"/>
+                            </li>
+                            <li>
+                                <p>检查（测）机构名称：</p>
+                                <input type="text" name="jcjgmc"/>
+                            </li>
+                            <li class="select-time">
+                                <p>检查（测）日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcrq]"/>
+                            </li>-->
+                            <li class="select-time">
+                                <p>填表日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTbrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTbrq]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="cffs:chtgjcjl:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="cffs:chtgjcjl:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="cffs:chtgjcjl:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="cffs:chtgjcjl:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('cffs:chtgjcjl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('cffs:chtgjcjl:remove')}]];
+        var prefix = ctx + "cffs/chtgjcjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "产后42天体格检查记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : '主键',
+                    visible: false
+                },
+               /* {
+                    field : 'chjcdjid', 
+                    title : '产后42天检查登记id'
+                },*/
+                {
+                    field : 'xm', 
+                    title : '姓名'
+                },
+                {
+                    field : 'tw', 
+                    title : '体温'
+                },
+                {
+                    field : 'ssy', 
+                    title : '收缩压'
+                },
+                {
+                    field : 'szy', 
+                    title : '舒张压'
+                },
+                {
+                    field : 'rrjcjg', 
+                    title : '乳头检查结果'
+                },
+                {
+                    field : 'jzxjcjg', 
+                    title : '甲状腺检查结果'
+                },
+                {
+                    field : 'xztzjg', 
+                    title : '心脏听诊结果'
+                },
+                {
+                    field : 'fbtzjg', 
+                    title : '肺部听诊结果'
+                },
+                {
+                    field : 'gjjcjg', 
+                    title : '宫颈检查结果'
+                },
+                {
+                    field : 'ydjcjg', 
+                    title : '阴道检查结果'
+                },
+                {
+                    field : 'zgjcjg', 
+                    title : '子宫检查结果'
+                },
+               /* {
+                    field : 'zcfjjcjgdm', 
+                    title : '左侧附件检查结果代码'
+                },
+                {
+                    field : 'ycfjjcjgdm', 
+                    title : '右侧附件检查结果代码'
+                },
+                {
+                    field : 'zcrxjcjgdm', 
+                    title : '左侧乳腺检查结果代码'
+                },
+                {
+                    field : 'ycrxjcjgdm', 
+                    title : '右侧乳腺检查结果代码'
+                },*/
+                {
+                    field : 'wyjcjg', 
+                    title : '外阴检查结果'
+                },
+             /*   {
+                    field : 'skyhzkdm', 
+                    title : '伤口愈合状况代码'
+                },*/
+                {
+                    field : 'elzk', 
+                    title : '恶露状况'
+                },
+                {
+                    field : 'jcryxm', 
+                    title : '检查（测）人员姓名'
+                },
+                {
+                    field : 'jcjgmc', 
+                    title : '检查（测）机构名称'
+                },
+                {
+                    field : 'jcrq', 
+                    title : '检查（测）日期'
+                },
+                {
+                    field : 'tbrq', 
+                    title : '填表日期'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

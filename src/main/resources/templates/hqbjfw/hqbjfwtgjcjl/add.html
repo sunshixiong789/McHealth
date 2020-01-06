@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增婚前保健服务体格检查记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-hqbjfwtgjcjl-add">
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="name" class="form-control" type="text" onclick="listetda()" id="xm" placeholder="请选择登记信息"  readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">婚前保健服务登记ID：</label>
+                <div class="col-sm-8">
+                    <input name="hqbjfwdjid" id="hqbjfwdjid" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证号：</label>
+                <div class="col-sm-8">
+                    <input name="cardid" id="cardid" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">生日：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="birthday" id="birthday" class="form-control" placeholder="yyyy-MM-dd" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">对方记录表编号：</label>
+                <div class="col-sm-8">
+                    <input name="dfjlbid" id="dfjlbid" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">对方姓名：</label>
+                <div class="col-sm-8">
+                    <input name="dfxm" id="dfxm" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收缩压(mmHg)：</label>
+                <div class="col-sm-8">
+                    <input name="ssy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">舒张压(mmHg)：</label>
+                <div class="col-sm-8">
+                    <input name="szy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">特殊体态检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="tsttjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">精神状态代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_yz')}">
+                        <input type="radio" th:id="${'jsztdm_' + dict.dictCode}" name="jsztdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'jsztdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">特殊面容检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="tsmrjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">五官检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="wgjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">智力发育：</label>
+                <div class="col-sm-8">
+                    <input name="zlfy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">心率(次/分)：</label>
+                <div class="col-sm-8">
+                    <input name="xlh" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">心律：</label>
+                <div class="col-sm-8">
+                    <input name="xl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">心脏听诊结果：</label>
+                <div class="col-sm-8">
+                    <input name="xztzjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">腹部听诊结果：</label>
+                <div class="col-sm-8">
+                    <input name="fbtzjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">肝脏触诊结果：</label>
+                <div class="col-sm-8">
+                    <input name="gzczjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">四肢检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="szjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">脊柱检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="jzjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">皮肤毛发检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="pfmfjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">甲状腺检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="jzxjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">妇科检查方式代码：</label>
+                <div class="col-sm-8">
+                    <input name="fkjcfsdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">知情同意标志：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_zq')}">
+                        <input type="radio" th:id="${'zqtybz_' + dict.dictCode}" name="zqtybz" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'zqtybz_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴毛检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="ymjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">外阴检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="wyjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="ydjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">子宫检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="zgjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">左侧附件检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_fj')}">
+                        <input type="radio" th:id="${'zcfjjcjgdm_' + dict.dictCode}" name="zcfjjcjgdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'zcfjjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">右侧附件检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_fj')}">
+                        <input type="radio" th:id="${'ycfjjcjgdm_' + dict.dictCode}" name="ycfjjcjgdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'ycfjjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫颈检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="gjjcjgdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">左侧乳腺检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_rx')}">
+                        <input type="radio" th:id="${'zcrxjcjgdm_' + dict.dictCode}" name="zcrxjcjgdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'zcrxjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">右侧乳腺检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_rx')}">
+                        <input type="radio" th:id="${'ycrxjcjgdm_' + dict.dictCode}" name="ycrxjcjgdm" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'ycrxjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="jcrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="jcryxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="jcjgmc" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "hqbjfw/hqbjfwtgjcjl"
+        $("#form-hqbjfwtgjcjl-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-hqbjfwtgjcjl-add').serialize());
+            }
+        }
+
+        $("input[name='birthday']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='jcrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function listetda(){
+            localStorage.removeItem("selectEtda")
+            var title="选择妇女登记信息";
+            var url="/hqbjfw/hqbjfwdj/listhqbjfwdj";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectEtda");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return
+            }
+            var data=JSON.parse(json);
+
+            $("#xm").val(data[0].xm);
+            $("#hqbjfwdjid").val(data[0].id);
+            $("#cardid").val(data[0].cardid);
+            $("#birthday").val(data[0].birthday);
+            $("#dfjlbid").val(data[0].dfjlbid);
+            $("#dfxm").val(data[0].dfxm);
+            layer.close(index);
+        }
+    </script>
+</body>
+</html>

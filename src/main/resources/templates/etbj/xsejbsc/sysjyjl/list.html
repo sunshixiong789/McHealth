@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('新生儿疾病筛查实验室检查记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>筛查项目：</p>
+                                <select name="scxm" th:with="type=${@dict.getType('sys_et_jbscxm')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>筛查方法：</p>
+                                <select name="scff" th:with="type=${@dict.getType('sys_et_scff')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>筛查结果：</p>
+                                <select name="scjg" th:with="type=${@dict.getType('sys_et_scjg')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="sysjlTable"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var scxmDatas = [[${@dict.getType('sys_et_jbscxm')}]];
+        var scffDatas = [[${@dict.getType('sys_et_scff')}]];
+        var scjgDatas = [[${@dict.getType('sys_et_scjg')}]];
+        var prefix = ctx + "xsejbsc/sysjyjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                id:"sysjlTable",
+                modalName: "新生儿疾病筛查实验室检查记录",
+                onCheck:function(){
+                    var data = $("#selectSysjl").bootstrapTable('getSelections');
+                    localStorage.setItem("selectSysjl", JSON.stringify(data));
+                },
+                onUncheck:function(){
+                    localStorage.removeItem("selectSysjl")//清除筛查登记历史选择
+                },
+                columns: [{
+                    radio: true
+                },
+                {
+                    field : 'id', 
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'djid',
+                    title : '登记Id',
+                    visible: false
+                },
+                {
+                    field : 'xm',
+                    title : '姓名'
+                },
+                {
+                    field : 'csrq',
+                    title : '出生日期'
+                },
+                {
+                    field : 'bbbh',
+                    title : '标本编号'
+                },
+                {
+                    field : 'scxm', 
+                    title : '筛查项目',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(scxmDatas, value);
+                    }
+                },
+                {
+                    field : 'scff', 
+                    title : '筛查方法',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(scffDatas, value);
+                    }
+                },
+                {
+                    field : 'scjg', 
+                    title : '筛查结果',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(scjgDatas, value);
+                    }
+                },
+                {
+                    field : 'jcrq', 
+                    title : '筛查日期'
+                },
+                {
+                    field : 'jcry', 
+                    title : '筛查人员'
+                },
+                {
+                    field : 'jcjg', 
+                    title : '筛查机构'
+                },
+                {
+                    field : 'tzrq', 
+                    title : '通知日期'
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

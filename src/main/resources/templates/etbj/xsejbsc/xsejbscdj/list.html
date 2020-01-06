@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('新生儿疾病筛查登记列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <p>标本编号：</p>
+                            <input type="text" name="bbbh"/>
+                        </li>
+                        <li class="select-time">
+                            <p>采血日期：</p>
+                            <input type="text" class="time-input" id="cxrq" placeholder="采血日期" name="cxrq"/>
+                        </li>
+                        <li>
+                            <p>采血机构名：</p>
+                            <input type="text" name="cxjg"/>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="jbscdjTable"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var cxfsDatas = [[${@dict.getType('sys_et_cxfs')}]];
+    var cxbwDatas = [[${@dict.getType('sys_et_cxbw')}]];
+    var xbdmDatas = [[${@dict.getType('sys_user_sex')}]];
+    var prefix = ctx + "xsejbsc/xsejbscdj";
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            id:"jbscdjTable",
+            onCheck:function(){
+                var data = $("#jbscdjTable").bootstrapTable('getSelections');
+                localStorage.setItem("selectScdj", JSON.stringify(data));
+            },
+            onUncheck:function(){
+                localStorage.removeItem("selectScdj")//清除筛查登记历史选择
+            },
+            modalName: "新生儿疾病筛查登记",
+            columns: [{
+                radio: true
+            },
+                {
+                    field : 'id',
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'xm',
+                    title : '姓名'
+                },
+                {
+                    field : 'xbdm',
+                    title : '性别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(xbdmDatas, value);
+                    }
+                },
+                {
+                    field : 'csrq',
+                    title : '出生日期'
+                },
+                {
+                    field : 'bbbh',
+                    title : '标本编号'
+                },
+                {
+                    field : 'cxrq',
+                    title : '采血日期'
+                },
+                {
+                    field : 'cxfs',
+                    title : '采血方式',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(cxfsDatas, value);
+                    }
+                },
+                {
+                    field : 'cxbw',
+                    title : '采血部位',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(cxbwDatas, value);
+                    }
+                },
+                {
+                    field : 'cxjg',
+                    title : '采血机构名'
+                },
+                {
+                    field : 'cxry',
+                    title : '采血医生'
+                },
+                {
+                    field : 'lxfs',
+                    title : '联系方式'
+                },
+                {
+                    field : 'xzz',
+                    title : '现住址'
+                }
+            ]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

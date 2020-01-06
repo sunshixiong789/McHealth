@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改产前保健实验室检查记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-sysjcjl-edit" th:object="${fnCqbjSysjcjl}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" th:field="*{xm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">健康档案ID：</label>
+                <div class="col-sm-8">
+                    <input name="daid" th:field="*{daid}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="birthday" th:value="${#dates.format(fnCqbjSysjcjl.birthday, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="sfzjLbdm" th:field="*{sfzjLbdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input name="sfzjHm" th:field="*{sfzjHm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">ABO血型代码：</label>
+                <div class="col-sm-8">
+                    <select name="aboxxdm" class="form-control m-b" th:with="type=${@dict.getType('CV5103.02ABO')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{aboxxdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">Rh血型代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('RHXXDM')}">
+                        <input type="radio" th:id="${'rhxxdm_' + dict.dictCode}" name="rhxxdm" th:value="${dict.dictValue}" th:field="*{rhxxdm}">
+                        <label th:for="${'rhxxdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">肝功能检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_yz')}">
+                        <input type="radio" th:id="${'ggnjcjgdm_' + dict.dictCode}" name="ggnjcjgdm" th:value="${dict.dictValue}" th:field="*{ggnjcjgdm}">
+                        <label th:for="${'ggnjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">肾功能检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_yz')}">
+                        <input type="radio" th:id="${'sgnjcjgdm_' + dict.dictCode}" name="sgnjcjgdm" th:value="${dict.dictValue}" th:field="*{sgnjcjgdm}">
+                        <label th:for="${'sgnjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">血β-绒毛膜促性腺激素值(IU/L)：</label>
+                <div class="col-sm-8">
+                    <input name="rmmcxxjs" th:field="*{rmmcxxjs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">血糖检查值(nmol/L)：</label>
+                <div class="col-sm-8">
+                    <input name="xtjcz" th:field="*{xtjcz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">白细胞计数值(G/L)：</label>
+                <div class="col-sm-8">
+                    <input name="bxbjsz" th:field="*{bxbjsz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">红细胞计数值(G/L)：</label>
+                <div class="col-sm-8">
+                    <input name="hxbjsz" th:field="*{hxbjsz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">血小板计数值(G/L)：</label>
+                <div class="col-sm-8">
+                    <input name="xxbjsz" th:field="*{xxbjsz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出血时间(s)：</label>
+                <div class="col-sm-8">
+                    <input name="cxsj" th:field="*{cxsj}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">凝血时间(s)：</label>
+                <div class="col-sm-8">
+                    <input name="nxsj" th:field="*{nxsj}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">血红蛋白值(g/L)：</label>
+                <div class="col-sm-8">
+                    <input name="xhdbz" th:field="*{xhdbz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">血清谷丙转氨酶值(U/L)：</label>
+                <div class="col-sm-8">
+                    <input name="xqgbzamz" th:field="*{xqgbzamz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">尿比重：</label>
+                <div class="col-sm-8">
+                    <input name="nbz" th:field="*{nbz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">尿蛋白定量检测值(mg/24h)：</label>
+                <div class="col-sm-8">
+                    <input name="ndbdljcz" th:field="*{ndbdljcz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">尿液酸碱度：</label>
+                <div class="col-sm-8">
+                    <input name="nyxjd" th:field="*{nyxjd}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">尿糖定量检测(mmol/L)：</label>
+                <div class="col-sm-8">
+                    <input name="ntdljc" th:field="*{ntdljc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道分泌物性状描述：</label>
+                <div class="col-sm-8">
+                    <input name="ydfmwxzms" th:field="*{ydfmwxzms}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">滴虫检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'dcjcjgdm_' + dict.dictCode}" name="dcjcjgdm" th:value="${dict.dictValue}" th:field="*{dcjcjgdm}">
+                        <label th:for="${'dcjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">念珠菌检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'nzjjcjgdm_' + dict.dictCode}" name="nzjjcjgdm" th:value="${dict.dictValue}" th:field="*{nzjjcjgdm}">
+                        <label th:for="${'nzjjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道分泌物清洁度代码：</label>
+                <div class="col-sm-8">
+                    <select name="ydfmwqjdm" class="form-control m-b" th:with="type=${@dict.getType('ydfmwqjddm')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{ydfmwqjdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乙型肝炎病毒表面抗原检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'yxgybdbm_' + dict.dictCode}" name="yxgybdbm" th:value="${dict.dictValue}" th:field="*{yxgybdbm}">
+                        <label th:for="${'yxgybdbm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">梅毒血清学试验结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'mdxqxsy_' + dict.dictCode}" name="mdxqxsy" th:value="${dict.dictValue}" th:field="*{mdxqxsy}">
+                        <label th:for="${'mdxqxsy_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">淋球菌检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="lqjjcjg" th:field="*{lqjjcjg}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">HIV抗体检查结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'hivktjc_' + dict.dictCode}" name="hivktjc" th:value="${dict.dictValue}" th:field="*{hivktjc}">
+                        <label th:for="${'hivktjc_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="jctyxm" th:field="*{jctyxm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="jcjimc" th:field="*{jcjimc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)日期：</label>
+                <div class="col-sm-8">
+                    <input name="jcrq" th:field="*{jcrq}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cqbj/sysjcjl";
+        $("#form-sysjcjl-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-sysjcjl-edit').serialize());
+            }
+        }
+
+        $("input[name='birthday']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

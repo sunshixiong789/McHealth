@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.gwycf.gwycfwxjl.mapper.TbChGwycfwxjlMapper">
+    
+    <resultMap type="TbChGwycfwxjl" id="TbChGwycfwxjlResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="mqsfzjlbdm"    column="mqsfzjlbdm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="mcyjrq"    column="mcyjrq"    />
+        <result property="ycq"    column="ycq"    />
+        <result property="yc"    column="yc"    />
+        <result property="cc"    column="cc"    />
+        <result property="ycqgwysdm"    column="ycqgwysdm"    />
+        <result property="ycqgwysbz"    column="ycqgwysbz"    />
+        <result property="gwpfyz"    column="gwpfyz"    />
+        <result property="gwpfrq"    column="gwpfrq"    />
+        <result property="gwpfz"    column="gwpfz"    />
+        <result property="gwrcjbdm"    column="gwrcjbdm"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="gwycfdjid"    column="gwycfdjid"    />
+    </resultMap>
+
+    <sql id="selectTbChGwycfwxjlVo">
+        select id, xm, csrq, mqsfzjhm, mqsfzjlbdm, lxfs, mcyjrq, ycq, yc, cc, ycqgwysdm, ycqgwysbz, gwpfyz, gwpfrq, gwpfz, gwrcjbdm, djrq, gwycfdjid from tb_ch_gwycfwxjl
+    </sql>
+
+    <select id="selectTbChGwycfwxjlList" parameterType="TbChGwycfwxjl" resultMap="TbChGwycfwxjlResult">
+        <include refid="selectTbChGwycfwxjlVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''"> and mqsfzjlbdm = #{mqsfzjlbdm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="mcyjrq != null "> and mcyjrq = #{mcyjrq}</if>
+            <if test="ycq != null "> and ycq = #{ycq}</if>
+            <if test="yc != null "> and yc = #{yc}</if>
+            <if test="cc != null "> and cc = #{cc}</if>
+            <if test="ycqgwysdm != null  and ycqgwysdm != ''"> and ycqgwysdm = #{ycqgwysdm}</if>
+            <if test="ycqgwysbz != null  and ycqgwysbz != ''"> and ycqgwysbz = #{ycqgwysbz}</if>
+            <if test="gwpfyz != null "> and gwpfyz = #{gwpfyz}</if>
+            <if test="gwpfrq != null "> and gwpfrq = #{gwpfrq}</if>
+            <if test="gwpfz != null "> and gwpfz = #{gwpfz}</if>
+            <if test="gwrcjbdm != null  and gwrcjbdm != ''"> and gwrcjbdm = #{gwrcjbdm}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="gwycfdjid != null "> and gwycfdjid = #{gwycfdjid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChGwycfwxjlById" parameterType="Long" resultMap="TbChGwycfwxjlResult">
+        <include refid="selectTbChGwycfwxjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChGwycfwxjl" parameterType="TbChGwycfwxjl" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_gwycfwxjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="mcyjrq != null ">mcyjrq,</if>
+            <if test="ycq != null ">ycq,</if>
+            <if test="yc != null ">yc,</if>
+            <if test="cc != null ">cc,</if>
+            <if test="ycqgwysdm != null  and ycqgwysdm != ''">ycqgwysdm,</if>
+            <if test="ycqgwysbz != null  and ycqgwysbz != ''">ycqgwysbz,</if>
+            <if test="gwpfyz != null ">gwpfyz,</if>
+            <if test="gwpfrq != null ">gwpfrq,</if>
+            <if test="gwpfz != null ">gwpfz,</if>
+            <if test="gwrcjbdm != null  and gwrcjbdm != ''">gwrcjbdm,</if>
+            <if test="djrq != null ">djrq,</if>
+            <if test="gwycfdjid != null ">gwycfdjid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">#{mqsfzjlbdm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="mcyjrq != null ">#{mcyjrq},</if>
+            <if test="ycq != null ">#{ycq},</if>
+            <if test="yc != null ">#{yc},</if>
+            <if test="cc != null ">#{cc},</if>
+            <if test="ycqgwysdm != null  and ycqgwysdm != ''">#{ycqgwysdm},</if>
+            <if test="ycqgwysbz != null  and ycqgwysbz != ''">#{ycqgwysbz},</if>
+            <if test="gwpfyz != null ">#{gwpfyz},</if>
+            <if test="gwpfrq != null ">#{gwpfrq},</if>
+            <if test="gwpfz != null ">#{gwpfz},</if>
+            <if test="gwrcjbdm != null  and gwrcjbdm != ''">#{gwrcjbdm},</if>
+            <if test="djrq != null ">#{djrq},</if>
+            <if test="gwycfdjid != null ">#{gwycfdjid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChGwycfwxjl" parameterType="TbChGwycfwxjl">
+        update tb_ch_gwycfwxjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm = #{mqsfzjlbdm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="mcyjrq != null ">mcyjrq = #{mcyjrq},</if>
+            <if test="ycq != null ">ycq = #{ycq},</if>
+            <if test="yc != null ">yc = #{yc},</if>
+            <if test="cc != null ">cc = #{cc},</if>
+            <if test="ycqgwysdm != null  and ycqgwysdm != ''">ycqgwysdm = #{ycqgwysdm},</if>
+            <if test="ycqgwysbz != null  and ycqgwysbz != ''">ycqgwysbz = #{ycqgwysbz},</if>
+            <if test="gwpfyz != null ">gwpfyz = #{gwpfyz},</if>
+            <if test="gwpfrq != null ">gwpfrq = #{gwpfrq},</if>
+            <if test="gwpfz != null ">gwpfz = #{gwpfz},</if>
+            <if test="gwrcjbdm != null  and gwrcjbdm != ''">gwrcjbdm = #{gwrcjbdm},</if>
+            <if test="djrq != null ">djrq = #{djrq},</if>
+            <if test="gwycfdjid != null ">gwycfdjid = #{gwycfdjid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChGwycfwxjlById" parameterType="Long">
+        delete from tb_ch_gwycfwxjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChGwycfwxjlByIds" parameterType="String">
+        delete from tb_ch_gwycfwxjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

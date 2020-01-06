@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cqbj.zzjl.mapper.FnCqbjZzjlMapper">
+    
+    <resultMap type="FnCqbjZzjl" id="FnCqbjZzjlResult">
+        <result property="id"    column="id"    />
+        <result property="zyh"    column="zyh"    />
+        <result property="xm"    column="xm"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="sfzjLbdm"    column="sfzj_lbdm"    />
+        <result property="sfzjHm"    column="sfzj_hm"    />
+        <result property="zzjl"    column="zzjl"    />
+        <result property="daid"    column="daid"    />
+    </resultMap>
+
+    <sql id="selectFnCqbjZzjlVo">
+        select id, zyh, xm, birthday, sfzj_lbdm, sfzj_hm, zzjl, daid from fn_cqbj_zzjl
+    </sql>
+
+    <select id="selectFnCqbjZzjlList" parameterType="FnCqbjZzjl" resultMap="FnCqbjZzjlResult">
+        <include refid="selectFnCqbjZzjlVo"/>
+        <where>  
+            <if test="zyh != null  and zyh != ''"> and zyh = #{zyh}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''"> and sfzj_lbdm = #{sfzjLbdm}</if>
+            <if test="sfzjHm != null  and sfzjHm != ''"> and sfzj_hm = #{sfzjHm}</if>
+            <if test="zzjl != null  and zzjl != ''"> and zzjl = #{zzjl}</if>
+            <if test="daid != null "> and daid = #{daid}</if>
+        </where>
+    </select>
+    
+    <select id="selectFnCqbjZzjlById" parameterType="Long" resultMap="FnCqbjZzjlResult">
+        <include refid="selectFnCqbjZzjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFnCqbjZzjl" parameterType="FnCqbjZzjl">
+        insert into fn_cqbj_zzjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="zyh != null  and zyh != ''">zyh,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm,</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm,</if>
+            <if test="zzjl != null  and zzjl != ''">zzjl,</if>
+            <if test="daid != null ">daid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="zyh != null  and zyh != ''">#{zyh},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">#{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">#{sfzjHm},</if>
+            <if test="zzjl != null  and zzjl != ''">#{zzjl},</if>
+            <if test="daid != null ">#{daid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFnCqbjZzjl" parameterType="FnCqbjZzjl">
+        update fn_cqbj_zzjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zyh != null  and zyh != ''">zyh = #{zyh},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm = #{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm = #{sfzjHm},</if>
+            <if test="zzjl != null  and zzjl != ''">zzjl = #{zzjl},</if>
+            <if test="daid != null ">daid = #{daid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFnCqbjZzjlById" parameterType="Long">
+        delete from fn_cqbj_zzjl where id = #{id}
+    </delete>
+
+    <delete id="deleteFnCqbjZzjlByIds" parameterType="String">
+        delete from fn_cqbj_zzjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

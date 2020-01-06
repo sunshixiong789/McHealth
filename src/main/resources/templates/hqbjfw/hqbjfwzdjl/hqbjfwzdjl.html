@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('婚前保健服务诊断记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li>
+                                <p>婚前保健服务登记ID：</p>
+                                <input type="text" name="hqbjfwdjid"/>
+                            </li>
+                            <li>
+                                <p>身份证号：</p>
+                                <input type="text" name="cardid"/>
+                            </li>
+                            <li>
+                                <p>对方记录表编号：</p>
+                                <input type="text" name="dfjlbid"/>
+                            </li>
+                            <li>
+                                <p>对方姓名：</p>
+                                <input type="text" name="dfxm"/>
+                            </li>
+                            <li class="select-time">
+                                <p>生日：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginBirthday]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endBirthday]"/>
+                            </li>
+                            <li>
+                                <p>疾病诊断代码：</p>
+                                <input type="text" name="jbzddm"/>
+                            </li>
+                            <li>
+                                <p>婚前医学检查结果代码：</p>
+                                <select name="hqyxjcjgdm" th:with="type=${@dict.getType('sys_fn_jg')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <p>检查(测)日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcrq]"/>
+                            </li>
+                            <li>
+                                <p>检查(测)人员姓名：</p>
+                                <input type="text" name="jcryxm"/>
+                            </li>
+                            <li>
+                                <p>检查(测)机构名称：</p>
+                                <input type="text" name="jcjgmc"/>
+                            </li>
+                            <li class="select-time">
+                                <p>填报日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTbrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTbrq]"/>
+                            </li>
+                            <li>
+                                <p>首诊医师姓名：</p>
+                                <input type="text" name="szysxm"/>
+                            </li>
+                            <li>
+                                <p>主检医师姓名：</p>
+                                <input type="text" name="zjysxm"/>
+                            </li>
+                            <li class="select-time">
+                                <p>出具《婚前医学检查证明》日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCjrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCjrq]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="hqbjfw:hqbjfwzdjl:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="hqbjfw:hqbjfwzdjl:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="hqbjfw:hqbjfwzdjl:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="hqbjfw:hqbjfwzdjl:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('hqbjfw:hqbjfwzdjl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('hqbjfw:hqbjfwzdjl:remove')}]];
+        var hqyxjcjgdmDatas = [[${@dict.getType('sys_fn_jg')}]];
+        var prefix = ctx + "hqbjfw/hqbjfwzdjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "婚前保健服务诊断记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : 'null',
+                    visible: false
+                },
+                {
+                    field : 'xm', 
+                    title : '姓名'
+                },
+                {
+                    field : 'hqbjfwdjid', 
+                    title : '婚前保健服务登记ID'
+                },
+                {
+                    field : 'cardid', 
+                    title : '身份证号'
+                },
+                {
+                    field : 'dfjlbid', 
+                    title : '对方记录表编号'
+                },
+                {
+                    field : 'dfxm', 
+                    title : '对方姓名'
+                },
+                {
+                    field : 'birthday', 
+                    title : '生日'
+                },
+                {
+                    field : 'jbzddm', 
+                    title : '疾病诊断代码'
+                },
+                {
+                    field : 'hqyxjcjgdm', 
+                    title : '婚前医学检查结果代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(hqyxjcjgdmDatas, value);
+                    }
+                },
+                {
+                    field : 'jcrq', 
+                    title : '检查(测)日期'
+                },
+                {
+                    field : 'jcryxm', 
+                    title : '检查(测)人员姓名'
+                },
+                {
+                    field : 'jcjgmc', 
+                    title : '检查(测)机构名称'
+                },
+                {
+                    field : 'tbrq', 
+                    title : '填报日期'
+                },
+                {
+                    field : 'szysxm', 
+                    title : '首诊医师姓名'
+                },
+                {
+                    field : 'zjysxm', 
+                    title : '主检医师姓名'
+                },
+                {
+                    field : 'cjrq', 
+                    title : '出具《婚前医学检查证明》日期'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

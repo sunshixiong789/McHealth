@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cqbj.wxjl.mapper.FnCqbjWxjlMapper">
+    
+    <resultMap type="FnCqbjWxjl" id="FnCqbjWxjlResult">
+        <result property="id"    column="id"    />
+        <result property="zyh"    column="zyh"    />
+        <result property="xm"    column="xm"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="daid"    column="daid"    />
+        <result property="sfzjLbdm"    column="sfzj_lbdm"    />
+        <result property="sfzjHm"    column="sfzj_hm"    />
+        <result property="xbs"    column="xbs"    />
+    </resultMap>
+
+    <sql id="selectFnCqbjWxjlVo">
+        select id, zyh, xm, birthday, daid, sfzj_lbdm, sfzj_hm, xbs from fn_cqbj_wxjl
+    </sql>
+
+    <select id="selectFnCqbjWxjlList" parameterType="FnCqbjWxjl" resultMap="FnCqbjWxjlResult">
+        <include refid="selectFnCqbjWxjlVo"/>
+        <where>  
+            <if test="zyh != null  and zyh != ''"> and zyh = #{zyh}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="daid != null "> and daid = #{daid}</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''"> and sfzj_lbdm = #{sfzjLbdm}</if>
+            <if test="sfzjHm != null  and sfzjHm != ''"> and sfzj_hm = #{sfzjHm}</if>
+            <if test="xbs != null  and xbs != ''"> and xbs = #{xbs}</if>
+        </where>
+    </select>
+    
+    <select id="selectFnCqbjWxjlById" parameterType="Long" resultMap="FnCqbjWxjlResult">
+        <include refid="selectFnCqbjWxjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFnCqbjWxjl" parameterType="FnCqbjWxjl" useGeneratedKeys="true" keyProperty="id">
+        insert into fn_cqbj_wxjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zyh != null  and zyh != ''">zyh,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="daid != null ">daid,</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm,</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm,</if>
+            <if test="xbs != null  and xbs != ''">xbs,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zyh != null  and zyh != ''">#{zyh},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="daid != null ">#{daid},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">#{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">#{sfzjHm},</if>
+            <if test="xbs != null  and xbs != ''">#{xbs},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFnCqbjWxjl" parameterType="FnCqbjWxjl">
+        update fn_cqbj_wxjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zyh != null  and zyh != ''">zyh = #{zyh},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="daid != null ">daid = #{daid},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm = #{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm = #{sfzjHm},</if>
+            <if test="xbs != null  and xbs != ''">xbs = #{xbs},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFnCqbjWxjlById" parameterType="Long">
+        delete from fn_cqbj_wxjl where id = #{id}
+    </delete>
+
+    <delete id="deleteFnCqbjWxjlByIds" parameterType="String">
+        delete from fn_cqbj_wxjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

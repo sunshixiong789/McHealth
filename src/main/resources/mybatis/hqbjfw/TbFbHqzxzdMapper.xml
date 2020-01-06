@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.hqbjfw.hqzxzd.mapper.TbFbHqzxzdMapper">
+    
+    <resultMap type="TbFbHqzxzd" id="TbFbHqzxzdResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="hqbjfwdjid"    column="hqbjfwdjid"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="dfjlbid"    column="dfjlbid"    />
+        <result property="dfxm"    column="dfxm"    />
+        <result property="hqwszxnr"    column="hqwszxnr"    />
+        <result property="hqzxzdjgdm"    column="hqzxzdjgdm"    />
+        <result property="hqwszdnr"    column="hqwszdnr"    />
+    </resultMap>
+
+    <sql id="selectTbFbHqzxzdVo">
+        select id, xm, hqbjfwdjid, birthday, cardid, dfjlbid, dfxm, hqwszxnr, hqzxzdjgdm, hqwszdnr from tb_fb_hqzxzd
+    </sql>
+
+    <select id="selectTbFbHqzxzdList" parameterType="TbFbHqzxzd" resultMap="TbFbHqzxzdResult">
+        <include refid="selectTbFbHqzxzdVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="hqbjfwdjid != null "> and hqbjfwdjid = #{hqbjfwdjid}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="dfjlbid != null "> and dfjlbid = #{dfjlbid}</if>
+            <if test="dfxm != null  and dfxm != ''"> and dfxm = #{dfxm}</if>
+            <if test="hqwszxnr != null  and hqwszxnr != ''"> and hqwszxnr = #{hqwszxnr}</if>
+            <if test="hqzxzdjgdm != null  and hqzxzdjgdm != ''"> and hqzxzdjgdm = #{hqzxzdjgdm}</if>
+            <if test="hqwszdnr != null  and hqwszdnr != ''"> and hqwszdnr = #{hqwszdnr}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbFbHqzxzdById" parameterType="Long" resultMap="TbFbHqzxzdResult">
+        <include refid="selectTbFbHqzxzdVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbFbHqzxzd" parameterType="TbFbHqzxzd">
+        insert into tb_fb_hqzxzd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="hqbjfwdjid != null ">hqbjfwdjid,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="cardid != null  and cardid != ''">cardid,</if>
+            <if test="dfjlbid != null ">dfjlbid,</if>
+            <if test="dfxm != null  and dfxm != ''">dfxm,</if>
+            <if test="hqwszxnr != null  and hqwszxnr != ''">hqwszxnr,</if>
+            <if test="hqzxzdjgdm != null  and hqzxzdjgdm != ''">hqzxzdjgdm,</if>
+            <if test="hqwszdnr != null  and hqwszdnr != ''">hqwszdnr,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="hqbjfwdjid != null ">#{hqbjfwdjid},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="dfjlbid != null ">#{dfjlbid},</if>
+            <if test="dfxm != null  and dfxm != ''">#{dfxm},</if>
+            <if test="hqwszxnr != null  and hqwszxnr != ''">#{hqwszxnr},</if>
+            <if test="hqzxzdjgdm != null  and hqzxzdjgdm != ''">#{hqzxzdjgdm},</if>
+            <if test="hqwszdnr != null  and hqwszdnr != ''">#{hqwszdnr},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbFbHqzxzd" parameterType="TbFbHqzxzd">
+        update tb_fb_hqzxzd
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="hqbjfwdjid != null ">hqbjfwdjid = #{hqbjfwdjid},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="cardid != null  and cardid != ''">cardid = #{cardid},</if>
+            <if test="dfjlbid != null ">dfjlbid = #{dfjlbid},</if>
+            <if test="dfxm != null  and dfxm != ''">dfxm = #{dfxm},</if>
+            <if test="hqwszxnr != null  and hqwszxnr != ''">hqwszxnr = #{hqwszxnr},</if>
+            <if test="hqzxzdjgdm != null  and hqzxzdjgdm != ''">hqzxzdjgdm = #{hqzxzdjgdm},</if>
+            <if test="hqwszdnr != null  and hqwszdnr != ''">hqwszdnr = #{hqwszdnr},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbHqzxzdById" parameterType="Long">
+        delete from tb_fb_hqzxzd where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbHqzxzdByIds" parameterType="String">
+        delete from tb_fb_hqzxzd where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

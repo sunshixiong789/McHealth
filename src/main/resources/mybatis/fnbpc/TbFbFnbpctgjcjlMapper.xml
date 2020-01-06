@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbpc.fnbpctgjcjl.mapper.TbFbFnbpctgjcjlMapper">
+    
+    <resultMap type="TbFbFnbpctgjcjl" id="TbFbFnbpctgjcjlResult">
+        <result property="id"    column="id"    />
+        <result property="fnbpcdjid"    column="fnbpcdjid"    />
+        <result property="xm"    column="xm"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="xl"    column="xl"    />
+        <result property="ssy"    column="ssy"    />
+        <result property="szy"    column="szy"    />
+        <result property="zcfjjcjgdm"    column="zcfjjcjgdm"    />
+        <result property="ycfjjcjgdm"    column="ycfjjcjgdm"    />
+        <result property="gjjcjg"    column="gjjcjg"    />
+        <result property="ydjcjg"    column="ydjcjg"    />
+        <result property="wyjcjg"    column="wyjcjg"    />
+        <result property="zgjcjg"    column="zgjcjg"    />
+        <result property="zcrxjcjgdm"    column="zcrxjcjgdm"    />
+        <result property="ycrxjcjgdm"    column="ycrxjcjgdm"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcrydm"    column="jcrydm"    />
+        <result property="jcryxm"    column="jcryxm"    />
+        <result property="jcjgdm"    column="jcjgdm"    />
+        <result property="jcjgmc"    column="jcjgmc"    />
+        <result property="deleteFlag"    column="delete_flag"    />
+    </resultMap>
+
+    <sql id="selectTbFbFnbpctgjcjlVo">
+        select id, fnbpcdjid, xm, birthday, cardid, xl, ssy, szy, zcfjjcjgdm, ycfjjcjgdm, gjjcjg, ydjcjg, wyjcjg, zgjcjg, zcrxjcjgdm, ycrxjcjgdm, jcrq, jcrydm, jcryxm, jcjgdm, jcjgmc, delete_flag from tb_fb_fnbpctgjcjl
+    </sql>
+
+    <select id="selectTbFbFnbpctgjcjlList" parameterType="TbFbFnbpctgjcjl" resultMap="TbFbFnbpctgjcjlResult">
+        <include refid="selectTbFbFnbpctgjcjlVo"/>
+        <where>  
+            <if test="fnbpcdjid != null "> and fnbpcdjid = #{fnbpcdjid}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="xl != null "> and xl = #{xl}</if>
+            <if test="ssy != null "> and ssy = #{ssy}</if>
+            <if test="szy != null "> and szy = #{szy}</if>
+            <if test="zcfjjcjgdm != null  and zcfjjcjgdm != ''"> and zcfjjcjgdm = #{zcfjjcjgdm}</if>
+            <if test="ycfjjcjgdm != null  and ycfjjcjgdm != ''"> and ycfjjcjgdm = #{ycfjjcjgdm}</if>
+            <if test="gjjcjg != null  and gjjcjg != ''"> and gjjcjg = #{gjjcjg}</if>
+            <if test="ydjcjg != null  and ydjcjg != ''"> and ydjcjg = #{ydjcjg}</if>
+            <if test="wyjcjg != null  and wyjcjg != ''"> and wyjcjg = #{wyjcjg}</if>
+            <if test="zgjcjg != null  and zgjcjg != ''"> and zgjcjg = #{zgjcjg}</if>
+            <if test="zcrxjcjgdm != null  and zcrxjcjgdm != ''"> and zcrxjcjgdm = #{zcrxjcjgdm}</if>
+            <if test="ycrxjcjgdm != null  and ycrxjcjgdm != ''"> and ycrxjcjgdm = #{ycrxjcjgdm}</if>
+            <if test="jcrq != null "> and jcrq = #{jcrq}</if>
+            <if test="jcrydm != null  and jcrydm != ''"> and jcrydm = #{jcrydm}</if>
+            <if test="jcryxm != null  and jcryxm != ''"> and jcryxm = #{jcryxm}</if>
+            <if test="jcjgdm != null  and jcjgdm != ''"> and jcjgdm = #{jcjgdm}</if>
+            <if test="jcjgmc != null  and jcjgmc != ''"> and jcjgmc = #{jcjgmc}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbFbFnbpctgjcjlById" parameterType="Long" resultMap="TbFbFnbpctgjcjlResult">
+        <include refid="selectTbFbFnbpctgjcjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbFbFnbpctgjcjl" parameterType="TbFbFnbpctgjcjl" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fb_fnbpctgjcjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fnbpcdjid != null ">fnbpcdjid,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="cardid != null  and cardid != ''">cardid,</if>
+            <if test="xl != null ">xl,</if>
+            <if test="ssy != null ">ssy,</if>
+            <if test="szy != null ">szy,</if>
+            <if test="zcfjjcjgdm != null  and zcfjjcjgdm != ''">zcfjjcjgdm,</if>
+            <if test="ycfjjcjgdm != null  and ycfjjcjgdm != ''">ycfjjcjgdm,</if>
+            <if test="gjjcjg != null  and gjjcjg != ''">gjjcjg,</if>
+            <if test="ydjcjg != null  and ydjcjg != ''">ydjcjg,</if>
+            <if test="wyjcjg != null  and wyjcjg != ''">wyjcjg,</if>
+            <if test="zgjcjg != null  and zgjcjg != ''">zgjcjg,</if>
+            <if test="zcrxjcjgdm != null  and zcrxjcjgdm != ''">zcrxjcjgdm,</if>
+            <if test="ycrxjcjgdm != null  and ycrxjcjgdm != ''">ycrxjcjgdm,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcrydm != null  and jcrydm != ''">jcrydm,</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm,</if>
+            <if test="jcjgdm != null  and jcjgdm != ''">jcjgdm,</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc,</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fnbpcdjid != null ">#{fnbpcdjid},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="xl != null ">#{xl},</if>
+            <if test="ssy != null ">#{ssy},</if>
+            <if test="szy != null ">#{szy},</if>
+            <if test="zcfjjcjgdm != null  and zcfjjcjgdm != ''">#{zcfjjcjgdm},</if>
+            <if test="ycfjjcjgdm != null  and ycfjjcjgdm != ''">#{ycfjjcjgdm},</if>
+            <if test="gjjcjg != null  and gjjcjg != ''">#{gjjcjg},</if>
+            <if test="ydjcjg != null  and ydjcjg != ''">#{ydjcjg},</if>
+            <if test="wyjcjg != null  and wyjcjg != ''">#{wyjcjg},</if>
+            <if test="zgjcjg != null  and zgjcjg != ''">#{zgjcjg},</if>
+            <if test="zcrxjcjgdm != null  and zcrxjcjgdm != ''">#{zcrxjcjgdm},</if>
+            <if test="ycrxjcjgdm != null  and ycrxjcjgdm != ''">#{ycrxjcjgdm},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcrydm != null  and jcrydm != ''">#{jcrydm},</if>
+            <if test="jcryxm != null  and jcryxm != ''">#{jcryxm},</if>
+            <if test="jcjgdm != null  and jcjgdm != ''">#{jcjgdm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">#{jcjgmc},</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">#{deleteFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbFbFnbpctgjcjl" parameterType="TbFbFnbpctgjcjl">
+        update tb_fb_fnbpctgjcjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fnbpcdjid != null ">fnbpcdjid = #{fnbpcdjid},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="cardid != null  and cardid != ''">cardid = #{cardid},</if>
+            <if test="xl != null ">xl = #{xl},</if>
+            <if test="ssy != null ">ssy = #{ssy},</if>
+            <if test="szy != null ">szy = #{szy},</if>
+            <if test="zcfjjcjgdm != null  and zcfjjcjgdm != ''">zcfjjcjgdm = #{zcfjjcjgdm},</if>
+            <if test="ycfjjcjgdm != null  and ycfjjcjgdm != ''">ycfjjcjgdm = #{ycfjjcjgdm},</if>
+            <if test="gjjcjg != null  and gjjcjg != ''">gjjcjg = #{gjjcjg},</if>
+            <if test="ydjcjg != null  and ydjcjg != ''">ydjcjg = #{ydjcjg},</if>
+            <if test="wyjcjg != null  and wyjcjg != ''">wyjcjg = #{wyjcjg},</if>
+            <if test="zgjcjg != null  and zgjcjg != ''">zgjcjg = #{zgjcjg},</if>
+            <if test="zcrxjcjgdm != null  and zcrxjcjgdm != ''">zcrxjcjgdm = #{zcrxjcjgdm},</if>
+            <if test="ycrxjcjgdm != null  and ycrxjcjgdm != ''">ycrxjcjgdm = #{ycrxjcjgdm},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcrydm != null  and jcrydm != ''">jcrydm = #{jcrydm},</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm = #{jcryxm},</if>
+            <if test="jcjgdm != null  and jcjgdm != ''">jcjgdm = #{jcjgdm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc = #{jcjgmc},</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">delete_flag = #{deleteFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbFnbpctgjcjlById" parameterType="Long">
+        delete from tb_fb_fnbpctgjcjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbFnbpctgjcjlByIds" parameterType="String">
+        delete from tb_fb_fnbpctgjcjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

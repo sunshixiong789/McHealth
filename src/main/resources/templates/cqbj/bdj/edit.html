@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改产前保健登记')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-bdj-edit" th:object="${fnCqbjBdj}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">住院号：</label>
+                <div class="col-sm-8">
+                    <input name="zyh" th:field="*{zyh}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" th:field="*{xm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">健康档案ID：</label>
+                <div class="col-sm-8">
+                    <input name="daid" th:field="*{daid}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="birthday" th:value="${#dates.format(fnCqbjBdj.birthday, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">文化程度代码：</label>
+                <div class="col-sm-8">
+                    <select name="whcddm" class="form-control m-b" th:with="type=${@dict.getType('sys_user_educational_level')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{whcddm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-类别代码：</label>
+                <div class="col-sm-8">
+                    <select name="sfzjLbdm" class="form-control m-b" th:with="type=${@dict.getType('sys_user_paperwork')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sfzjLbdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证号码：</label>
+                <div class="col-sm-8">
+                    <input name="sfzjHm" th:field="*{sfzjHm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">职业类别代码(国标)：</label>
+                <div class="col-sm-8">
+                    <select name="zylbdm" class="form-control m-b" th:with="type=${@dict.getType('sys_user_profession_type')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{zylbdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工作单位名称：</label>
+                <div class="col-sm-8">
+                    <input name="gzdwmc" th:field="*{gzdwmc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶名称：</label>
+                <div class="col-sm-8">
+                    <input name="pomc" th:field="*{pomc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="pocsrq" th:value="${#dates.format(fnCqbjBdj.pocsrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶名族代码：</label>
+                <div class="col-sm-8">
+                    <input name="pomzdm" th:field="*{pomzdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶文化程度代码：</label>
+                <div class="col-sm-8">
+                    <input name="powhcdm" th:field="*{powhcdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶身份证件-类别代码：</label>
+                <div class="col-sm-8">
+                    <select name="posfzjLedm" class="form-control m-b" th:with="type=${@dict.getType('sys_user_paperwork')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{posfzjLedm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input name="posfzjHm" th:field="*{posfzjHm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶职业类别代码(国标)：</label>
+                <div class="col-sm-8">
+                    <input name="pozylbdm" th:field="*{pozylbdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配偶工作单位名称：</label>
+                <div class="col-sm-8">
+                    <input name="pogzdwmc" th:field="*{pogzdwmc}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cqbj/bdj";
+        $("#form-bdj-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-bdj-edit').serialize());
+            }
+        }
+
+        $("input[name='birthday']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='pocsrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.jbda.fnda.mapper.TxWomanInfoMapper">
+
+    <resultMap type="TxWomanInfo" id="TxWomanInfoResult">
+        <result property="healthFileId"    column="HEALTH_FILE_ID"    />
+        <result property="name"    column="name"    />
+        <result property="gender"    column="gender"    />
+        <result property="address"    column="address"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="cardid"    column="cardId"    />
+        <result property="nation"    column="nation"    />
+        <result property="menophanianAge"    column="MENOPHANIAN_AGE"    />
+        <result property="menstrualCycle"    column="MENSTRUAL_CYCLE"    />
+        <result property="menstrualPeriod"    column="MENSTRUAL_PERIOD"    />
+        <result property="hurt"    column="hurt"    />
+        <result property="menstrualQuantity"    column="MENSTRUAL_QUANTITY"    />
+        <result property="bloodClot"    column="BLOOD_CLOT"    />
+        <result property="stopFlag"    column="STOP_FLAG"    />
+        <result property="stopAge"    column="STOP_AGE"    />
+        <result property="operationStop"    column="OPERATION_STOP"    />
+        <result property="bleedingAfterStop"    column="BLEEDING_AFTER_STOP"    />
+        <result property="contactBleeding"    column="CONTACT_BLEEDING"    />
+        <result property="smellLeucorrhea"    column="SMELL_LEUCORRHEA"    />
+        <result property="discardFlag"    column="DISCARD_FLAG"    />
+        <result property="discardDate"    column="DISCARD_DATE"    />
+        <result property="leucorrheaQuantity"    column="LEUCORRHEA_QUANTITY"    />
+        <result property="leucorrheaColor"    column="LEUCORRHEA_COLOR"    />
+        <result property="leucorrheaColorOther"    column="LEUCORRHEA_COLOR_OTHER"    />
+        <result property="itch"    column="ITCH"    />
+        <result property="marriage"    column="MARRIAGE"    />
+        <result property="marriageAge"    column="MARRIAGE_AGE"    />
+        <result property="gestationTimes"    column="GESTATION_TIMES"    />
+        <result property="deliveryTimes"    column="DELIVERY_TIMES"    />
+        <result property="cesareanTimes"    column="CESAREAN_TIMES"    />
+        <result property="artificialAbortion"    column="ARTIFICIAL_ABORTION"    />
+        <result property="spontaneousAbortion"    column="SPONTANEOUS_ABORTION"    />
+        <result property="inducedLabour"    column="INDUCED_LABOUR"    />
+        <result property="deatFetus"    column="DEAT_FETUS"    />
+        <result property="stillbirth"    column="STILLBIRTH"    />
+        <result property="puerperalInfection"    column="PUERPERAL_INFECTION"    />
+        <result property="lastDeliveryDate"    column="LAST_DELIVERY_DATE"    />
+        <result property="contraceptiveRing"    column="CONTRACEPTIVE_RING"    />
+        <result property="contraceptiveRingLoc"    column="CONTRACEPTIVE_RING_LOC"    />
+        <result property="contraceptiveDate"    column="CONTRACEPTIVE_DATE"    />
+        <result property="takenPills"    column="TAKEN_PILLS"    />
+        <result property="tools"    column="TOOLS"    />
+        <result property="diseaseHistory"    column="DISEASE_HISTORY"    />
+        <result property="operationHistory"    column="OPERATION_HISTORY"    />
+        <result property="breastCancerFamily"    column="BREAST_CANCER_FAMILY"    />
+        <result property="blood"    column="BLOOD"    />
+        <result property="breastCancer"    column="BREAST_CANCER"    />
+        <result property="breastCancerDate"    column="BREAST_CANCER_DATE"    />
+        <result property="breastCancerTreat"    column="BREAST_CANCER_TREAT"    />
+        <result property="uterineNeckCancer"    column="UTERINE_NECK_CANCER"    />
+        <result property="uterineNeckCancerDate"    column="UTERINE_NECK_CANCER_DATE"    />
+        <result property="uterineNeckCancerTreat"    column="UTERINE_NECK_CANCER_TREAT"    />
+        <result property="otherDes"    column="OTHER_DES"    />
+    </resultMap>
+
+    <sql id="selectTxWomanInfoVo">
+        select HEALTH_FILE_ID, name, gender, address, birthday, cardId, nation, MENOPHANIAN_AGE, MENSTRUAL_CYCLE, MENSTRUAL_PERIOD, hurt, MENSTRUAL_QUANTITY, BLOOD_CLOT, STOP_FLAG, STOP_AGE, OPERATION_STOP, BLEEDING_AFTER_STOP, CONTACT_BLEEDING, SMELL_LEUCORRHEA, DISCARD_FLAG, DISCARD_DATE, LEUCORRHEA_QUANTITY, LEUCORRHEA_COLOR, LEUCORRHEA_COLOR_OTHER, ITCH, MARRIAGE, MARRIAGE_AGE, GESTATION_TIMES, DELIVERY_TIMES, CESAREAN_TIMES, ARTIFICIAL_ABORTION, SPONTANEOUS_ABORTION, INDUCED_LABOUR, DEAT_FETUS, STILLBIRTH, PUERPERAL_INFECTION, LAST_DELIVERY_DATE, CONTRACEPTIVE_RING, CONTRACEPTIVE_RING_LOC, CONTRACEPTIVE_DATE, TAKEN_PILLS, TOOLS, DISEASE_HISTORY, OPERATION_HISTORY, BREAST_CANCER_FAMILY, BLOOD, BREAST_CANCER, BREAST_CANCER_DATE, BREAST_CANCER_TREAT, UTERINE_NECK_CANCER, UTERINE_NECK_CANCER_DATE, UTERINE_NECK_CANCER_TREAT, OTHER_DES from tx_woman_info
+    </sql>
+
+    <select id="selectTxWomanInfoList" parameterType="TxWomanInfo" resultMap="TxWomanInfoResult">
+        <include refid="selectTxWomanInfoVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="cardid != null  and cardid != ''"> and cardId = #{cardid}</if>
+            <if test="nation != null  and nation != ''"> and nation = #{nation}</if>
+            <if test="menophanianAge != null  and menophanianAge != ''"> and MENOPHANIAN_AGE = #{menophanianAge}</if>
+            <if test="menstrualCycle != null  and menstrualCycle != ''"> and MENSTRUAL_CYCLE = #{menstrualCycle}</if>
+            <if test="menstrualPeriod != null  and menstrualPeriod != ''"> and MENSTRUAL_PERIOD = #{menstrualPeriod}</if>
+            <if test="hurt != null  and hurt != ''"> and hurt = #{hurt}</if>
+            <if test="menstrualQuantity != null  and menstrualQuantity != ''"> and MENSTRUAL_QUANTITY = #{menstrualQuantity}</if>
+            <if test="bloodClot != null  and bloodClot != ''"> and BLOOD_CLOT = #{bloodClot}</if>
+            <if test="stopFlag != null  and stopFlag != ''"> and STOP_FLAG = #{stopFlag}</if>
+            <if test="stopAge != null  and stopAge != ''"> and STOP_AGE = #{stopAge}</if>
+            <if test="operationStop != null  and operationStop != ''"> and OPERATION_STOP = #{operationStop}</if>
+            <if test="bleedingAfterStop != null  and bleedingAfterStop != ''"> and BLEEDING_AFTER_STOP = #{bleedingAfterStop}</if>
+            <if test="contactBleeding != null  and contactBleeding != ''"> and CONTACT_BLEEDING = #{contactBleeding}</if>
+            <if test="smellLeucorrhea != null  and smellLeucorrhea != ''"> and SMELL_LEUCORRHEA = #{smellLeucorrhea}</if>
+            <if test="discardFlag != null  and discardFlag != ''"> and DISCARD_FLAG = #{discardFlag}</if>
+            <if test="discardDate != null "> and DISCARD_DATE = #{discardDate}</if>
+            <if test="leucorrheaQuantity != null  and leucorrheaQuantity != ''"> and LEUCORRHEA_QUANTITY = #{leucorrheaQuantity}</if>
+            <if test="leucorrheaColor != null  and leucorrheaColor != ''"> and LEUCORRHEA_COLOR = #{leucorrheaColor}</if>
+            <if test="leucorrheaColorOther != null  and leucorrheaColorOther != ''"> and LEUCORRHEA_COLOR_OTHER = #{leucorrheaColorOther}</if>
+            <if test="itch != null  and itch != ''"> and ITCH = #{itch}</if>
+            <if test="marriage != null  and marriage != ''"> and MARRIAGE = #{marriage}</if>
+            <if test="marriageAge != null  and marriageAge != ''"> and MARRIAGE_AGE = #{marriageAge}</if>
+            <if test="gestationTimes != null "> and GESTATION_TIMES = #{gestationTimes}</if>
+            <if test="deliveryTimes != null "> and DELIVERY_TIMES = #{deliveryTimes}</if>
+            <if test="cesareanTimes != null "> and CESAREAN_TIMES = #{cesareanTimes}</if>
+            <if test="artificialAbortion != null "> and ARTIFICIAL_ABORTION = #{artificialAbortion}</if>
+            <if test="spontaneousAbortion != null "> and SPONTANEOUS_ABORTION = #{spontaneousAbortion}</if>
+            <if test="inducedLabour != null "> and INDUCED_LABOUR = #{inducedLabour}</if>
+            <if test="deatFetus != null  and deatFetus != ''"> and DEAT_FETUS = #{deatFetus}</if>
+            <if test="stillbirth != null  and stillbirth != ''"> and STILLBIRTH = #{stillbirth}</if>
+            <if test="puerperalInfection != null  and puerperalInfection != ''"> and PUERPERAL_INFECTION = #{puerperalInfection}</if>
+            <if test="lastDeliveryDate != null "> and LAST_DELIVERY_DATE = #{lastDeliveryDate}</if>
+            <if test="contraceptiveRing != null  and contraceptiveRing != ''"> and CONTRACEPTIVE_RING = #{contraceptiveRing}</if>
+            <if test="contraceptiveRingLoc != null  and contraceptiveRingLoc != ''"> and CONTRACEPTIVE_RING_LOC = #{contraceptiveRingLoc}</if>
+            <if test="contraceptiveDate != null "> and CONTRACEPTIVE_DATE = #{contraceptiveDate}</if>
+            <if test="takenPills != null  and takenPills != ''"> and TAKEN_PILLS = #{takenPills}</if>
+            <if test="tools != null  and tools != ''"> and TOOLS = #{tools}</if>
+            <if test="diseaseHistory != null  and diseaseHistory != ''"> and DISEASE_HISTORY = #{diseaseHistory}</if>
+            <if test="operationHistory != null  and operationHistory != ''"> and OPERATION_HISTORY = #{operationHistory}</if>
+            <if test="breastCancerFamily != null  and breastCancerFamily != ''"> and BREAST_CANCER_FAMILY = #{breastCancerFamily}</if>
+            <if test="blood != null  and blood != ''"> and BLOOD = #{blood}</if>
+            <if test="breastCancer != null  and breastCancer != ''"> and BREAST_CANCER = #{breastCancer}</if>
+            <if test="breastCancerDate != null "> and BREAST_CANCER_DATE = #{breastCancerDate}</if>
+            <if test="breastCancerTreat != null  and breastCancerTreat != ''"> and BREAST_CANCER_TREAT = #{breastCancerTreat}</if>
+            <if test="uterineNeckCancer != null  and uterineNeckCancer != ''"> and UTERINE_NECK_CANCER = #{uterineNeckCancer}</if>
+            <if test="uterineNeckCancerDate != null "> and UTERINE_NECK_CANCER_DATE = #{uterineNeckCancerDate}</if>
+            <if test="uterineNeckCancerTreat != null "> and UTERINE_NECK_CANCER_TREAT = #{uterineNeckCancerTreat}</if>
+            <if test="otherDes != null  and otherDes != ''"> and OTHER_DES = #{otherDes}</if>
+        </where>
+    </select>
+
+    <select id="selectTxWomanInfoById" parameterType="Long" resultMap="TxWomanInfoResult">
+        <include refid="selectTxWomanInfoVo"/>
+        where HEALTH_FILE_ID = #{healthFileId}
+    </select>
+
+    <insert id="insertTxWomanInfo" parameterType="TxWomanInfo" useGeneratedKeys="true" keyProperty="healthFileId">
+        insert into tx_woman_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="gender != null  and gender != ''">gender,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="cardid != null  and cardid != ''">cardId,</if>
+            <if test="nation != null  and nation != ''">nation,</if>
+            <if test="menophanianAge != null  and menophanianAge != ''">MENOPHANIAN_AGE,</if>
+            <if test="menstrualCycle != null  and menstrualCycle != ''">MENSTRUAL_CYCLE,</if>
+            <if test="menstrualPeriod != null  and menstrualPeriod != ''">MENSTRUAL_PERIOD,</if>
+            <if test="hurt != null  and hurt != ''">hurt,</if>
+            <if test="menstrualQuantity != null  and menstrualQuantity != ''">MENSTRUAL_QUANTITY,</if>
+            <if test="bloodClot != null  and bloodClot != ''">BLOOD_CLOT,</if>
+            <if test="stopFlag != null  and stopFlag != ''">STOP_FLAG,</if>
+            <if test="stopAge != null  and stopAge != ''">STOP_AGE,</if>
+            <if test="operationStop != null  and operationStop != ''">OPERATION_STOP,</if>
+            <if test="bleedingAfterStop != null  and bleedingAfterStop != ''">BLEEDING_AFTER_STOP,</if>
+            <if test="contactBleeding != null  and contactBleeding != ''">CONTACT_BLEEDING,</if>
+            <if test="smellLeucorrhea != null  and smellLeucorrhea != ''">SMELL_LEUCORRHEA,</if>
+            <if test="discardFlag != null  and discardFlag != ''">DISCARD_FLAG,</if>
+            <if test="discardDate != null ">DISCARD_DATE,</if>
+            <if test="leucorrheaQuantity != null  and leucorrheaQuantity != ''">LEUCORRHEA_QUANTITY,</if>
+            <if test="leucorrheaColor != null  and leucorrheaColor != ''">LEUCORRHEA_COLOR,</if>
+            <if test="leucorrheaColorOther != null  and leucorrheaColorOther != ''">LEUCORRHEA_COLOR_OTHER,</if>
+            <if test="itch != null  and itch != ''">ITCH,</if>
+            <if test="marriage != null  and marriage != ''">MARRIAGE,</if>
+            <if test="marriageAge != null  and marriageAge != ''">MARRIAGE_AGE,</if>
+            <if test="gestationTimes != null ">GESTATION_TIMES,</if>
+            <if test="deliveryTimes != null ">DELIVERY_TIMES,</if>
+            <if test="cesareanTimes != null ">CESAREAN_TIMES,</if>
+            <if test="artificialAbortion != null ">ARTIFICIAL_ABORTION,</if>
+            <if test="spontaneousAbortion != null ">SPONTANEOUS_ABORTION,</if>
+            <if test="inducedLabour != null ">INDUCED_LABOUR,</if>
+            <if test="deatFetus != null  and deatFetus != ''">DEAT_FETUS,</if>
+            <if test="stillbirth != null  and stillbirth != ''">STILLBIRTH,</if>
+            <if test="puerperalInfection != null  and puerperalInfection != ''">PUERPERAL_INFECTION,</if>
+            <if test="lastDeliveryDate != null ">LAST_DELIVERY_DATE,</if>
+            <if test="contraceptiveRing != null  and contraceptiveRing != ''">CONTRACEPTIVE_RING,</if>
+            <if test="contraceptiveRingLoc != null  and contraceptiveRingLoc != ''">CONTRACEPTIVE_RING_LOC,</if>
+            <if test="contraceptiveDate != null ">CONTRACEPTIVE_DATE,</if>
+            <if test="takenPills != null  and takenPills != ''">TAKEN_PILLS,</if>
+            <if test="tools != null  and tools != ''">TOOLS,</if>
+            <if test="diseaseHistory != null  and diseaseHistory != ''">DISEASE_HISTORY,</if>
+            <if test="operationHistory != null  and operationHistory != ''">OPERATION_HISTORY,</if>
+            <if test="breastCancerFamily != null  and breastCancerFamily != ''">BREAST_CANCER_FAMILY,</if>
+            <if test="blood != null  and blood != ''">BLOOD,</if>
+            <if test="breastCancer != null  and breastCancer != ''">BREAST_CANCER,</if>
+            <if test="breastCancerDate != null ">BREAST_CANCER_DATE,</if>
+            <if test="breastCancerTreat != null  and breastCancerTreat != ''">BREAST_CANCER_TREAT,</if>
+            <if test="uterineNeckCancer != null  and uterineNeckCancer != ''">UTERINE_NECK_CANCER,</if>
+            <if test="uterineNeckCancerDate != null ">UTERINE_NECK_CANCER_DATE,</if>
+            <if test="uterineNeckCancerTreat != null ">UTERINE_NECK_CANCER_TREAT,</if>
+            <if test="otherDes != null  and otherDes != ''">OTHER_DES,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="nation != null  and nation != ''">#{nation},</if>
+            <if test="menophanianAge != null  and menophanianAge != ''">#{menophanianAge},</if>
+            <if test="menstrualCycle != null  and menstrualCycle != ''">#{menstrualCycle},</if>
+            <if test="menstrualPeriod != null  and menstrualPeriod != ''">#{menstrualPeriod},</if>
+            <if test="hurt != null  and hurt != ''">#{hurt},</if>
+            <if test="menstrualQuantity != null  and menstrualQuantity != ''">#{menstrualQuantity},</if>
+            <if test="bloodClot != null  and bloodClot != ''">#{bloodClot},</if>
+            <if test="stopFlag != null  and stopFlag != ''">#{stopFlag},</if>
+            <if test="stopAge != null  and stopAge != ''">#{stopAge},</if>
+            <if test="operationStop != null  and operationStop != ''">#{operationStop},</if>
+            <if test="bleedingAfterStop != null  and bleedingAfterStop != ''">#{bleedingAfterStop},</if>
+            <if test="contactBleeding != null  and contactBleeding != ''">#{contactBleeding},</if>
+            <if test="smellLeucorrhea != null  and smellLeucorrhea != ''">#{smellLeucorrhea},</if>
+            <if test="discardFlag != null  and discardFlag != ''">#{discardFlag},</if>
+            <if test="discardDate != null ">#{discardDate},</if>
+            <if test="leucorrheaQuantity != null  and leucorrheaQuantity != ''">#{leucorrheaQuantity},</if>
+            <if test="leucorrheaColor != null  and leucorrheaColor != ''">#{leucorrheaColor},</if>
+            <if test="leucorrheaColorOther != null  and leucorrheaColorOther != ''">#{leucorrheaColorOther},</if>
+            <if test="itch != null  and itch != ''">#{itch},</if>
+            <if test="marriage != null  and marriage != ''">#{marriage},</if>
+            <if test="marriageAge != null  and marriageAge != ''">#{marriageAge},</if>
+            <if test="gestationTimes != null ">#{gestationTimes},</if>
+            <if test="deliveryTimes != null ">#{deliveryTimes},</if>
+            <if test="cesareanTimes != null ">#{cesareanTimes},</if>
+            <if test="artificialAbortion != null ">#{artificialAbortion},</if>
+            <if test="spontaneousAbortion != null ">#{spontaneousAbortion},</if>
+            <if test="inducedLabour != null ">#{inducedLabour},</if>
+            <if test="deatFetus != null  and deatFetus != ''">#{deatFetus},</if>
+            <if test="stillbirth != null  and stillbirth != ''">#{stillbirth},</if>
+            <if test="puerperalInfection != null  and puerperalInfection != ''">#{puerperalInfection},</if>
+            <if test="lastDeliveryDate != null ">#{lastDeliveryDate},</if>
+            <if test="contraceptiveRing != null  and contraceptiveRing != ''">#{contraceptiveRing},</if>
+            <if test="contraceptiveRingLoc != null  and contraceptiveRingLoc != ''">#{contraceptiveRingLoc},</if>
+            <if test="contraceptiveDate != null ">#{contraceptiveDate},</if>
+            <if test="takenPills != null  and takenPills != ''">#{takenPills},</if>
+            <if test="tools != null  and tools != ''">#{tools},</if>
+            <if test="diseaseHistory != null  and diseaseHistory != ''">#{diseaseHistory},</if>
+            <if test="operationHistory != null  and operationHistory != ''">#{operationHistory},</if>
+            <if test="breastCancerFamily != null  and breastCancerFamily != ''">#{breastCancerFamily},</if>
+            <if test="blood != null  and blood != ''">#{blood},</if>
+            <if test="breastCancer != null  and breastCancer != ''">#{breastCancer},</if>
+            <if test="breastCancerDate != null ">#{breastCancerDate},</if>
+            <if test="breastCancerTreat != null  and breastCancerTreat != ''">#{breastCancerTreat},</if>
+            <if test="uterineNeckCancer != null  and uterineNeckCancer != ''">#{uterineNeckCancer},</if>
+            <if test="uterineNeckCancerDate != null ">#{uterineNeckCancerDate},</if>
+            <if test="uterineNeckCancerTreat != null ">#{uterineNeckCancerTreat},</if>
+            <if test="otherDes != null  and otherDes != ''">#{otherDes},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTxWomanInfo" parameterType="TxWomanInfo">
+        update tx_woman_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="gender != null  and gender != ''">gender = #{gender},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="cardid != null  and cardid != ''">cardId = #{cardid},</if>
+            <if test="nation != null  and nation != ''">nation = #{nation},</if>
+            <if test="menophanianAge != null  and menophanianAge != ''">MENOPHANIAN_AGE = #{menophanianAge},</if>
+            <if test="menstrualCycle != null  and menstrualCycle != ''">MENSTRUAL_CYCLE = #{menstrualCycle},</if>
+            <if test="menstrualPeriod != null  and menstrualPeriod != ''">MENSTRUAL_PERIOD = #{menstrualPeriod},</if>
+            <if test="hurt != null  and hurt != ''">hurt = #{hurt},</if>
+            <if test="menstrualQuantity != null  and menstrualQuantity != ''">MENSTRUAL_QUANTITY = #{menstrualQuantity},</if>
+            <if test="bloodClot != null  and bloodClot != ''">BLOOD_CLOT = #{bloodClot},</if>
+            <if test="stopFlag != null  and stopFlag != ''">STOP_FLAG = #{stopFlag},</if>
+            <if test="stopAge != null  and stopAge != ''">STOP_AGE = #{stopAge},</if>
+            <if test="operationStop != null  and operationStop != ''">OPERATION_STOP = #{operationStop},</if>
+            <if test="bleedingAfterStop != null  and bleedingAfterStop != ''">BLEEDING_AFTER_STOP = #{bleedingAfterStop},</if>
+            <if test="contactBleeding != null  and contactBleeding != ''">CONTACT_BLEEDING = #{contactBleeding},</if>
+            <if test="smellLeucorrhea != null  and smellLeucorrhea != ''">SMELL_LEUCORRHEA = #{smellLeucorrhea},</if>
+            <if test="discardFlag != null  and discardFlag != ''">DISCARD_FLAG = #{discardFlag},</if>
+            <if test="discardDate != null ">DISCARD_DATE = #{discardDate},</if>
+            <if test="leucorrheaQuantity != null  and leucorrheaQuantity != ''">LEUCORRHEA_QUANTITY = #{leucorrheaQuantity},</if>
+            <if test="leucorrheaColor != null  and leucorrheaColor != ''">LEUCORRHEA_COLOR = #{leucorrheaColor},</if>
+            <if test="leucorrheaColorOther != null  and leucorrheaColorOther != ''">LEUCORRHEA_COLOR_OTHER = #{leucorrheaColorOther},</if>
+            <if test="itch != null  and itch != ''">ITCH = #{itch},</if>
+            <if test="marriage != null  and marriage != ''">MARRIAGE = #{marriage},</if>
+            <if test="marriageAge != null  and marriageAge != ''">MARRIAGE_AGE = #{marriageAge},</if>
+            <if test="gestationTimes != null ">GESTATION_TIMES = #{gestationTimes},</if>
+            <if test="deliveryTimes != null ">DELIVERY_TIMES = #{deliveryTimes},</if>
+            <if test="cesareanTimes != null ">CESAREAN_TIMES = #{cesareanTimes},</if>
+            <if test="artificialAbortion != null ">ARTIFICIAL_ABORTION = #{artificialAbortion},</if>
+            <if test="spontaneousAbortion != null ">SPONTANEOUS_ABORTION = #{spontaneousAbortion},</if>
+            <if test="inducedLabour != null ">INDUCED_LABOUR = #{inducedLabour},</if>
+            <if test="deatFetus != null  and deatFetus != ''">DEAT_FETUS = #{deatFetus},</if>
+            <if test="stillbirth != null  and stillbirth != ''">STILLBIRTH = #{stillbirth},</if>
+            <if test="puerperalInfection != null  and puerperalInfection != ''">PUERPERAL_INFECTION = #{puerperalInfection},</if>
+            <if test="lastDeliveryDate != null ">LAST_DELIVERY_DATE = #{lastDeliveryDate},</if>
+            <if test="contraceptiveRing != null  and contraceptiveRing != ''">CONTRACEPTIVE_RING = #{contraceptiveRing},</if>
+            <if test="contraceptiveRingLoc != null  and contraceptiveRingLoc != ''">CONTRACEPTIVE_RING_LOC = #{contraceptiveRingLoc},</if>
+            <if test="contraceptiveDate != null ">CONTRACEPTIVE_DATE = #{contraceptiveDate},</if>
+            <if test="takenPills != null  and takenPills != ''">TAKEN_PILLS = #{takenPills},</if>
+            <if test="tools != null  and tools != ''">TOOLS = #{tools},</if>
+            <if test="diseaseHistory != null  and diseaseHistory != ''">DISEASE_HISTORY = #{diseaseHistory},</if>
+            <if test="operationHistory != null  and operationHistory != ''">OPERATION_HISTORY = #{operationHistory},</if>
+            <if test="breastCancerFamily != null  and breastCancerFamily != ''">BREAST_CANCER_FAMILY = #{breastCancerFamily},</if>
+            <if test="blood != null  and blood != ''">BLOOD = #{blood},</if>
+            <if test="breastCancer != null  and breastCancer != ''">BREAST_CANCER = #{breastCancer},</if>
+            <if test="breastCancerDate != null ">BREAST_CANCER_DATE = #{breastCancerDate},</if>
+            <if test="breastCancerTreat != null  and breastCancerTreat != ''">BREAST_CANCER_TREAT = #{breastCancerTreat},</if>
+            <if test="uterineNeckCancer != null  and uterineNeckCancer != ''">UTERINE_NECK_CANCER = #{uterineNeckCancer},</if>
+            <if test="uterineNeckCancerDate != null ">UTERINE_NECK_CANCER_DATE = #{uterineNeckCancerDate},</if>
+            <if test="uterineNeckCancerTreat != null ">UTERINE_NECK_CANCER_TREAT = #{uterineNeckCancerTreat},</if>
+            <if test="otherDes != null  and otherDes != ''">OTHER_DES = #{otherDes},</if>
+        </trim>
+        where HEALTH_FILE_ID = #{healthFileId}
+    </update>
+
+    <delete id="deleteTxWomanInfoById" parameterType="Long">
+        delete from tx_woman_info where HEALTH_FILE_ID = #{healthFileId}
+    </delete>
+
+    <delete id="deleteTxWomanInfoByIds" parameterType="String">
+        delete from tx_woman_info where HEALTH_FILE_ID in
+        <foreach item="healthFileId" collection="array" open="(" separator="," close=")">
+            #{healthFileId}
+        </foreach>
+    </delete>
+
+</mapper>

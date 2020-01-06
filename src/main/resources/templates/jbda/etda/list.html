@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('儿童档案列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <p>身份证号：</p>
+                            <input type="text" name="cardid"/>
+                        </li>
+                        <li>
+                            <p>儿童姓名：</p>
+                            <input type="text" name="childName"/>
+                        </li>
+                        <li class="select-time">
+                            <p>生日：</p>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginBirthday]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endBirthday]"/>
+                        </li>
+
+                        <li>
+                            <p>性别：</p>
+                            <input type="text" name="gender"/>
+                        </li>
+                        <li>
+                            <p>民族：</p>
+                            <input type="text" name="nationality"/>
+                        </li>
+
+
+                        <li>
+                            <p>家庭地址：</p>
+                            <input type="text" name="address"/>
+                        </li>
+
+
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="etdatable"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var prefix = ctx + "jbda/etda";
+    localStorage.removeItem("selectEtda")//清除历史选择
+    var genderDatas = [[${@dict.getType('sys_user_sex')}]];
+
+    $(function() {
+        var options = {
+            id:"etdatable",
+            url: prefix + "/list",
+            modalName: "儿童档案",
+            onCheck:function(){
+                var data = $("#etdatable").bootstrapTable('getSelections');
+                localStorage.setItem("selectEtda", JSON.stringify(data));
+            },
+            onUncheck:function(){
+                localStorage.removeItem("selectEtda")//清除历史选择
+            },
+            columns: [{
+                radio: true
+            },
+            {
+                field : 'healthFileId',
+                title : '健康档案号',
+                visible: false
+            },
+            {
+                field : 'cardid',
+                title : '身份证号'
+            },
+            {
+                field : 'childName',
+                title : '儿童姓名'
+            },
+            {
+                field : 'birthday',
+                title : '生日'
+            },
+            {
+                field : 'age',
+                title : '年龄'
+            },
+            {
+                field : 'gender',
+                title : '性别',
+                formatter: function(value, row, index) {
+                    return $.table.selectDictLabel(genderDatas, value);
+                }
+            },
+            {
+                field : 'nationality',
+                title : '民族'
+            },
+            {
+                field : 'fatherName',
+                title : '父亲姓名'
+            },
+            {
+                field : 'fatherJob',
+                title : '父亲单位'
+            },
+            {
+                field : 'motherName',
+                title : '母亲姓名'
+            },
+            {
+                field : 'motherJob',
+                title : '母亲单位'
+            },
+            {
+                field : 'address',
+                title : '家庭地址'
+            },
+            {
+                field : 'phone',
+                title : '联系电话'
+            },
+            {
+                field : 'creatTime',
+                title : '建卡时间'
+            },
+            {
+                field : 'nursery',
+                title : '托幼单位'
+            },
+            {
+                field : 'nurseryTime',
+                title : '入托时间'
+            },
+            {
+                field : 'fatherId',
+                title : '父亲身份证'
+            },
+            {
+                field : 'motherId',
+                title : '母亲身份证'
+            }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

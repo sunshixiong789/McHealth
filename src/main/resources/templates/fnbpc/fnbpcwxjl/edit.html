@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改妇女病普查问询记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-fnbpcwxjl-edit" th:object="${tbFbFnbpcwxjl}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">妇女病普查登记ID：</label>
+                <div class="col-sm-8">
+                    <input name="fnbpcdjid" th:field="*{fnbpcdjid}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" th:field="*{xm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="csrq" th:value="${#dates.format(tbFbFnbpcwxjl.csrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input name="sfzjHm" th:field="*{sfzjHm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">性交出血史：</label>
+                <div class="col-sm-8">
+                    <input name="xjcxs" th:field="*{xjcxs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">妊娠合并史/并发症史：</label>
+                <div class="col-sm-8">
+                    <input name="rshbs" th:field="*{rshbs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">既往疾病史：</label>
+                <div class="col-sm-8">
+                    <input name="jwjbs" th:field="*{jwjbs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">家族肿瘤史：</label>
+                <div class="col-sm-8">
+                    <input name="jzzls" th:field="*{jzzls}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">妇科及乳腺不适症状代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('fkjrxbszzdm')}">
+                        <input type="radio" th:id="${'fkjrxbszzdm_' + dict.dictCode}" name="fkjrxbszzdm" th:value="${dict.dictValue}" th:field="*{fkjrxbszzdm}">
+                        <label th:for="${'fkjrxbszzdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">初潮年龄：</label>
+                <div class="col-sm-8">
+                    <input name="ccnl" th:field="*{ccnl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">月经周期：</label>
+                <div class="col-sm-8">
+                    <input name="yjzq" th:field="*{yjzq}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">月经持续时间：</label>
+                <div class="col-sm-8">
+                    <input name="yjcxsj" th:field="*{yjcxsj}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">月经出血量类别：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_yjl')}">
+                        <input type="radio" th:id="${'yjcxllbdm_' + dict.dictCode}" name="yjcxllbdm" th:value="${dict.dictValue}" th:field="*{yjcxllbdm}">
+                        <label th:for="${'yjcxllbdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">痛经：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_tongjing')}">
+                        <input type="radio" th:id="${'tjbz_' + dict.dictCode}" name="tjbz" th:value="${dict.dictValue}" th:field="*{tjbz}">
+                        <label th:for="${'tjbz_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末次月经日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="mcyjrq" th:value="${#dates.format(tbFbFnbpcwxjl.mcyjrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">绝经：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jj')}">
+                        <input type="radio" th:id="${'jjbz_' + dict.dictCode}" name="jjbz" th:value="${dict.dictValue}" th:field="*{jjbz}">
+                        <label th:for="${'jjbz_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术绝经：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_ssjj')}">
+                        <input type="radio" th:id="${'ssjjbz_' + dict.dictCode}" name="ssjjbz" th:value="${dict.dictValue}" th:field="*{ssjjbz}">
+                        <label th:for="${'ssjjbz_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">绝经年龄：</label>
+                <div class="col-sm-8">
+                    <input name="jjnl" th:field="*{jjnl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">孕次：</label>
+                <div class="col-sm-8">
+                    <input name="yc" th:field="*{yc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产次：</label>
+                <div class="col-sm-8">
+                    <input name="cc" th:field="*{cc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">自然流产次数：</label>
+                <div class="col-sm-8">
+                    <input name="zrlccs" th:field="*{zrlccs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">人工流产次数：</label>
+                <div class="col-sm-8">
+                    <input name="rglccs" th:field="*{rglccs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">中期引产次数：</label>
+                <div class="col-sm-8">
+                    <input name="zqyccs" th:field="*{zqyccs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">早产次数：</label>
+                <div class="col-sm-8">
+                    <input name="czcs" th:field="*{czcs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">手术产次数：</label>
+                <div class="col-sm-8">
+                    <input name="ssccs" th:field="*{ssccs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">剖宫产次数：</label>
+                <div class="col-sm-8">
+                    <input name="pgccs" th:field="*{pgccs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">死胎例数：</label>
+                <div class="col-sm-8">
+                    <input name="stls" th:field="*{stls}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">死产例数：</label>
+                <div class="col-sm-8">
+                    <input name="scls" th:field="*{scls}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生缺陷儿例数：</label>
+                <div class="col-sm-8">
+                    <input name="csqxrls" th:field="*{csqxrls}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末次妊娠终止日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="mcrszzrq" th:value="${#dates.format(tbFbFnbpcwxjl.mcrszzrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末次妊娠终止方式：</label>
+                <div class="col-sm-8">
+                    <input name="mcrszzfsdm" th:field="*{mcrszzfsdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末次分娩日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="mcfmrq" th:value="${#dates.format(tbFbFnbpcwxjl.mcfmrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">末次分娩方式：</label>
+                <div class="col-sm-8">
+                    <input name="mcfmfsdm" th:field="*{mcfmfsdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">其他异常孕产史：</label>
+                <div class="col-sm-8">
+                    <input name="qtycycs" th:field="*{qtycycs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">避孕方式：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('byfsdm')}">
+                        <input type="radio" th:id="${'byfsdm_' + dict.dictCode}" name="byfsdm" th:value="${dict.dictValue}" th:field="*{byfsdm}">
+                        <label th:for="${'byfsdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "fnbpc/fnbpcwxjl";
+        $("#form-fnbpcwxjl-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-fnbpcwxjl-edit').serialize());
+            }
+        }
+
+        $("input[name='csrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='mcyjrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='mcrszzrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='mcfmrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.etjktj.jktjdj.mapper.TbEtJktjdjMapper">
+    
+    <resultMap type="TbEtJktjdj" id="TbEtJktjdjResult">
+        <result property="id"    column="id"    />
+        <result property="jdrq"    column="jdrq"    />
+        <result property="jdry"    column="jdry"    />
+        <result property="jdjg"    column="jdjg"    />
+        <result property="xm"    column="xm"    />
+        <result property="xbdm"    column="xbdm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqxm"    column="mqxm"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="xzz"    column="xzz"    />
+        <result property="healthFileId"    column="healthFileId"    />
+    </resultMap>
+
+    <sql id="selectTbEtJktjdjVo">
+        select id, jdrq, jdry, jdjg, xm, xbdm, csrq, mqxm, mqsfzjhm, lxfs, xzz, healthFileId from tb_et_jktjdj
+    </sql>
+
+    <select id="selectTbEtJktjdjList" parameterType="TbEtJktjdj" resultMap="TbEtJktjdjResult">
+        <include refid="selectTbEtJktjdjVo"/>
+        <where>  
+            <if test="jdrq != null "> and jdrq = #{jdrq}</if>
+            <if test="jdry != null  and jdry != ''"> and jdry = #{jdry}</if>
+            <if test="jdjg != null  and jdjg != ''"> and jdjg = #{jdjg}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="xbdm != null  and xbdm != ''"> and xbdm = #{xbdm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mqxm != null  and mqxm != ''"> and mqxm = #{mqxm}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="xzz != null  and xzz != ''"> and xzz = #{xzz}</if>
+            <if test="healthFileId != null "> and healthFileId = #{healthFileId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtJktjdjById" parameterType="Long" resultMap="TbEtJktjdjResult">
+        <include refid="selectTbEtJktjdjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbEtJktjdj" parameterType="TbEtJktjdj" useGeneratedKeys="true">
+        insert into tb_et_jktjdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jdrq != null ">jdrq,</if>
+            <if test="jdry != null  and jdry != ''">jdry,</if>
+            <if test="jdjg != null  and jdjg != ''">jdjg,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="xbdm != null  and xbdm != ''">xbdm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mqxm != null  and mqxm != ''">mqxm,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="xzz != null  and xzz != ''">xzz,</if>
+            <if test="healthFileId != null ">healthFileId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jdrq != null ">#{jdrq},</if>
+            <if test="jdry != null  and jdry != ''">#{jdry},</if>
+            <if test="jdjg != null  and jdjg != ''">#{jdjg},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="xbdm != null  and xbdm != ''">#{xbdm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mqxm != null  and mqxm != ''">#{mqxm},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="xzz != null  and xzz != ''">#{xzz},</if>
+            <if test="healthFileId != null ">#{healthFileId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtJktjdj" parameterType="TbEtJktjdj">
+        update tb_et_jktjdj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="jdrq != null ">jdrq = #{jdrq},</if>
+            <if test="jdry != null  and jdry != ''">jdry = #{jdry},</if>
+            <if test="jdjg != null  and jdjg != ''">jdjg = #{jdjg},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="xbdm != null  and xbdm != ''">xbdm = #{xbdm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mqxm != null  and mqxm != ''">mqxm = #{mqxm},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="xzz != null  and xzz != ''">xzz = #{xzz},</if>
+            <if test="healthFileId != null ">healthFileId = #{healthFileId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtJktjdjById" parameterType="Long">
+        delete from tb_et_jktjdj where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtJktjdjByIds" parameterType="String">
+        delete from tb_et_jktjdj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

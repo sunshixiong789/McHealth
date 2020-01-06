@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cqbj.yxjcjl.mapper.FnCqbjYxjcjlMapper">
+    
+    <resultMap type="FnCqbjYxjcjl" id="FnCqbjYxjcjlResult">
+        <result property="id"    column="id"    />
+        <result property="zyh"    column="zyh"    />
+        <result property="xm"    column="xm"    />
+        <result property="daid"    column="daid"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="sfzlbDm"    column="sfzlb_dm"    />
+        <result property="sfzjHm"    column="sfzj_hm"    />
+        <result property="bcjcjg"    column="bcjcjg"    />
+        <result property="tfwdm"    column="tfwdm"    />
+        <result property="txldm"    column="txldm"    />
+        <result property="jcryxm"    column="jcryxm"    />
+        <result property="jcjgmc"    column="jcjgmc"    />
+        <result property="jcrq"    column="jcrq"    />
+    </resultMap>
+
+    <sql id="selectFnCqbjYxjcjlVo">
+        select id, zyh, xm, daid, birthday, sfzlb_dm, sfzj_hm, bcjcjg, tfwdm, txldm, jcryxm, jcjgmc, jcrq from fn_cqbj_yxjcjl
+    </sql>
+
+    <select id="selectFnCqbjYxjcjlList" parameterType="FnCqbjYxjcjl" resultMap="FnCqbjYxjcjlResult">
+        <include refid="selectFnCqbjYxjcjlVo"/>
+        <where>  
+            <if test="zyh != null  and zyh != ''"> and zyh = #{zyh}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="daid != null "> and daid = #{daid}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="sfzlbDm != null  and sfzlbDm != ''"> and sfzlb_dm = #{sfzlbDm}</if>
+            <if test="sfzjHm != null  and sfzjHm != ''"> and sfzj_hm = #{sfzjHm}</if>
+            <if test="bcjcjg != null  and bcjcjg != ''"> and bcjcjg = #{bcjcjg}</if>
+            <if test="tfwdm != null  and tfwdm != ''"> and tfwdm = #{tfwdm}</if>
+            <if test="txldm != null  and txldm != ''"> and txldm = #{txldm}</if>
+            <if test="jcryxm != null  and jcryxm != ''"> and jcryxm = #{jcryxm}</if>
+            <if test="jcjgmc != null  and jcjgmc != ''"> and jcjgmc = #{jcjgmc}</if>
+            <if test="jcrq != null "> and jcrq = #{jcrq}</if>
+        </where>
+    </select>
+    
+    <select id="selectFnCqbjYxjcjlById" parameterType="Long" resultMap="FnCqbjYxjcjlResult">
+        <include refid="selectFnCqbjYxjcjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFnCqbjYxjcjl" parameterType="FnCqbjYxjcjl">
+        insert into fn_cqbj_yxjcjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="zyh != null  and zyh != ''">zyh,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="daid != null ">daid,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="sfzlbDm != null  and sfzlbDm != ''">sfzlb_dm,</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm,</if>
+            <if test="bcjcjg != null  and bcjcjg != ''">bcjcjg,</if>
+            <if test="tfwdm != null  and tfwdm != ''">tfwdm,</if>
+            <if test="txldm != null  and txldm != ''">txldm,</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm,</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc,</if>
+            <if test="jcrq != null ">jcrq,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="zyh != null  and zyh != ''">#{zyh},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="daid != null ">#{daid},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="sfzlbDm != null  and sfzlbDm != ''">#{sfzlbDm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">#{sfzjHm},</if>
+            <if test="bcjcjg != null  and bcjcjg != ''">#{bcjcjg},</if>
+            <if test="tfwdm != null  and tfwdm != ''">#{tfwdm},</if>
+            <if test="txldm != null  and txldm != ''">#{txldm},</if>
+            <if test="jcryxm != null  and jcryxm != ''">#{jcryxm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">#{jcjgmc},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFnCqbjYxjcjl" parameterType="FnCqbjYxjcjl">
+        update fn_cqbj_yxjcjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zyh != null  and zyh != ''">zyh = #{zyh},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="daid != null ">daid = #{daid},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="sfzlbDm != null  and sfzlbDm != ''">sfzlb_dm = #{sfzlbDm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm = #{sfzjHm},</if>
+            <if test="bcjcjg != null  and bcjcjg != ''">bcjcjg = #{bcjcjg},</if>
+            <if test="tfwdm != null  and tfwdm != ''">tfwdm = #{tfwdm},</if>
+            <if test="txldm != null  and txldm != ''">txldm = #{txldm},</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm = #{jcryxm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc = #{jcjgmc},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFnCqbjYxjcjlById" parameterType="Long">
+        delete from fn_cqbj_yxjcjl where id = #{id}
+    </delete>
+
+    <delete id="deleteFnCqbjYxjcjlByIds" parameterType="String">
+        delete from fn_cqbj_yxjcjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('分娩记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                           <!-- <li>
+                                <p>妇女档案ID：</p>
+                                <input type="text" name="healthfileid"/>
+                            </li>-->
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li class="select-time">
+                                <p>出生日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCsrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCsrq]"/>
+                            </li>
+                            <!--<li class="select-time">
+                                <p>登记日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDjrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDjrq]"/>
+                            </li>-->
+                            <li>
+                                <p>分娩孕周：</p>
+                                <input type="text" name="fmyz"/>
+                            </li>
+                            <li class="select-time">
+                                <p>分娩日期时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginFmrqsj]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endFmrqsj]"/>
+                            </li>
+                           <!-- <li>
+                                <p>分娩方式代码：</p>
+                                <input type="text" name="fmfsdm"/>
+                            </li>
+                            <li>
+                                <p>总产程时长：</p>
+                                <input type="text" name="zccsc"/>
+                            </li>
+                            <li>
+                                <p>第一产程时长：</p>
+                                <input type="text" name="dyccsc"/>
+                            </li>
+                            <li>
+                                <p>第二产程时长：</p>
+                                <input type="text" name="deccsc"/>
+                            </li>
+                            <li>
+                                <p>第三产程时长：</p>
+                                <input type="text" name="dsccsc"/>
+                            </li>
+                            <li>
+                                <p>产后开奶时长：</p>
+                                <input type="text" name="chknsc"/>
+                            </li>-->
+                            <li>
+                                <p>产后天数：</p>
+                                <input type="text" name="chts"/>
+                            </li>
+                          <!--  <li>
+                                <p>产时并发症代码：</p>
+                                <input type="text" name="csbfzdm"/>
+                            </li>
+                            <li>
+                                <p>分娩结局：</p>
+                                <input type="text" name="fmjj"/>
+                            </li>
+                            <li>
+                                <p>总出血量：</p>
+                                <input type="text" name="zcxl"/>
+                            </li>
+                            <li>
+                                <p>产时出血量：</p>
+                                <input type="text" name="cscxl"/>
+                            </li>
+                            <li>
+                                <p>产后两小时出血量：</p>
+                                <input type="text" name="chlxscxl"/>
+                            </li>
+                            <li>
+                                <p>会阴-切开标志：</p>
+                                <input type="text" name="hyqkbz"/>
+                            </li>
+                            <li>
+                                <p>会阴-缝合针数：</p>
+                                <input type="text" name="hyfhzs"/>
+                            </li>
+                            <li>
+                                <p>会阴裂伤程度代码：</p>
+                                <input type="text" name="hylscddm"/>
+                            </li>
+                            <li>
+                                <p>危重孕产妇标志：</p>
+                                <input type="text" name="wzycfbz"/>
+                            </li>
+                            <li>
+                                <p>Apgar评分值：</p>
+                                <input type="text" name="apgarpfz"/>
+                            </li>
+                            <li>
+                                <p>妊娠合并症/并发症史：</p>
+                                <input type="text" name="rshbzbfzs"/>
+                            </li>
+                            <li>
+                                <p>出生缺陷标志：</p>
+                                <input type="text" name="csqxbz"/>
+                            </li>
+                            <li>
+                                <p>出生缺陷类别代码：</p>
+                                <input type="text" name="csqxlbdm"/>
+                            </li>
+                            <li>
+                                <p>出生缺陷儿例数：</p>
+                                <input type="text" name="csqxels"/>
+                            </li>
+                            <li>
+                                <p>新生儿并发症-标志：</p>
+                                <input type="text" name="xsebfzbz"/>
+                            </li>
+                            <li>
+                                <p>新生儿并发症-代码：</p>
+                                <input type="text" name="xsebfadm"/>
+                            </li>
+                            <li>
+                                <p>新生儿抢救标志：</p>
+                                <input type="text" name="xseqjbz"/>
+                            </li>
+                            <li>
+                                <p>新生儿抢救方法代码：</p>
+                                <input type="text" name="xseqjffdm"/>
+                            </li>
+                            <li>
+                                <p>孕产妇死亡时间类别代码：</p>
+                                <input type="text" name="ycfswsjlbdm"/>
+                            </li>-->
+                            <li>
+                                <p>助产人员姓名：</p>
+                                <input type="text" name="zcryxm"/>
+                            </li>
+                            <li>
+                                <p>助产机构名称：</p>
+                                <input type="text" name="zcjgmc"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="cffs:csbjfmjl:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="cffs:csbjfmjl:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="cffs:csbjfmjl:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="cffs:csbjfmjl:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('cffs:csbjfmjl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('cffs:csbjfmjl:remove')}]];
+        var prefix = ctx + "cffs/csbjfmjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "分娩记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : '主键',
+                    visible: false
+                },
+               /* {
+                    field : 'healthfileid', 
+                    title : '妇女档案ID'
+                },*/
+                {
+                    field : 'xm', 
+                    title : '姓名'
+                },
+                {
+                    field : 'csrq', 
+                    title : '出生日期'
+                },
+                {
+                    field : 'djrq', 
+                    title : '登记日期'
+                },
+                {
+                    field : 'fmyz', 
+                    title : '分娩孕周'
+                },
+                {
+                    field : 'fmrqsj', 
+                    title : '分娩日期时间'
+                },
+                {
+                    field : 'fmfsdm', 
+                    title : '分娩方式代码'
+                },
+                {
+                    field : 'zccsc', 
+                    title : '总产程时长'
+                },
+                {
+                    field : 'dyccsc', 
+                    title : '第一产程时长'
+                },
+                {
+                    field : 'deccsc', 
+                    title : '第二产程时长'
+                },
+                {
+                    field : 'dsccsc', 
+                    title : '第三产程时长'
+                },
+                {
+                    field : 'chknsc', 
+                    title : '产后开奶时长'
+                },
+                {
+                    field : 'chts', 
+                    title : '产后天数'
+                },
+                {
+                    field : 'csbfzdm', 
+                    title : '产时并发症代码'
+                },
+                {
+                    field : 'fmjj', 
+                    title : '分娩结局'
+                },
+                {
+                    field : 'zcxl', 
+                    title : '总出血量'
+                },
+                {
+                    field : 'cscxl', 
+                    title : '产时出血量'
+                },
+                {
+                    field : 'chlxscxl', 
+                    title : '产后两小时出血量'
+                },
+                {
+                    field : 'hyqkbz', 
+                    title : '会阴-切开标志'
+                },
+                {
+                    field : 'hyfhzs', 
+                    title : '会阴-缝合针数'
+                },
+                {
+                    field : 'hylscddm', 
+                    title : '会阴裂伤程度代码'
+                },
+                {
+                    field : 'wzycfbz', 
+                    title : '危重孕产妇标志'
+                },
+                {
+                    field : 'apgarpfz', 
+                    title : 'Apgar评分值'
+                },
+                {
+                    field : 'rshbzbfzs', 
+                    title : '妊娠合并症/并发症史'
+                },
+                {
+                    field : 'csqxbz', 
+                    title : '出生缺陷标志'
+                },
+                {
+                    field : 'csqxlbdm', 
+                    title : '出生缺陷类别代码'
+                },
+                {
+                    field : 'csqxels', 
+                    title : '出生缺陷儿例数'
+                },
+                {
+                    field : 'xsebfzbz', 
+                    title : '新生儿并发症-标志'
+                },
+                {
+                    field : 'xsebfadm', 
+                    title : '新生儿并发症-代码'
+                },
+                {
+                    field : 'xseqjbz', 
+                    title : '新生儿抢救标志'
+                },
+                {
+                    field : 'xseqjffdm', 
+                    title : '新生儿抢救方法代码'
+                },
+                {
+                    field : 'ycfswsjlbdm', 
+                    title : '孕产妇死亡时间类别代码'
+                },
+                {
+                    field : 'zcryxm', 
+                    title : '助产人员姓名'
+                },
+                {
+                    field : 'zcjgmc', 
+                    title : '助产机构名称'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

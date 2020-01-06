@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbpc.fnbpcdj.mapper.TbFbFnbpcdjMapper">
+    
+    <resultMap type="TbFbFnbpcdj" id="TbFbFnbpcdjResult">
+        <result property="id"    column="id"    />
+        <result property="fnjbqkxxid"    column="fnjbqkxxid"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="sfzjLbdm"    column="sfzj_lbdm"    />
+        <result property="sfzjHm"    column="sfzj_hm"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="lastUpdateBy"    column="last_update_by"    />
+        <result property="lastUpdateDate"    column="last_update_date"    />
+        <result property="xgbz"    column="xgbz"    />
+    </resultMap>
+
+    <sql id="selectTbFbFnbpcdjVo">
+        select id, fnjbqkxxid, xm, csrq, sfzj_lbdm, sfzj_hm, create_by, create_date, last_update_by, last_update_date, xgbz from tb_fb_fnbpcdj
+    </sql>
+
+    <select id="selectTbFbFnbpcdjList" parameterType="TbFbFnbpcdj" resultMap="TbFbFnbpcdjResult">
+        <include refid="selectTbFbFnbpcdjVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="sfzjHm != null  and sfzjHm != ''"> and sfzj_hm = #{sfzjHm}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbFbFnbpcdjById" parameterType="Long" resultMap="TbFbFnbpcdjResult">
+        <include refid="selectTbFbFnbpcdjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbFbFnbpcdj" parameterType="TbFbFnbpcdj" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fb_fnbpcdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fnjbqkxxid != null ">fnjbqkxxid,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm,</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createDate != null ">create_date,</if>
+            <if test="lastUpdateBy != null  and lastUpdateBy != ''">last_update_by,</if>
+            <if test="lastUpdateDate != null ">last_update_date,</if>
+            <if test="xgbz != null  and xgbz != ''">xgbz,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fnjbqkxxid != null ">#{fnjbqkxxid},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">#{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">#{sfzjHm},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createDate != null ">#{createDate},</if>
+            <if test="lastUpdateBy != null  and lastUpdateBy != ''">#{lastUpdateBy},</if>
+            <if test="lastUpdateDate != null ">#{lastUpdateDate},</if>
+            <if test="xgbz != null  and xgbz != ''">#{xgbz},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbFbFnbpcdj" parameterType="TbFbFnbpcdj">
+        update tb_fb_fnbpcdj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fnjbqkxxid != null ">fnjbqkxxid = #{fnjbqkxxid},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm = #{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm = #{sfzjHm},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createDate != null ">create_date = #{createDate},</if>
+            <if test="lastUpdateBy != null  and lastUpdateBy != ''">last_update_by = #{lastUpdateBy},</if>
+            <if test="lastUpdateDate != null ">last_update_date = #{lastUpdateDate},</if>
+            <if test="xgbz != null  and xgbz != ''">xgbz = #{xgbz},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbFnbpcdjById" parameterType="Long">
+        delete from tb_fb_fnbpcdj where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbFnbpcdjByIds" parameterType="String">
+        delete from tb_fb_fnbpcdj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

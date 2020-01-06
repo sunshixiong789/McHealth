@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改妇女病普查辅助检查记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-fnbpcfzjcjl-edit" th:object="${tbFbFnbpcfzjcjl}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">妇女病普查登记ID：</label>
+                <div class="col-sm-8">
+                    <input name="fnbpcdjid" readonly th:field="*{fnbpcdjid}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" readonly th:field="*{xm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input name="cardid" readonly th:field="*{cardid}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <input name="birthday" readonly th:field="*{birthday}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乳腺X线检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="rxxxjcjg" th:field="*{rxxxjcjg}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乳腺B超检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="rxbcjcjg" th:field="*{rxbcjcjg}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道镜检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="ydjjcjg" th:field="*{ydjjcjg}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道分泌物性状描述：</label>
+                <div class="col-sm-8">
+                    <input name="ydfmwxzms" th:field="*{ydfmwxzms}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道细胞学诊断结果代码：</label>
+                <div class="col-sm-8">
+                    <input name="ydxbxzdjgdm" th:field="*{ydxbxzdjgdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">滴虫检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'dcjcjgdm_' + dict.dictCode}" name="dcjcjgdm" th:value="${dict.dictValue}" th:field="*{dcjcjgdm}">
+                        <label th:for="${'dcjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">念珠菌检测结果代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jc')}">
+                        <input type="radio" th:id="${'nzjjcjgdm_' + dict.dictCode}" name="nzjjcjgdm" th:value="${dict.dictValue}" th:field="*{nzjjcjgdm}">
+                        <label th:for="${'nzjjcjgdm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">阴道分泌物清洁度代码：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('ydfmwqjddm')}">
+                        <input type="radio" th:id="${'ydfmwqjddm_' + dict.dictCode}" name="ydfmwqjddm" th:value="${dict.dictValue}" th:field="*{ydfmwqjddm}">
+                        <label th:for="${'ydfmwqjddm_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">淋球菌检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="lqjjcjg" th:field="*{lqjjcjg}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">梅毒血清学实验结果代码：</label>
+                <div class="col-sm-8">
+                    <input name="mdxqxsyjgdm" th:field="*{mdxqxsyjgdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">其他：</label>
+                <div class="col-sm-8">
+                    <input name="qt" th:field="*{qt}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="jcrq" th:value="${#dates.format(tbFbFnbpcfzjcjl.jcrq, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)人员代码：</label>
+                <div class="col-sm-8">
+                    <input name="jcrydm" th:field="*{jcrydm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="jcryxm" th:field="*{jcryxm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)机构代码：</label>
+                <div class="col-sm-8">
+                    <input name="jcjgdm" th:field="*{jcjgdm}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查(测)机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="jcjgmc" th:field="*{jcjgmc}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "fnbpc/fnbpcfzjcjl";
+        $("#form-fnbpcfzjcjl-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-fnbpcfzjcjl-edit').serialize());
+            }
+        }
+
+        $("input[name='jcrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

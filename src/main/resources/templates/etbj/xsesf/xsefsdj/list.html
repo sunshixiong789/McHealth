@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('新生儿随访登记列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <p>姓名：</p>
+                            <input type="text" name="xm"/>
+                        </li>
+                        <li>
+                            <p>性别：</p>
+                            <select name="xbdm" th:with="type=${@dict.getType('sys_user_sex')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <p>出生日期：</p>
+                            <input type="text" class="time-input"  placeholder="出生日期" name="csrq"/>
+                        </li>
+                        <li>
+                            <p>母亲姓名：</p>
+                            <input type="text" name="mqxm"/>
+                        </li>
+                        <li>
+                            <p>证件类别：</p>
+                            <select name="mqsfzj" th:with="type=${@dict.getType('sys_user_paperwork')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </li>
+                        <li>
+                            <p>证件号码：</p>
+                            <input type="text" name="mqsfzjhm"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="fsdjtable"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var xbdmDatas = [[${@dict.getType('sys_user_sex')}]];
+    var mqsfzjDatas = [[${@dict.getType('sys_user_paperwork')}]];
+    var prefix = ctx + "xsesf/xsefsdj";
+    localStorage.removeItem("selectFs")//清除访视登记历史选择
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            id:"fsdjtable",
+            modalName: "新生儿随访登记",
+            onCheck:function(){
+                var data = $("#fsdjtable").bootstrapTable('getSelections');
+                localStorage.setItem("selectFs", JSON.stringify(data));
+            },
+            onUncheck:function(){
+                localStorage.removeItem("selectFs")//清除访视登记历史选择
+            },
+            columns: [{
+                radio: true
+            },
+            {
+                field : 'id',
+                title : '主键',
+                visible: false
+            },
+            {
+                field : 'xm',
+                title : '姓名'
+            },
+            {
+                field : 'xbdm',
+                title : '性别',
+                formatter: function(value, row, index) {
+                    return $.table.selectDictLabel(xbdmDatas, value);
+                }
+            },
+            {
+                field : 'csrq',
+                title : '出生日期',
+                formatter: function(value, row, index) {
+                    return value.substring(0,11)
+                }
+            },
+            {
+                field : 'mqxm',
+                title : '母亲姓名'
+            },
+            // {
+            //     field : 'mqsfzj',
+            //     title : '证件类别',
+            //     formatter: function(value, row, index) {
+            //         return $.table.selectDictLabel(mqsfzjDatas, value);
+            //     }
+            // },
+            {
+                field : 'mqsfzjhm',
+                title : '证件号码'
+            },
+            // {
+            //     field : 'dzsheng',
+            //     title : '地址-省/直辖市/自治区'
+            // },
+            // {
+            //     field : 'dzshi',
+            //     title : '地址-市/地区'
+            // },
+            // {
+            //     field : 'dzxian',
+            //     title : '地址-区/县'
+            // },
+            // {
+            //     field : 'dzxiang',
+            //     title : '地址-乡镇/街道办事处'
+            // },
+            // {
+            //     field : 'dzcun',
+            //     title : '地址-村/街/路'
+            // },
+            // {
+            //     field : 'dzmp',
+            //     title : '地址-门牌'
+            // },
+            {
+                field : 'lxfs',
+                title : '联系方式'
+            },
+            {
+                field : 'xzz',
+                title : '现住址'
+            },
+            {
+                field : 'djsj',
+                title : '登记日期'
+            }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

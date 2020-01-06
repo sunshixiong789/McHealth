@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.tlsc.tlscdj.mapper.TbEtTlscMapper">
+    
+    <resultMap type="TbEtTlsc" id="TbEtTlscResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="xbdm"    column="xbdm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqxm"    column="mqxm"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="xzz"    column="xzz"    />
+        <result property="healthFileId"    column="healthFileId"    />
+        <result property="scjgzr"    column="scjgzr"    />
+        <result property="scjgyr"    column="scjgyr"    />
+        <result property="zdjgzr"    column="zdjgzr"    />
+        <result property="zdjgyr"    column="zdjgyr"    />
+        <result property="qzyl"    column="qzyl"    />
+        <result property="qzyy"    column="qzyy"    />
+    </resultMap>
+
+    <sql id="selectTbEtTlscVo">
+        select id, xm, xbdm, csrq, mqxm, mqsfzjhm, lxfs, xzz, healthFileId, scjgzr, scjgyr, zdjgzr, zdjgyr, qzyl, qzyy from tb_et_tlsc
+    </sql>
+
+    <select id="selectTbEtTlscList" parameterType="TbEtTlsc" resultMap="TbEtTlscResult">
+        <include refid="selectTbEtTlscVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="xbdm != null  and xbdm != ''"> and xbdm = #{xbdm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mqxm != null  and mqxm != ''"> and mqxm = #{mqxm}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="xzz != null  and xzz != ''"> and xzz = #{xzz}</if>
+            <if test="healthFileId != null "> and healthFileId = #{healthFileId}</if>
+            <if test="scjgzr != null  and scjgzr != ''"> and scjgzr = #{scjgzr}</if>
+            <if test="scjgyr != null  and scjgyr != ''"> and scjgyr = #{scjgyr}</if>
+            <if test="zdjgzr != null  and zdjgzr != ''"> and zdjgzr = #{zdjgzr}</if>
+            <if test="zdjgyr != null  and zdjgyr != ''"> and zdjgyr = #{zdjgyr}</if>
+            <if test="qzyl != null  and qzyl != ''"> and qzyl = #{qzyl}</if>
+            <if test="qzyy != null  and qzyy != ''"> and qzyy = #{qzyy}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtTlscById" parameterType="Long" resultMap="TbEtTlscResult">
+        <include refid="selectTbEtTlscVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbEtTlsc" parameterType="TbEtTlsc" useGeneratedKeys="true">
+        insert into tb_et_tlsc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="xbdm != null  and xbdm != ''">xbdm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mqxm != null  and mqxm != ''">mqxm,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="xzz != null  and xzz != ''">xzz,</if>
+            <if test="healthFileId != null ">healthFileId,</if>
+            <if test="scjgzr != null  and scjgzr != ''">scjgzr,</if>
+            <if test="scjgyr != null  and scjgyr != ''">scjgyr,</if>
+            <if test="zdjgzr != null  and zdjgzr != ''">zdjgzr,</if>
+            <if test="zdjgyr != null  and zdjgyr != ''">zdjgyr,</if>
+            <if test="qzyl != null  and qzyl != ''">qzyl,</if>
+            <if test="qzyy != null  and qzyy != ''">qzyy,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="xbdm != null  and xbdm != ''">#{xbdm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mqxm != null  and mqxm != ''">#{mqxm},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="xzz != null  and xzz != ''">#{xzz},</if>
+            <if test="healthFileId != null ">#{healthFileId},</if>
+            <if test="scjgzr != null  and scjgzr != ''">#{scjgzr},</if>
+            <if test="scjgyr != null  and scjgyr != ''">#{scjgyr},</if>
+            <if test="zdjgzr != null  and zdjgzr != ''">#{zdjgzr},</if>
+            <if test="zdjgyr != null  and zdjgyr != ''">#{zdjgyr},</if>
+            <if test="qzyl != null  and qzyl != ''">#{qzyl},</if>
+            <if test="qzyy != null  and qzyy != ''">#{qzyy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtTlsc" parameterType="TbEtTlsc">
+        update tb_et_tlsc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="xbdm != null  and xbdm != ''">xbdm = #{xbdm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mqxm != null  and mqxm != ''">mqxm = #{mqxm},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="xzz != null  and xzz != ''">xzz = #{xzz},</if>
+            <if test="healthFileId != null ">healthFileId = #{healthFileId},</if>
+            <if test="scjgzr != null  and scjgzr != ''">scjgzr = #{scjgzr},</if>
+            <if test="scjgyr != null  and scjgyr != ''">scjgyr = #{scjgyr},</if>
+            <if test="zdjgzr != null  and zdjgzr != ''">zdjgzr = #{zdjgzr},</if>
+            <if test="zdjgyr != null  and zdjgyr != ''">zdjgyr = #{zdjgyr},</if>
+            <if test="qzyl != null  and qzyl != ''">qzyl = #{qzyl},</if>
+            <if test="qzyy != null  and qzyy != ''">qzyy = #{qzyy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtTlscById" parameterType="Long">
+        delete from tb_et_tlsc where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtTlscByIds" parameterType="String">
+        delete from tb_et_tlsc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

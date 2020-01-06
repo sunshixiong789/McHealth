@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改新生儿听力筛查')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-tlscdj-edit" th:object="${tbEtTlsc}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" th:field="*{xm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">性别：</label>
+                <div class="col-sm-8">
+                    <select name="xbdm" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}" disabled="disabled" id="xbdm" readonly>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{xbdm}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="csrq" th:field="*{csrq}"  class="form-control" placeholder="yyyy-MM-dd" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">母亲姓名：</label>
+                <div class="col-sm-8">
+                    <input name="mqxm" th:field="*{mqxm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">母亲证件号码：</label>
+                <div class="col-sm-8">
+                    <input name="mqsfzjhm" th:field="*{mqsfzjhm}" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">联系方式：</label>
+                <div class="col-sm-8">
+                    <input name="lxfs" th:field="*{lxfs}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">现住址：</label>
+                <div class="col-sm-8">
+                    <input name="xzz" th:field="*{xzz}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">筛查结果左耳：</label>
+                <div class="col-sm-8">
+                    <input name="scjgzr" th:field="*{scjgzr}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">筛查结果右耳：</label>
+                <div class="col-sm-8">
+                    <input name="scjgyr" th:field="*{scjgyr}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">诊断结果左耳：</label>
+                <div class="col-sm-8">
+                    <input name="zdjgzr" th:field="*{zdjgzr}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">诊断结果右耳：</label>
+                <div class="col-sm-8">
+                    <input name="zdjgyr" th:field="*{zdjgyr}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">确诊月龄：</label>
+                <div class="col-sm-8">
+                    <input name="qzyl" th:field="*{qzyl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">确诊医院：</label>
+                <div class="col-sm-8">
+                    <input name="qzyy" th:field="*{qzyy}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "tlsc/tlscdj";
+        $("#form-tlscdj-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-tlscdj-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

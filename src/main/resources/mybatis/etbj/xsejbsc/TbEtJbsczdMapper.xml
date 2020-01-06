@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.xsejbsc.jbsczd.mapper.TbEtJbsczdMapper">
+    
+    <resultMap type="TbEtJbsczd" id="TbEtJbsczdResult">
+        <result property="id"    column="id"    />
+        <result property="zdrq"    column="zdrq"    />
+        <result property="zdxm"    column="zdxm"    />
+        <result property="zdff"    column="zdff"    />
+        <result property="zdjg"    column="zdjg"    />
+        <result property="zdjgmc"    column="zdjgmc"    />
+        <result property="djid"    column="djid"    />
+        <result property="zhid"    column="zhid"    />
+        <result property="sysjlid"    column="sysjlid"    />
+    </resultMap>
+
+    <sql id="selectTbEtJbsczdVo">
+        select id, zdrq, zdxm, zdff, zdjg, zdjgmc, djid, zhid, sysjlid from tb_et_jbsczd
+    </sql>
+
+    <select id="selectTbEtJbsczdList" parameterType="com.imedcare.project.etbj.xsejbsc.jbsczd.domain.TbEtJbsczdVo" resultType="com.imedcare.project.etbj.xsejbsc.jbsczd.domain.TbEtJbsczdVo">
+        select zd.id, zd.zdrq, zd.zdxm, zd.zdff, zd.zdjg, zd.zdjgmc, zd.djid, zd.zhid, zd.sysjlid,
+        dj.xm,dj.csrq,jl.scxm from tb_et_jbsczd zd inner join tb_et_xsejbscdj dj on dj.id=zd.djid
+        inner join tb_et_sysjyjl jl on jl.id=zd.sysjlid
+        <where>  
+            <if test="zdrq != null "> and zd.zdrq = #{zdrq}</if>
+            <if test="zdxm != null  and zdxm != ''"> and zd.zdxm = #{zdxm}</if>
+            <if test="zdff != null  and zdff != ''"> and zd.zdff = #{zdff}</if>
+            <if test="zdjg != null  and zdjg != ''"> and zd.zdjg = #{zdjg}</if>
+            <if test="zdjgmc != null  and zdjgmc != ''"> and zd.zdjgmc = #{zdjgmc}</if>
+            <if test="djid != null "> and zd.djid = #{djid}</if>
+            <if test="zhid != null "> and zd.zhid = #{zhid}</if>
+            <if test="sysjlid != null "> and zd.sysjlid = #{sysjlid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtJbsczdById" parameterType="Long" resultType="com.imedcare.project.etbj.xsejbsc.jbsczd.domain.TbEtJbsczdVo">
+        select zd.id, zd.zdrq, zd.zdxm, zd.zdff, zd.zdjg, zd.zdjgmc, zd.djid, zd.zhid, zd.sysjlid,
+        dj.xm,dj.csrq,jl.scxm from tb_et_jbsczd zd inner join tb_et_xsejbscdj dj on dj.id=zd.djid
+        inner join tb_et_sysjyjl jl on jl.id=zd.sysjlid
+        where zd.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtJbsczd" parameterType="TbEtJbsczd" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_et_jbsczd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zdrq != null ">zdrq,</if>
+            <if test="zdxm != null  and zdxm != ''">zdxm,</if>
+            <if test="zdff != null  and zdff != ''">zdff,</if>
+            <if test="zdjg != null  and zdjg != ''">zdjg,</if>
+            <if test="zdjgmc != null  and zdjgmc != ''">zdjgmc,</if>
+            <if test="djid != null ">djid,</if>
+            <if test="zhid != null ">zhid,</if>
+            <if test="sysjlid != null ">sysjlid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zdrq != null ">#{zdrq},</if>
+            <if test="zdxm != null  and zdxm != ''">#{zdxm},</if>
+            <if test="zdff != null  and zdff != ''">#{zdff},</if>
+            <if test="zdjg != null  and zdjg != ''">#{zdjg},</if>
+            <if test="zdjgmc != null  and zdjgmc != ''">#{zdjgmc},</if>
+            <if test="djid != null ">#{djid},</if>
+            <if test="zhid != null ">#{zhid},</if>
+            <if test="sysjlid != null ">#{sysjlid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtJbsczd" parameterType="TbEtJbsczd">
+        update tb_et_jbsczd
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zdrq != null ">zdrq = #{zdrq},</if>
+            <if test="zdxm != null  and zdxm != ''">zdxm = #{zdxm},</if>
+            <if test="zdff != null  and zdff != ''">zdff = #{zdff},</if>
+            <if test="zdjg != null  and zdjg != ''">zdjg = #{zdjg},</if>
+            <if test="zdjgmc != null  and zdjgmc != ''">zdjgmc = #{zdjgmc},</if>
+            <if test="djid != null ">djid = #{djid},</if>
+            <if test="zhid != null ">zhid = #{zhid},</if>
+            <if test="sysjlid != null ">sysjlid = #{sysjlid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtJbsczdById" parameterType="Long">
+        delete from tb_et_jbsczd where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtJbsczdByIds" parameterType="String">
+        delete from tb_et_jbsczd where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

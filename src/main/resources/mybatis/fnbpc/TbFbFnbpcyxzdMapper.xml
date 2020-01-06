@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbpc.fnbpcyxzd.mapper.TbFbFnbpcyxzdMapper">
+    
+    <resultMap type="TbFbFnbpcyxzd" id="TbFbFnbpcyxzdResult">
+        <result property="id"    column="id"    />
+        <result property="fnbpcdjid"    column="fnbpcdjid"    />
+        <result property="xm"    column="xm"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="tjjg"    column="tjjg"    />
+        <result property="cljzdyj"    column="cljzdyj"    />
+        <result property="zjysxm"    column="zjysxm"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcrydm"    column="jcrydm"    />
+        <result property="jcryxm"    column="jcryxm"    />
+        <result property="jcjgdm"    column="jcjgdm"    />
+        <result property="jcjgmc"    column="jcjgmc"    />
+        <result property="deleteFlag"    column="delete_flag"    />
+    </resultMap>
+
+    <sql id="selectTbFbFnbpcyxzdVo">
+        select id, fnbpcdjid, xm, cardid, birthday, tjjg, cljzdyj, zjysxm, jcrq, jcrydm, jcryxm, jcjgdm, jcjgmc, delete_flag from tb_fb_fnbpcyxzd
+    </sql>
+
+    <select id="selectTbFbFnbpcyxzdList" parameterType="TbFbFnbpcyxzd" resultMap="TbFbFnbpcyxzdResult">
+        <include refid="selectTbFbFnbpcyxzdVo"/>
+        <where>  
+            <if test="fnbpcdjid != null "> and fnbpcdjid = #{fnbpcdjid}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="tjjg != null  and tjjg != ''"> and tjjg = #{tjjg}</if>
+            <if test="cljzdyj != null  and cljzdyj != ''"> and cljzdyj = #{cljzdyj}</if>
+            <if test="zjysxm != null  and zjysxm != ''"> and zjysxm = #{zjysxm}</if>
+            <if test="jcrq != null "> and jcrq = #{jcrq}</if>
+            <if test="jcrydm != null  and jcrydm != ''"> and jcrydm = #{jcrydm}</if>
+            <if test="jcryxm != null  and jcryxm != ''"> and jcryxm = #{jcryxm}</if>
+            <if test="jcjgdm != null  and jcjgdm != ''"> and jcjgdm = #{jcjgdm}</if>
+            <if test="jcjgmc != null  and jcjgmc != ''"> and jcjgmc = #{jcjgmc}</if>
+            <if test="deleteFlag != null  and deleteFlag != ''"> and delete_flag = #{deleteFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbFbFnbpcyxzdById" parameterType="Long" resultMap="TbFbFnbpcyxzdResult">
+        <include refid="selectTbFbFnbpcyxzdVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbFbFnbpcyxzd" parameterType="TbFbFnbpcyxzd" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fb_fnbpcyxzd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fnbpcdjid != null ">fnbpcdjid,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="cardid != null  and cardid != ''">cardid,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="tjjg != null  and tjjg != ''">tjjg,</if>
+            <if test="cljzdyj != null  and cljzdyj != ''">cljzdyj,</if>
+            <if test="zjysxm != null  and zjysxm != ''">zjysxm,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcrydm != null  and jcrydm != ''">jcrydm,</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm,</if>
+            <if test="jcjgdm != null  and jcjgdm != ''">jcjgdm,</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc,</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fnbpcdjid != null ">#{fnbpcdjid},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="tjjg != null  and tjjg != ''">#{tjjg},</if>
+            <if test="cljzdyj != null  and cljzdyj != ''">#{cljzdyj},</if>
+            <if test="zjysxm != null  and zjysxm != ''">#{zjysxm},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcrydm != null  and jcrydm != ''">#{jcrydm},</if>
+            <if test="jcryxm != null  and jcryxm != ''">#{jcryxm},</if>
+            <if test="jcjgdm != null  and jcjgdm != ''">#{jcjgdm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">#{jcjgmc},</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">#{deleteFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbFbFnbpcyxzd" parameterType="TbFbFnbpcyxzd">
+        update tb_fb_fnbpcyxzd
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fnbpcdjid != null ">fnbpcdjid = #{fnbpcdjid},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="cardid != null  and cardid != ''">cardid = #{cardid},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="tjjg != null  and tjjg != ''">tjjg = #{tjjg},</if>
+            <if test="cljzdyj != null  and cljzdyj != ''">cljzdyj = #{cljzdyj},</if>
+            <if test="zjysxm != null  and zjysxm != ''">zjysxm = #{zjysxm},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcrydm != null  and jcrydm != ''">jcrydm = #{jcrydm},</if>
+            <if test="jcryxm != null  and jcryxm != ''">jcryxm = #{jcryxm},</if>
+            <if test="jcjgdm != null  and jcjgdm != ''">jcjgdm = #{jcjgdm},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc = #{jcjgmc},</if>
+            <if test="deleteFlag != null  and deleteFlag != ''">delete_flag = #{deleteFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbFnbpcyxzdById" parameterType="Long">
+        delete from tb_fb_fnbpcyxzd where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbFnbpcyxzdByIds" parameterType="String">
+        delete from tb_fb_fnbpcyxzd where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

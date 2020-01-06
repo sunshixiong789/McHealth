@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('婚前保健服务登记列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 select-table table-striped">
+                <table id="etdatable"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "hqbjfw/hqbjfwdj";
+        localStorage.removeItem("selectEtda")//清除历史选择
+        $(function() {
+            var options = {
+                id:"etdatable",
+                url: prefix + "/list",
+                modalName: "婚前保健服务登记",
+                onCheck:function(){
+                    var data = $("#etdatable").bootstrapTable('getSelections');
+                    localStorage.setItem("selectEtda", JSON.stringify(data));
+                },
+                onUncheck:function(){
+                    localStorage.removeItem("selectEtda")//清除历史选择
+                },
+                columns: [{
+                    radio: true
+                },
+                    {
+                        field : 'id',
+                        title : '主键',
+                        visible: false
+                    },
+                    {
+                        field : 'jkdaid',
+                        title : '健康档案id'
+                    },
+                    {
+                        field : 'xm',
+                        title : '姓名'
+                    },
+                    {
+                        field : 'cardid',
+                        title : '身份证号'
+                    },
+                    {
+                        field : 'birthday',
+                        title : '生日'
+                    },
+                    {
+                        field : 'dfjlbid',
+                        title : '对方记录表编号'
+                    },
+                    {
+                        field : 'dfxm',
+                        title : '对方姓名'
+                    },
+                    {
+                        field : 'txrq',
+                        title : '填写日期'
+                    },
+                    {
+                        field : 'deleteFlag',
+                        title : '是否删除'
+                    }
+
+                ]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('菜单树选择')" />
+    <th:block th:include="include :: ztree-css" />
+</head>
+<style>
+    body{height:auto;font-family: "Microsoft YaHei";}
+    button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
+</style>
+<body class="hold-transition box box-main">
+<div class="container">
+    <div class="col-sm-12 search-collapse">
+        <form id="formId">
+            <div class="select-list">
+                <ul>
+                    <li>
+                        <p>姓名：</p>
+                        <input type="text" name="name" id="name"/>
+                        <input id="fnjbqkxxid"   name="fnjbqkxxid"    type="hidden" />
+                        <input id="xm" name="xm"  type="hidden" />
+                        <input id="sfzjLbdm" name="sfzjLbdm"  type="hidden" />
+                        <input id="sfzjHm" name="sfzjHm"  type="hidden" />
+                        <input id="csrq" name="csrq"  type="hidden" />
+                    </li>
+                    <li>
+                        <a class="btn btn-primary btn-rounded btn-sm" onclick="searchPerson();"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                        <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <table id='tabletest' class="table"></table>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: ztree-js" />
+<script th:inline="javascript">
+    var prefix = ctx + "fnbpc/fnbpcdj";
+    $(function() {
+        $.ajax({
+            url:'/fnbpc/fnbpcdj/getWomenBaseData',
+            data: {},
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                var t = '<th scope="col">建档ID</th><th scope="col">姓名</th><th scope="col">证件类型</th><th scope="col">证件号码</th><th scope="col">出生日期</th><th scope="col">是否建档</th>';
+                $("#tabletest").append('<tr>' + t + '</tr>');
+                $.each(data, function(index,item){
+                    console.log(item.name);
+                    var tr =  '<td>'+item.id+'</td>'+'<td>'+item.name+'</td>'+'<td>'+item.idNoType+'</td>'+'<td>'+item.idNo+'</td>'+'<td>'+item.birthday+'</td>'+'<td>是</td>';
+                    $("#tabletest").append('<tr>' + tr + '</tr>');
+                    $("#tabletest tr:gt(0)").on("click",function () {
+                        $(this).parent().children().css('background-color','white');
+                        $(this).css('background-color','#e0e0e0');
+                        var id = $(this).children(":first").html();
+                        var name = $(this).children(":nth-child(2)").html();
+                        var sfzjLbdm = $(this).children(":nth-child(3)").html();
+                        var idNo = $(this).children(":nth-child(4)").html();
+                        var brith = $(this).children(":nth-child(5)").html();
+                        $("#fnjbqkxxid").val(id);
+                        $("#xm").val(name);
+                        $("#sfzjLbdm").val(sfzjLbdm);
+                        $("#sfzjHm").val(idNo);
+                        $("#csrq").val(brith.substr(0,19));
+                    });
+                });
+            }
+        });
+    })
+
+    function searchPerson() {
+        var name = $("#name").val();
+        $("#tabletest").html('');
+        $.ajax({
+            url:'/fnbpc/fnbpcdj/getWomenBaseData',
+            data: {'name':name},
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                var t = '<th scope="col">建档ID</th><th scope="col">姓名</th><th scope="col">证件类型</th><th scope="col">证件号码</th><th scope="col">出生日期</th><th scope="col">是否建档</th>';
+                $("#tabletest").append('<tr>' + t + '</tr>');
+                $.each(data, function(index,item){
+                    console.log(item.name);
+                    var tr = '<td>'+item.id+'</td>'+'<td>'+item.name+'</td>'+'<td>'+item.idNoType+'</td>'+'<td>'+item.idNo+'</td>'+'<td>'+item.birthday+'</td>'+'<td>是</td>';
+                    $("#tabletest").append('<tr>' + tr + '</tr>');
+                    $("#tabletest tr").on("click",function () {
+                        $(this).parent().children().css('background-color','white');
+                        $(this).css('background-color','#e0e0e0');
+                        var id = $(this).children(":first").html();
+                        var name = $(this).children(":nth-child(2)").html();
+                        var sfzjLbdm = $(this).children(":nth-child(3)").html();
+                        var idNo = $(this).children(":nth-child(4)").html();
+                        var brith = $(this).children(":nth-child(5)").html();
+                        $("#fnjbqkxxid").val(id);
+                        $("#xm").val(name);
+                        $("#sfzjLbdm").val(sfzjLbdm);
+                        $("#sfzjHm").val(idNo);
+                        $("#csrq").val(brith.substr(0,19));
+                    });
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

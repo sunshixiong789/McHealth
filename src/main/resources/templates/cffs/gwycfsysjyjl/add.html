@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增高危孕产妇实验室检验记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-gwycfsysjyjl-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input class="form-control" type="text" onclick="listFsdj()" id="xm" name="xm" readonly placeholder="选择登记信息" required>
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input id="csrq" name="csrq" class="form-control" placeholder="yyyy-MM-dd" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input id="mqsfzjhm" name="mqsfzjhm" class="form-control" type="text" readonly>
+                </div>
+            </div>
+           <!-- <div class="form-group">
+                <label class="col-sm-3 control-label">身份证件-类别代码：</label>
+                <div class="col-sm-8">
+                    <input id="mqsfzjlbdm" name="mqsfzjlbdm" class="form-control" type="text">
+                </div>
+            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系方式：</label>
+                <div class="col-sm-8">
+                    <input id="lxfs" name="lxfs" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">辅助检查-结果：</label>
+                <div class="col-sm-8">
+                    <input name="fzjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">辅助检查-项目名称：</label>
+                <div class="col-sm-8">
+                    <input name="fzjcxmmc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="jcryxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="jcjgmc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">检查日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="jcrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">登记日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="djrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <input name="gwycfdjid"  type="hidden">
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">登记ID：</label>
+                <div class="col-sm-8">
+                    <input name="gwycfdjid" class="form-control" type="text">
+                </div>
+            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cffs/gwycfsysjyjl"
+        $("#form-gwycfsysjyjl-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-gwycfsysjyjl-add').serialize());
+            }
+        }
+
+        $("input[name='csrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='jcrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='djrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function listFsdj() {
+            localStorage.removeItem("selectFs")
+            var title="选择登记信息";
+            var url="/cffs/gwycfdj/list";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectFs");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return;
+            }
+            var data=JSON.parse(json);
+            $("#xm").val(data[0].xm);
+            $("#gwyfdjid").val(data[0].id)
+            $("#mqsfzjhm").val(data[0].mqsfzjhm);
+            $("#csrq").val(data[0].csrq);
+            $("#lxfs").val(data[0].lxfs);
+            layer.close(index);
+        }
+    </script>
+</body>
+</html>

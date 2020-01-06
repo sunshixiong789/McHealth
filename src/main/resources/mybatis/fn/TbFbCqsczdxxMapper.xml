@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fn.cqsczdxx.mapper.TbFbCqsczdxxMapper">
+    
+    <resultMap type="TbFbCqsczdxx" id="TbFbCqsczdxxResult">
+        <result property="id"    column="id"    />
+        <result property="fngrbsh"    column="fngrbsh"    />
+        <result property="xm"    column="xm"    />
+        <result property="sfz"    column="sfz"    />
+        <result property="mcyjrq"    column="mcyjrq"    />
+        <result property="tz"    column="tz"    />
+        <result property="yzqrff"    column="yzqrff"    />
+        <result property="ts"    column="ts"    />
+        <result property="cxsj"    column="cxsj"    />
+        <result property="cxdd"    column="cxdd"    />
+        <result property="ybtxm"    column="ybtxm"    />
+        <result property="cqzdyxyj"    column="cqzdyxyj"    />
+        <result property="rcjj"    column="rcjj"    />
+        <result property="xgbj"    column="xgbj"    />
+        <result property="zgrq"    column="zgrq"    />
+    </resultMap>
+
+    <sql id="selectTbFbCqsczdxxVo">
+        select id, fngrbsh, xm, sfz, mcyjrq, tz, yzqrff, ts, cxsj, cxdd, ybtxm, cqzdyxyj, rcjj, xgbj, zgrq from tb_fb_cqsczdxx
+    </sql>
+
+    <select id="selectTbFbCqsczdxxList" parameterType="TbFbCqsczdxx" resultMap="TbFbCqsczdxxResult">
+        <include refid="selectTbFbCqsczdxxVo"/>
+        <where>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="sfz != null  and sfz != ''"> and sfz = #{sfz}</if>
+            and xgbj != '3'
+        </where>
+    </select>
+    
+    <select id="selectTbFbCqsczdxxById" parameterType="Long" resultMap="TbFbCqsczdxxResult">
+        <include refid="selectTbFbCqsczdxxVo"/>
+        where id = #{id} and xgbj != '3'
+    </select>
+        
+    <insert id="insertTbFbCqsczdxx" parameterType="TbFbCqsczdxx" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fb_cqsczdxx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fngrbsh != null  and fngrbsh != ''">fngrbsh,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="sfz != null  and sfz != ''">sfz,</if>
+            <if test="mcyjrq != null ">mcyjrq,</if>
+            <if test="tz != null ">tz,</if>
+            <if test="yzqrff != null  and yzqrff != ''">yzqrff,</if>
+            <if test="ts != null ">ts,</if>
+            <if test="cxsj != null ">cxsj,</if>
+            <if test="cxdd != null  and cxdd != ''">cxdd,</if>
+            <if test="ybtxm != null  and ybtxm != ''">ybtxm,</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''">cqzdyxyj,</if>
+            <if test="rcjj != null  and rcjj != ''">rcjj,</if>
+            <if test="xgbj != null  and xgbj != ''">xgbj,</if>
+            <if test="zgrq != null ">zgrq,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fngrbsh != null  and fngrbsh != ''">#{fngrbsh},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="sfz != null  and sfz != ''">#{sfz},</if>
+            <if test="mcyjrq != null ">#{mcyjrq},</if>
+            <if test="tz != null ">#{tz},</if>
+            <if test="yzqrff != null  and yzqrff != ''">#{yzqrff},</if>
+            <if test="ts != null ">#{ts},</if>
+            <if test="cxsj != null ">#{cxsj},</if>
+            <if test="cxdd != null  and cxdd != ''">#{cxdd},</if>
+            <if test="ybtxm != null  and ybtxm != ''">#{ybtxm},</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''">#{cqzdyxyj},</if>
+            <if test="rcjj != null  and rcjj != ''">#{rcjj},</if>
+            <if test="xgbj != null  and xgbj != ''">#{xgbj},</if>
+            <if test="zgrq != null ">#{zgrq},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbFbCqsczdxx" parameterType="TbFbCqsczdxx">
+        update tb_fb_cqsczdxx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fngrbsh != null  and fngrbsh != ''">fngrbsh = #{fngrbsh},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="sfz != null  and sfz != ''">sfz = #{sfz},</if>
+            <if test="mcyjrq != null ">mcyjrq = #{mcyjrq},</if>
+            <if test="tz != null ">tz = #{tz},</if>
+            <if test="yzqrff != null  and yzqrff != ''">yzqrff = #{yzqrff},</if>
+            <if test="ts != null ">ts = #{ts},</if>
+            <if test="cxsj != null ">cxsj = #{cxsj},</if>
+            <if test="cxdd != null  and cxdd != ''">cxdd = #{cxdd},</if>
+            <if test="ybtxm != null  and ybtxm != ''">ybtxm = #{ybtxm},</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''">cqzdyxyj = #{cqzdyxyj},</if>
+            <if test="rcjj != null  and rcjj != ''">rcjj = #{rcjj},</if>
+            <if test="xgbj != null  and xgbj != ''">xgbj = #{xgbj},</if>
+            <if test="zgrq != null ">zgrq = #{zgrq},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbFbCqsczdxxById" parameterType="Long">
+        update  tb_fb_cqsczdxx set xgbj = '3' where id = #{id}
+    </delete>
+
+    <delete id="deleteTbFbCqsczdxxByIds" parameterType="String">
+        update  tb_fb_cqsczdxx set xgbj = '3' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

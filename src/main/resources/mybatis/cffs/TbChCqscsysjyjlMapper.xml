@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cqsc.cqscsysjyjl.mapper.TbChCqscsysjyjlMapper">
+    
+    <resultMap type="TbChCqscsysjyjl" id="TbChCqscsysjyjlResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="mqsfzjlbdm"    column="mqsfzjlbdm"    />
+        <result property="cqscxm"    column="cqscxm"    />
+        <result property="cqscffdm"    column="cqscffdm"    />
+        <result property="cqscjg"    column="cqscjg"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="cqscysxm"    column="cqscysxm"    />
+        <result property="cqscjgmc"    column="cqscjgmc"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="cqscdjid"    column="cqscdjid"    />
+    </resultMap>
+
+    <sql id="selectTbChCqscsysjyjlVo">
+        select id, xm, csrq, mqsfzjhm, mqsfzjlbdm, cqscxm, cqscffdm, cqscjg, jcrq, cqscysxm, cqscjgmc, djrq, cqscdjid from tb_ch_cqscsysjyjl
+    </sql>
+
+    <select id="selectTbChCqscsysjyjlList" parameterType="TbChCqscsysjyjl" resultMap="TbChCqscsysjyjlResult">
+        <include refid="selectTbChCqscsysjyjlVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''"> and mqsfzjlbdm = #{mqsfzjlbdm}</if>
+            <if test="cqscxm != null  and cqscxm != ''"> and cqscxm = #{cqscxm}</if>
+            <if test="cqscffdm != null  and cqscffdm != ''"> and cqscffdm = #{cqscffdm}</if>
+            <if test="cqscjg != null  and cqscjg != ''"> and cqscjg = #{cqscjg}</if>
+            <if test="jcrq != null "> and jcrq = #{jcrq}</if>
+            <if test="cqscysxm != null  and cqscysxm != ''"> and cqscysxm = #{cqscysxm}</if>
+            <if test="cqscjgmc != null  and cqscjgmc != ''"> and cqscjgmc = #{cqscjgmc}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="cqscdjid != null "> and cqscdjid = #{cqscdjid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChCqscsysjyjlById" parameterType="Long" resultMap="TbChCqscsysjyjlResult">
+        <include refid="selectTbChCqscsysjyjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChCqscsysjyjl" parameterType="TbChCqscsysjyjl" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_cqscsysjyjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm,</if>
+            <if test="cqscxm != null  and cqscxm != ''">cqscxm,</if>
+            <if test="cqscffdm != null  and cqscffdm != ''">cqscffdm,</if>
+            <if test="cqscjg != null  and cqscjg != ''">cqscjg,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="cqscysxm != null  and cqscysxm != ''">cqscysxm,</if>
+            <if test="cqscjgmc != null  and cqscjgmc != ''">cqscjgmc,</if>
+            <if test="djrq != null ">djrq,</if>
+            <if test="cqscdjid != null ">cqscdjid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">#{mqsfzjlbdm},</if>
+            <if test="cqscxm != null  and cqscxm != ''">#{cqscxm},</if>
+            <if test="cqscffdm != null  and cqscffdm != ''">#{cqscffdm},</if>
+            <if test="cqscjg != null  and cqscjg != ''">#{cqscjg},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="cqscysxm != null  and cqscysxm != ''">#{cqscysxm},</if>
+            <if test="cqscjgmc != null  and cqscjgmc != ''">#{cqscjgmc},</if>
+            <if test="djrq != null ">#{djrq},</if>
+            <if test="cqscdjid != null ">#{cqscdjid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChCqscsysjyjl" parameterType="TbChCqscsysjyjl">
+        update tb_ch_cqscsysjyjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm = #{mqsfzjlbdm},</if>
+            <if test="cqscxm != null  and cqscxm != ''">cqscxm = #{cqscxm},</if>
+            <if test="cqscffdm != null  and cqscffdm != ''">cqscffdm = #{cqscffdm},</if>
+            <if test="cqscjg != null  and cqscjg != ''">cqscjg = #{cqscjg},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="cqscysxm != null  and cqscysxm != ''">cqscysxm = #{cqscysxm},</if>
+            <if test="cqscjgmc != null  and cqscjgmc != ''">cqscjgmc = #{cqscjgmc},</if>
+            <if test="djrq != null ">djrq = #{djrq},</if>
+            <if test="cqscdjid != null ">cqscdjid = #{cqscdjid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChCqscsysjyjlById" parameterType="Long">
+        delete from tb_ch_cqscsysjyjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChCqscsysjyjlByIds" parameterType="String">
+        delete from tb_ch_cqscsysjyjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

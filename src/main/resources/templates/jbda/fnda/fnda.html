@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('妇女档案列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <p>姓名：</p>
+                            <input type="text" name="name"/>
+                        </li>
+                        <li>
+                            <p>住址：</p>
+                            <input type="text" name="address"/>
+                        </li>
+                        <li class="select-time">
+                            <p>出生日期：</p>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginBirthday]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endBirthday]"/>
+                        </li>
+                        <li>
+                            <p>身份证号：</p>
+                            <input type="text" name="cardid"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="jbda:fnda:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="jbda:fnda:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="jbda:fnda:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="jbda:fnda:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('jbda:fnda:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('jbda:fnda:remove')}]];
+    var genderDatas = [[${@dict.getType('sys_user_sex')}]];
+    var hurtDatas = [[${@dict.getType('sys_fn_tongjing')}]];
+    var menstrualQuantityDatas = [[${@dict.getType('sys_fn_yjl')}]];
+    var bloodClotDatas = [[${@dict.getType('sys_fn_xk')}]];
+    var stopFlagDatas = [[${@dict.getType('sys_fn_jj')}]];
+    var operationStopDatas = [[${@dict.getType('sys_fn_ssjj')}]];
+    var bleedingAfterStopDatas = [[${@dict.getType('sys_fn_jjhydcx')}]];
+    var contactBleedingDatas = [[${@dict.getType('sys_fn_jccx')}]];
+    var smellLeucorrheaDatas = [[${@dict.getType('sys_fn_bdw')}]];
+    var discardFlagDatas = [[${@dict.getType('sys_fn_zghfjqc')}]];
+    var leucorrheaQuantityDatas = [[${@dict.getType('sys_fn_bdl')}]];
+    var leucorrheaColorDatas = [[${@dict.getType('sys_fn_bds')}]];
+    var itchDatas = [[${@dict.getType('sys_fn_yg')}]];
+    var marriageDatas = [[${@dict.getType('sys_fn_hf')}]];
+    var deatFetusDatas = [[${@dict.getType('sys_fn_st')}]];
+    var stillbirthDatas = [[${@dict.getType('sys_fn_sc')}]];
+    var puerperalInfectionDatas = [[${@dict.getType('sys_fn_crgr')}]];
+    var bloodDatas = [[${@dict.getType('sys_fn_cx')}]];
+    var breastCancerDatas = [[${@dict.getType('sys_fn_rxa')}]];
+    var uterineNeckCancerDatas = [[${@dict.getType('sys_fn_gja')}]];
+    var prefix = ctx + "jbda/fnda";
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "妇女档案",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field : 'healthFileId',
+                    title : '健康档案号',
+                    visible: false
+                },
+                {
+                    field : 'name',
+                    title : '姓名'
+                },
+                {
+                    field : 'gender',
+                    title : '性别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(genderDatas, value);
+                    }
+                },
+                {
+                    field : 'address',
+                    title : '住址'
+                },
+                {
+                    field : 'birthday',
+                    title : '出生日期'
+                },
+                {
+                    field : 'cardid',
+                    title : '身份证号'
+                },
+                {
+                    field : 'nation',
+                    title : '民族'
+                },
+                {
+                    field : 'menophanianAge',
+                    title : '初潮年龄'
+                },
+                {
+                    field : 'menstrualCycle',
+                    title : '月经周期'
+                },
+                {
+                    field : 'menstrualPeriod',
+                    title : '行经天数'
+                },
+                {
+                    field : 'hurt',
+                    title : '痛经',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(hurtDatas, value);
+                    }
+                },
+                {
+                    field : 'menstrualQuantity',
+                    title : '月经量',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(menstrualQuantityDatas, value);
+                    }
+                },
+                {
+                    field : 'bloodClot',
+                    title : '血块',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(bloodClotDatas, value);
+                    }
+                },
+                {
+                    field : 'stopFlag',
+                    title : '是否绝经',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(stopFlagDatas, value);
+                    }
+                },
+                {
+                    field : 'stopAge',
+                    title : '绝经年龄'
+                },
+                {
+                    field : 'operationStop',
+                    title : '手术绝经',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(operationStopDatas, value);
+                    }
+                },
+                {
+                    field : 'bleedingAfterStop',
+                    title : '绝经后阴道出血',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(bleedingAfterStopDatas, value);
+                    }
+                },
+                {
+                    field : 'contactBleeding',
+                    title : '接触出血',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(contactBleedingDatas, value);
+                    }
+                },
+                {
+                    field : 'smellLeucorrhea',
+                    title : '白带味',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(smellLeucorrheaDatas, value);
+                    }
+                },
+                {
+                    field : 'discardFlag',
+                    title : '子宫或附件切除',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(discardFlagDatas, value);
+                    }
+                },
+                {
+                    field : 'discardDate',
+                    title : '切除年月'
+                },
+                {
+                    field : 'leucorrheaQuantity',
+                    title : '白带量',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(leucorrheaQuantityDatas, value);
+                    }
+                },
+                {
+                    field : 'leucorrheaColor',
+                    title : '白带色',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(leucorrheaColorDatas, value);
+                    }
+                },
+                {
+                    field : 'leucorrheaColorOther',
+                    title : '其他'
+                },
+                {
+                    field : 'itch',
+                    title : '氧感',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(itchDatas, value);
+                    }
+                },
+                {
+                    field : 'marriage',
+                    title : '婚否',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(marriageDatas, value);
+                    }
+                },
+                {
+                    field : 'marriageAge',
+                    title : '结婚年龄'
+                },
+                {
+                    field : 'gestationTimes',
+                    title : '妊娠次数'
+                },
+                {
+                    field : 'deliveryTimes',
+                    title : '生育次数'
+                },
+                {
+                    field : 'cesareanTimes',
+                    title : '剖宫产次数'
+                },
+                {
+                    field : 'artificialAbortion',
+                    title : '人工流产次数'
+                },
+                {
+                    field : 'spontaneousAbortion',
+                    title : '自然流产次数'
+                },
+                {
+                    field : 'inducedLabour',
+                    title : '引产次数'
+                },
+                {
+                    field : 'deatFetus',
+                    title : '死胎',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(deatFetusDatas, value);
+                    }
+                },
+                {
+                    field : 'stillbirth',
+                    title : '死产',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(stillbirthDatas, value);
+                    }
+                },
+                {
+                    field : 'puerperalInfection',
+                    title : '产褥感染',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(puerperalInfectionDatas, value);
+                    }
+                },
+                {
+                    field : 'lastDeliveryDate',
+                    title : '末次分娩日期'
+                },
+                {
+                    field : 'contraceptiveRing',
+                    title : '节育环'
+                },
+                {
+                    field : 'contraceptiveRingLoc',
+                    title : '环位置'
+                },
+                {
+                    field : 'contraceptiveDate',
+                    title : '结扎日期'
+                },
+                {
+                    field : 'takenPills',
+                    title : '口服药'
+                },
+                {
+                    field : 'tools',
+                    title : '工具'
+                },
+                {
+                    field : 'diseaseHistory',
+                    title : '曾患妇科病'
+                },
+                {
+                    field : 'operationHistory',
+                    title : '妇科手术史'
+                },
+                {
+                    field : 'breastCancerFamily',
+                    title : '乳癌家族史'
+                },
+                {
+                    field : 'blood',
+                    title : '出血',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(bloodDatas, value);
+                    }
+                },
+                {
+                    field : 'breastCancer',
+                    title : '乳腺癌',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(breastCancerDatas, value);
+                    }
+                },
+                {
+                    field : 'breastCancerDate',
+                    title : '乳腺癌确诊时间'
+                },
+                {
+                    field : 'breastCancerTreat',
+                    title : '乳腺癌治疗'
+                },
+                {
+                    field : 'uterineNeckCancer',
+                    title : '宫颈癌',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(uterineNeckCancerDatas, value);
+                    }
+                },
+                {
+                    field : 'uterineNeckCancerDate',
+                    title : '宫颈癌确诊时间'
+                },
+                {
+                    field : 'uterineNeckCancerTreat',
+                    title : '宫颈癌治疗'
+                },
+                {
+                    field : 'otherDes',
+                    title : '备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.healthFileId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.healthFileId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

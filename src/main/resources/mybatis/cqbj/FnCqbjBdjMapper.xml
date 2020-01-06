@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cqbj.bdj.mapper.FnCqbjBdjMapper">
+    
+    <resultMap type="FnCqbjBdj" id="FnCqbjBdjResult">
+        <result property="id"    column="id"    />
+        <result property="zyh"    column="zyh"    />
+        <result property="xm"    column="xm"    />
+        <result property="daid"    column="daid"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="whcddm"    column="whcddm"    />
+        <result property="sfzjLbdm"    column="sfzj_lbdm"    />
+        <result property="sfzjHm"    column="sfzj_hm"    />
+        <result property="zylbdm"    column="zylbdm"    />
+        <result property="gzdwmc"    column="gzdwmc"    />
+        <result property="pomc"    column="pomc"    />
+        <result property="pocsrq"    column="pocsrq"    />
+        <result property="pomzdm"    column="pomzdm"    />
+        <result property="powhcdm"    column="powhcdm"    />
+        <result property="posfzjLedm"    column="posfzj_ledm"    />
+        <result property="posfzjHm"    column="posfzj_hm"    />
+        <result property="pozylbdm"    column="pozylbdm"    />
+        <result property="pogzdwmc"    column="pogzdwmc"    />
+    </resultMap>
+
+    <sql id="selectFnCqbjBdjVo">
+        select id, zyh, xm, daid, birthday, whcddm, sfzj_lbdm, sfzj_hm, zylbdm, gzdwmc, pomc, pocsrq, pomzdm, powhcdm, posfzj_ledm, posfzj_hm, pozylbdm, pogzdwmc from fn_cqbj_bdj
+    </sql>
+
+    <select id="selectFnCqbjBdjList" parameterType="FnCqbjBdj" resultMap="FnCqbjBdjResult">
+        <include refid="selectFnCqbjBdjVo"/>
+        <where>  
+            <if test="zyh != null  and zyh != ''"> and zyh = #{zyh}</if>
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="daid != null "> and daid = #{daid}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="whcddm != null  and whcddm != ''"> and whcddm = #{whcddm}</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''"> and sfzj_lbdm = #{sfzjLbdm}</if>
+            <if test="sfzjHm != null  and sfzjHm != ''"> and sfzj_hm = #{sfzjHm}</if>
+            <if test="zylbdm != null  and zylbdm != ''"> and zylbdm = #{zylbdm}</if>
+            <if test="gzdwmc != null  and gzdwmc != ''"> and gzdwmc = #{gzdwmc}</if>
+            <if test="pomc != null  and pomc != ''"> and pomc = #{pomc}</if>
+            <if test="pocsrq != null "> and pocsrq = #{pocsrq}</if>
+            <if test="pomzdm != null  and pomzdm != ''"> and pomzdm = #{pomzdm}</if>
+            <if test="powhcdm != null  and powhcdm != ''"> and powhcdm = #{powhcdm}</if>
+            <if test="posfzjLedm != null  and posfzjLedm != ''"> and posfzj_ledm = #{posfzjLedm}</if>
+            <if test="posfzjHm != null  and posfzjHm != ''"> and posfzj_hm = #{posfzjHm}</if>
+            <if test="pozylbdm != null  and pozylbdm != ''"> and pozylbdm = #{pozylbdm}</if>
+            <if test="pogzdwmc != null  and pogzdwmc != ''"> and pogzdwmc = #{pogzdwmc}</if>
+        </where>
+    </select>
+    
+    <select id="selectFnCqbjBdjById" parameterType="Long" resultMap="FnCqbjBdjResult">
+        <include refid="selectFnCqbjBdjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFnCqbjBdj" parameterType="FnCqbjBdj">
+        insert into fn_cqbj_bdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="zyh != null  and zyh != ''">zyh,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="daid != null ">daid,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="whcddm != null  and whcddm != ''">whcddm,</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm,</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm,</if>
+            <if test="zylbdm != null  and zylbdm != ''">zylbdm,</if>
+            <if test="gzdwmc != null  and gzdwmc != ''">gzdwmc,</if>
+            <if test="pomc != null  and pomc != ''">pomc,</if>
+            <if test="pocsrq != null ">pocsrq,</if>
+            <if test="pomzdm != null  and pomzdm != ''">pomzdm,</if>
+            <if test="powhcdm != null  and powhcdm != ''">powhcdm,</if>
+            <if test="posfzjLedm != null  and posfzjLedm != ''">posfzj_ledm,</if>
+            <if test="posfzjHm != null  and posfzjHm != ''">posfzj_hm,</if>
+            <if test="pozylbdm != null  and pozylbdm != ''">pozylbdm,</if>
+            <if test="pogzdwmc != null  and pogzdwmc != ''">pogzdwmc,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="zyh != null  and zyh != ''">#{zyh},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="daid != null ">#{daid},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="whcddm != null  and whcddm != ''">#{whcddm},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">#{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">#{sfzjHm},</if>
+            <if test="zylbdm != null  and zylbdm != ''">#{zylbdm},</if>
+            <if test="gzdwmc != null  and gzdwmc != ''">#{gzdwmc},</if>
+            <if test="pomc != null  and pomc != ''">#{pomc},</if>
+            <if test="pocsrq != null ">#{pocsrq},</if>
+            <if test="pomzdm != null  and pomzdm != ''">#{pomzdm},</if>
+            <if test="powhcdm != null  and powhcdm != ''">#{powhcdm},</if>
+            <if test="posfzjLedm != null  and posfzjLedm != ''">#{posfzjLedm},</if>
+            <if test="posfzjHm != null  and posfzjHm != ''">#{posfzjHm},</if>
+            <if test="pozylbdm != null  and pozylbdm != ''">#{pozylbdm},</if>
+            <if test="pogzdwmc != null  and pogzdwmc != ''">#{pogzdwmc},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFnCqbjBdj" parameterType="FnCqbjBdj">
+        update fn_cqbj_bdj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zyh != null  and zyh != ''">zyh = #{zyh},</if>
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="daid != null ">daid = #{daid},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="whcddm != null  and whcddm != ''">whcddm = #{whcddm},</if>
+            <if test="sfzjLbdm != null  and sfzjLbdm != ''">sfzj_lbdm = #{sfzjLbdm},</if>
+            <if test="sfzjHm != null  and sfzjHm != ''">sfzj_hm = #{sfzjHm},</if>
+            <if test="zylbdm != null  and zylbdm != ''">zylbdm = #{zylbdm},</if>
+            <if test="gzdwmc != null  and gzdwmc != ''">gzdwmc = #{gzdwmc},</if>
+            <if test="pomc != null  and pomc != ''">pomc = #{pomc},</if>
+            <if test="pocsrq != null ">pocsrq = #{pocsrq},</if>
+            <if test="pomzdm != null  and pomzdm != ''">pomzdm = #{pomzdm},</if>
+            <if test="powhcdm != null  and powhcdm != ''">powhcdm = #{powhcdm},</if>
+            <if test="posfzjLedm != null  and posfzjLedm != ''">posfzj_ledm = #{posfzjLedm},</if>
+            <if test="posfzjHm != null  and posfzjHm != ''">posfzj_hm = #{posfzjHm},</if>
+            <if test="pozylbdm != null  and pozylbdm != ''">pozylbdm = #{pozylbdm},</if>
+            <if test="pogzdwmc != null  and pogzdwmc != ''">pogzdwmc = #{pogzdwmc},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFnCqbjBdjById" parameterType="Long">
+        delete from fn_cqbj_bdj where id = #{id}
+    </delete>
+
+    <delete id="deleteFnCqbjBdjByIds" parameterType="String">
+        delete from fn_cqbj_bdj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

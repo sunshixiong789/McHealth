@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增妇女档案')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-fnda-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">姓名：</label>
+            <div class="col-sm-8">
+                <input name="name" class="form-control" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">性别：</label>
+            <div class="col-sm-8">
+                <select name="gender" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}" required>
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">住址：</label>
+            <div class="col-sm-8">
+                <input name="address" class="form-control" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">出生日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="birthday" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">身份证号：</label>
+            <div class="col-sm-8">
+                <input name="cardid" class="form-control" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">民族：</label>
+            <div class="col-sm-8">
+                <input name="nation" class="form-control" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">初潮年龄：</label>
+            <div class="col-sm-8">
+                <input name="menophanianAge" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">月经周期：</label>
+            <div class="col-sm-8">
+                <input name="menstrualCycle" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">行经天数：</label>
+            <div class="col-sm-8">
+                <input name="menstrualPeriod" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">痛经：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_tongjing')}">
+                    <input type="radio" th:id="${'hurt_' + dict.dictCode}" name="hurt" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'hurt_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">月经量：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_yjl')}">
+                    <input type="radio" th:id="${'menstrualQuantity_' + dict.dictCode}" name="menstrualQuantity" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'menstrualQuantity_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">血块：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_xk')}">
+                    <input type="radio" th:id="${'bloodClot_' + dict.dictCode}" name="bloodClot" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'bloodClot_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否绝经：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jj')}">
+                    <input type="radio" th:id="${'stopFlag_' + dict.dictCode}" name="stopFlag" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'stopFlag_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">绝经年龄：</label>
+            <div class="col-sm-8">
+                <input name="stopAge" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">手术绝经：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_ssjj')}">
+                    <input type="radio" th:id="${'operationStop_' + dict.dictCode}" name="operationStop" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'operationStop_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">绝经后阴道出血：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jjhydcx')}">
+                    <input type="radio" th:id="${'bleedingAfterStop_' + dict.dictCode}" name="bleedingAfterStop" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'bleedingAfterStop_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">接触出血：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_jccx')}">
+                    <input type="radio" th:id="${'contactBleeding_' + dict.dictCode}" name="contactBleeding" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'contactBleeding_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">白带味：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_bdw')}">
+                    <input type="radio" th:id="${'smellLeucorrhea_' + dict.dictCode}" name="smellLeucorrhea" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'smellLeucorrhea_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">子宫或附件切除：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_zghfjqc')}">
+                    <input type="radio" th:id="${'discardFlag_' + dict.dictCode}" name="discardFlag" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'discardFlag_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">切除年月：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="discardDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">白带量：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_bdl')}">
+                    <input type="radio" th:id="${'leucorrheaQuantity_' + dict.dictCode}" name="leucorrheaQuantity" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'leucorrheaQuantity_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">白带色：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_bds')}">
+                    <input type="radio" th:id="${'leucorrheaColor_' + dict.dictCode}" name="leucorrheaColor" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'leucorrheaColor_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">其他：</label>
+            <div class="col-sm-8">
+                <input name="leucorrheaColorOther" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">氧感：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_yg')}">
+                    <input type="radio" th:id="${'itch_' + dict.dictCode}" name="itch" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'itch_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">婚否：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_hf')}">
+                    <input type="radio" th:id="${'marriage_' + dict.dictCode}" name="marriage" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'marriage_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">结婚年龄：</label>
+            <div class="col-sm-8">
+                <input name="marriageAge" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">妊娠次数：</label>
+            <div class="col-sm-8">
+                <input name="gestationTimes" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">生育次数：</label>
+            <div class="col-sm-8">
+                <input name="deliveryTimes" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">剖宫产次数：</label>
+            <div class="col-sm-8">
+                <input name="cesareanTimes" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">人工流产次数：</label>
+            <div class="col-sm-8">
+                <input name="artificialAbortion" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">自然流产次数：</label>
+            <div class="col-sm-8">
+                <input name="spontaneousAbortion" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">引产次数：</label>
+            <div class="col-sm-8">
+                <input name="inducedLabour" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">死胎：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_st')}">
+                    <input type="radio" th:id="${'deatFetus_' + dict.dictCode}" name="deatFetus" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'deatFetus_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">死产：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_sc')}">
+                    <input type="radio" th:id="${'stillbirth_' + dict.dictCode}" name="stillbirth" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'stillbirth_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">产褥感染：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_crgr')}">
+                    <input type="radio" th:id="${'puerperalInfection_' + dict.dictCode}" name="puerperalInfection" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'puerperalInfection_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">末次分娩日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="lastDeliveryDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">节育环：</label>
+            <div class="col-sm-8">
+                <input name="contraceptiveRing" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">环位置：</label>
+            <div class="col-sm-8">
+                <input name="contraceptiveRingLoc" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">结扎日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="contraceptiveDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">口服药：</label>
+            <div class="col-sm-8">
+                <input name="takenPills" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">工具：</label>
+            <div class="col-sm-8">
+                <input name="tools" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">曾患妇科病：</label>
+            <div class="col-sm-8">
+                <input name="diseaseHistory" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">妇科手术史：</label>
+            <div class="col-sm-8">
+                <input name="operationHistory" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">乳癌家族史：</label>
+            <div class="col-sm-8">
+                <input name="breastCancerFamily" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">出血：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_cx')}">
+                    <input type="radio" th:id="${'blood_' + dict.dictCode}" name="blood" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'blood_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">乳腺癌：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_rxa')}">
+                    <input type="radio" th:id="${'breastCancer_' + dict.dictCode}" name="breastCancer" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'breastCancer_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">乳腺癌确诊时间：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="breastCancerDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">乳腺癌治疗：</label>
+            <div class="col-sm-8">
+                <input name="breastCancerTreat" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">宫颈癌：</label>
+            <div class="col-sm-8">
+                <div class="radio-box" th:each="dict : ${@dict.getType('sys_fn_gja')}">
+                    <input type="radio" th:id="${'uterineNeckCancer_' + dict.dictCode}" name="uterineNeckCancer" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                    <label th:for="${'uterineNeckCancer_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">宫颈癌确诊时间：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="uterineNeckCancerDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">宫颈癌治疗：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="uterineNeckCancerTreat" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注：</label>
+            <div class="col-sm-8">
+                <input name="otherDes" class="form-control" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: datetimepicker-js" />
+<script type="text/javascript">
+    var prefix = ctx + "jbda/fnda"
+    $("#form-fnda-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-fnda-add').serialize());
+        }
+    }
+
+    $("input[name='birthday']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("input[name='discardDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("input[name='lastDeliveryDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("input[name='contraceptiveDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("input[name='breastCancerDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("input[name='uterineNeckCancerDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("input[name='uterineNeckCancerTreat']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+</script>
+</body>
+</html>

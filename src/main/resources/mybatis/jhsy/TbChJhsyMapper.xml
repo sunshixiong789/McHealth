@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.jhsy.jhsydj.mapper.TbChJhsyMapper">
+    
+    <resultMap type="TbChJhsy" id="TbChJhsyResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="jkdaid"    column="jkdaid"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="ssdm"    column="ssdm"    />
+        <result property="sqms"    column="sqms"    />
+        <result property="ssjlms"    column="ssjlms"    />
+        <result property="ssbfz"    column="ssbfz"    />
+        <result property="tsqkms"    column="tsqkms"    />
+        <result property="clyj"    column="clyj"    />
+        <result property="ysxm"    column="ysxm"    />
+        <result property="ssrq"    column="ssrq"    />
+        <result property="sscxl"    column="sscxl"    />
+        <result property="qgrq"    column="qgrq"    />
+        <result property="pnpcrq"    column="pnpcrq"    />
+        <result property="ywyf"    column="ywyf"    />
+        <result property="bljcjg"    column="bljcjg"    />
+        <result property="ftcd"    column="ftcd"    />
+        <result property="fxcs"    column="fxcs"    />
+        <result property="otcs"    column="otcs"    />
+        <result property="ylywlb"    column="ylywlb"    />
+        <result property="lcff"    column="lcff"    />
+        <result property="pnzj"    column="pnzj"    />
+        <result property="jzbw"    column="jzbw"    />
+        <result property="jzfs"    column="jzfs"    />
+        <result property="pxmzyc"    column="pxmzyc"    />
+        <result property="pxmzbw"    column="pxmzbw"    />
+        <result property="pxmznx"    column="pxmznx"    />
+        <result property="pxmzsq"    column="pxmzsq"    />
+        <result property="gnjyqzl"    column="gnjyqzl"    />
+        <result property="gnjyqycms"    column="gnjyqycms"    />
+        <result property="gnjyqyc"    column="gnjyqyc"    />
+        <result property="gnjyqfzsq"    column="gnjyqfzsq"    />
+        <result property="gnjyqfznx"    column="gnjyqfznx"    />
+        <result property="rmcxxjs"    column="rmcxxjs"    />
+        <result property="nrssyjg"    column="nrssyjg"    />
+        <result property="yclcjg"    column="yclcjg"    />
+        <result property="zclcjg"    column="zclcjg"    />
+        <result property="ycslgjcjg"    column="ycslgjcjg"    />
+        <result property="zcslgjcjg"    column="zcslgjcjg"    />
+        <result property="zgdx"    column="zgdx"    />
+        <result property="zgwz"    column="zgwz"    />
+    </resultMap>
+
+    <sql id="selectTbChJhsyVo">
+        select id, xm, jkdaid, cardid, birthday, ssdm, sqms, ssjlms, ssbfz, tsqkms, clyj, ysxm, ssrq, sscxl, qgrq, pnpcrq, ywyf, bljcjg, ftcd, fxcs, otcs, ylywlb, lcff, pnzj, jzbw, jzfs, pxmzyc, pxmzbw, pxmznx, pxmzsq, gnjyqzl, gnjyqycms, gnjyqyc, gnjyqfzsq, gnjyqfznx, rmcxxjs, nrssyjg, yclcjg, zclcjg, ycslgjcjg, zcslgjcjg, zgdx, zgwz from tb_ch_jhsy
+    </sql>
+
+    <select id="selectTbChJhsyList" parameterType="TbChJhsy" resultMap="TbChJhsyResult">
+        <include refid="selectTbChJhsyVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="jkdaid != null "> and jkdaid = #{jkdaid}</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="ssdm != null "> and ssdm = #{ssdm}</if>
+            <if test="sqms != null  and sqms != ''"> and sqms = #{sqms}</if>
+            <if test="ssjlms != null  and ssjlms != ''"> and ssjlms = #{ssjlms}</if>
+            <if test="ssbfz != null  and ssbfz != ''"> and ssbfz = #{ssbfz}</if>
+            <if test="tsqkms != null  and tsqkms != ''"> and tsqkms = #{tsqkms}</if>
+            <if test="clyj != null  and clyj != ''"> and clyj = #{clyj}</if>
+            <if test="ysxm != null  and ysxm != ''"> and ysxm = #{ysxm}</if>
+            <if test="ssrq != null "> and ssrq = #{ssrq}</if>
+            <if test="sscxl != null  and sscxl != ''"> and sscxl = #{sscxl}</if>
+            <if test="qgrq != null "> and qgrq = #{qgrq}</if>
+            <if test="pnpcrq != null "> and pnpcrq = #{pnpcrq}</if>
+            <if test="ywyf != null  and ywyf != ''"> and ywyf = #{ywyf}</if>
+            <if test="bljcjg != null  and bljcjg != ''"> and bljcjg = #{bljcjg}</if>
+            <if test="ftcd != null "> and ftcd = #{ftcd}</if>
+            <if test="fxcs != null  and fxcs != ''"> and fxcs = #{fxcs}</if>
+            <if test="otcs != null  and otcs != ''"> and otcs = #{otcs}</if>
+            <if test="ylywlb != null "> and ylywlb = #{ylywlb}</if>
+            <if test="lcff != null "> and lcff = #{lcff}</if>
+            <if test="pnzj != null  and pnzj != ''"> and pnzj = #{pnzj}</if>
+            <if test="jzbw != null "> and jzbw = #{jzbw}</if>
+            <if test="jzfs != null "> and jzfs = #{jzfs}</if>
+            <if test="pxmzyc != null "> and pxmzyc = #{pxmzyc}</if>
+            <if test="pxmzbw != null "> and pxmzbw = #{pxmzbw}</if>
+            <if test="pxmznx != null  and pxmznx != ''"> and pxmznx = #{pxmznx}</if>
+            <if test="pxmzsq != null "> and pxmzsq = #{pxmzsq}</if>
+            <if test="gnjyqzl != null "> and gnjyqzl = #{gnjyqzl}</if>
+            <if test="gnjyqycms != null  and gnjyqycms != ''"> and gnjyqycms = #{gnjyqycms}</if>
+            <if test="gnjyqyc != null "> and gnjyqyc = #{gnjyqyc}</if>
+            <if test="gnjyqfzsq != null "> and gnjyqfzsq = #{gnjyqfzsq}</if>
+            <if test="gnjyqfznx != null  and gnjyqfznx != ''"> and gnjyqfznx = #{gnjyqfznx}</if>
+            <if test="rmcxxjs != null  and rmcxxjs != ''"> and rmcxxjs = #{rmcxxjs}</if>
+            <if test="nrssyjg != null  and nrssyjg != ''"> and nrssyjg = #{nrssyjg}</if>
+            <if test="yclcjg != null  and yclcjg != ''"> and yclcjg = #{yclcjg}</if>
+            <if test="zclcjg != null  and zclcjg != ''"> and zclcjg = #{zclcjg}</if>
+            <if test="ycslgjcjg != null  and ycslgjcjg != ''"> and ycslgjcjg = #{ycslgjcjg}</if>
+            <if test="zcslgjcjg != null  and zcslgjcjg != ''"> and zcslgjcjg = #{zcslgjcjg}</if>
+            <if test="zgdx != null "> and zgdx = #{zgdx}</if>
+            <if test="zgwz != null "> and zgwz = #{zgwz}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChJhsyById" parameterType="Long" resultMap="TbChJhsyResult">
+        <include refid="selectTbChJhsyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChJhsy" parameterType="TbChJhsy" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_jhsy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="jkdaid != null ">jkdaid,</if>
+            <if test="cardid != null  and cardid != ''">cardid,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="ssdm != null ">ssdm,</if>
+            <if test="sqms != null  and sqms != ''">sqms,</if>
+            <if test="ssjlms != null  and ssjlms != ''">ssjlms,</if>
+            <if test="ssbfz != null  and ssbfz != ''">ssbfz,</if>
+            <if test="tsqkms != null  and tsqkms != ''">tsqkms,</if>
+            <if test="clyj != null  and clyj != ''">clyj,</if>
+            <if test="ysxm != null  and ysxm != ''">ysxm,</if>
+            <if test="ssrq != null ">ssrq,</if>
+            <if test="sscxl != null  and sscxl != ''">sscxl,</if>
+            <if test="qgrq != null ">qgrq,</if>
+            <if test="pnpcrq != null ">pnpcrq,</if>
+            <if test="ywyf != null  and ywyf != ''">ywyf,</if>
+            <if test="bljcjg != null  and bljcjg != ''">bljcjg,</if>
+            <if test="ftcd != null ">ftcd,</if>
+            <if test="fxcs != null  and fxcs != ''">fxcs,</if>
+            <if test="otcs != null  and otcs != ''">otcs,</if>
+            <if test="ylywlb != null ">ylywlb,</if>
+            <if test="lcff != null ">lcff,</if>
+            <if test="pnzj != null  and pnzj != ''">pnzj,</if>
+            <if test="jzbw != null ">jzbw,</if>
+            <if test="jzfs != null ">jzfs,</if>
+            <if test="pxmzyc != null ">pxmzyc,</if>
+            <if test="pxmzbw != null ">pxmzbw,</if>
+            <if test="pxmznx != null  and pxmznx != ''">pxmznx,</if>
+            <if test="pxmzsq != null ">pxmzsq,</if>
+            <if test="gnjyqzl != null ">gnjyqzl,</if>
+            <if test="gnjyqycms != null  and gnjyqycms != ''">gnjyqycms,</if>
+            <if test="gnjyqyc != null ">gnjyqyc,</if>
+            <if test="gnjyqfzsq != null ">gnjyqfzsq,</if>
+            <if test="gnjyqfznx != null  and gnjyqfznx != ''">gnjyqfznx,</if>
+            <if test="rmcxxjs != null  and rmcxxjs != ''">rmcxxjs,</if>
+            <if test="nrssyjg != null  and nrssyjg != ''">nrssyjg,</if>
+            <if test="yclcjg != null  and yclcjg != ''">yclcjg,</if>
+            <if test="zclcjg != null  and zclcjg != ''">zclcjg,</if>
+            <if test="ycslgjcjg != null  and ycslgjcjg != ''">ycslgjcjg,</if>
+            <if test="zcslgjcjg != null  and zcslgjcjg != ''">zcslgjcjg,</if>
+            <if test="zgdx != null ">zgdx,</if>
+            <if test="zgwz != null ">zgwz,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="jkdaid != null ">#{jkdaid},</if>
+            <if test="cardid != null  and cardid != ''">#{cardid},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="ssdm != null ">#{ssdm},</if>
+            <if test="sqms != null  and sqms != ''">#{sqms},</if>
+            <if test="ssjlms != null  and ssjlms != ''">#{ssjlms},</if>
+            <if test="ssbfz != null  and ssbfz != ''">#{ssbfz},</if>
+            <if test="tsqkms != null  and tsqkms != ''">#{tsqkms},</if>
+            <if test="clyj != null  and clyj != ''">#{clyj},</if>
+            <if test="ysxm != null  and ysxm != ''">#{ysxm},</if>
+            <if test="ssrq != null ">#{ssrq},</if>
+            <if test="sscxl != null  and sscxl != ''">#{sscxl},</if>
+            <if test="qgrq != null ">#{qgrq},</if>
+            <if test="pnpcrq != null ">#{pnpcrq},</if>
+            <if test="ywyf != null  and ywyf != ''">#{ywyf},</if>
+            <if test="bljcjg != null  and bljcjg != ''">#{bljcjg},</if>
+            <if test="ftcd != null ">#{ftcd},</if>
+            <if test="fxcs != null  and fxcs != ''">#{fxcs},</if>
+            <if test="otcs != null  and otcs != ''">#{otcs},</if>
+            <if test="ylywlb != null ">#{ylywlb},</if>
+            <if test="lcff != null ">#{lcff},</if>
+            <if test="pnzj != null  and pnzj != ''">#{pnzj},</if>
+            <if test="jzbw != null ">#{jzbw},</if>
+            <if test="jzfs != null ">#{jzfs},</if>
+            <if test="pxmzyc != null ">#{pxmzyc},</if>
+            <if test="pxmzbw != null ">#{pxmzbw},</if>
+            <if test="pxmznx != null  and pxmznx != ''">#{pxmznx},</if>
+            <if test="pxmzsq != null ">#{pxmzsq},</if>
+            <if test="gnjyqzl != null ">#{gnjyqzl},</if>
+            <if test="gnjyqycms != null  and gnjyqycms != ''">#{gnjyqycms},</if>
+            <if test="gnjyqyc != null ">#{gnjyqyc},</if>
+            <if test="gnjyqfzsq != null ">#{gnjyqfzsq},</if>
+            <if test="gnjyqfznx != null  and gnjyqfznx != ''">#{gnjyqfznx},</if>
+            <if test="rmcxxjs != null  and rmcxxjs != ''">#{rmcxxjs},</if>
+            <if test="nrssyjg != null  and nrssyjg != ''">#{nrssyjg},</if>
+            <if test="yclcjg != null  and yclcjg != ''">#{yclcjg},</if>
+            <if test="zclcjg != null  and zclcjg != ''">#{zclcjg},</if>
+            <if test="ycslgjcjg != null  and ycslgjcjg != ''">#{ycslgjcjg},</if>
+            <if test="zcslgjcjg != null  and zcslgjcjg != ''">#{zcslgjcjg},</if>
+            <if test="zgdx != null ">#{zgdx},</if>
+            <if test="zgwz != null ">#{zgwz},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChJhsy" parameterType="TbChJhsy">
+        update tb_ch_jhsy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="jkdaid != null ">jkdaid = #{jkdaid},</if>
+            <if test="cardid != null  and cardid != ''">cardid = #{cardid},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="ssdm != null ">ssdm = #{ssdm},</if>
+            <if test="sqms != null  and sqms != ''">sqms = #{sqms},</if>
+            <if test="ssjlms != null  and ssjlms != ''">ssjlms = #{ssjlms},</if>
+            <if test="ssbfz != null  and ssbfz != ''">ssbfz = #{ssbfz},</if>
+            <if test="tsqkms != null  and tsqkms != ''">tsqkms = #{tsqkms},</if>
+            <if test="clyj != null  and clyj != ''">clyj = #{clyj},</if>
+            <if test="ysxm != null  and ysxm != ''">ysxm = #{ysxm},</if>
+            <if test="ssrq != null ">ssrq = #{ssrq},</if>
+            <if test="sscxl != null  and sscxl != ''">sscxl = #{sscxl},</if>
+            <if test="qgrq != null ">qgrq = #{qgrq},</if>
+            <if test="pnpcrq != null ">pnpcrq = #{pnpcrq},</if>
+            <if test="ywyf != null  and ywyf != ''">ywyf = #{ywyf},</if>
+            <if test="bljcjg != null  and bljcjg != ''">bljcjg = #{bljcjg},</if>
+            <if test="ftcd != null ">ftcd = #{ftcd},</if>
+            <if test="fxcs != null  and fxcs != ''">fxcs = #{fxcs},</if>
+            <if test="otcs != null  and otcs != ''">otcs = #{otcs},</if>
+            <if test="ylywlb != null ">ylywlb = #{ylywlb},</if>
+            <if test="lcff != null ">lcff = #{lcff},</if>
+            <if test="pnzj != null  and pnzj != ''">pnzj = #{pnzj},</if>
+            <if test="jzbw != null ">jzbw = #{jzbw},</if>
+            <if test="jzfs != null ">jzfs = #{jzfs},</if>
+            <if test="pxmzyc != null ">pxmzyc = #{pxmzyc},</if>
+            <if test="pxmzbw != null ">pxmzbw = #{pxmzbw},</if>
+            <if test="pxmznx != null  and pxmznx != ''">pxmznx = #{pxmznx},</if>
+            <if test="pxmzsq != null ">pxmzsq = #{pxmzsq},</if>
+            <if test="gnjyqzl != null ">gnjyqzl = #{gnjyqzl},</if>
+            <if test="gnjyqycms != null  and gnjyqycms != ''">gnjyqycms = #{gnjyqycms},</if>
+            <if test="gnjyqyc != null ">gnjyqyc = #{gnjyqyc},</if>
+            <if test="gnjyqfzsq != null ">gnjyqfzsq = #{gnjyqfzsq},</if>
+            <if test="gnjyqfznx != null  and gnjyqfznx != ''">gnjyqfznx = #{gnjyqfznx},</if>
+            <if test="rmcxxjs != null  and rmcxxjs != ''">rmcxxjs = #{rmcxxjs},</if>
+            <if test="nrssyjg != null  and nrssyjg != ''">nrssyjg = #{nrssyjg},</if>
+            <if test="yclcjg != null  and yclcjg != ''">yclcjg = #{yclcjg},</if>
+            <if test="zclcjg != null  and zclcjg != ''">zclcjg = #{zclcjg},</if>
+            <if test="ycslgjcjg != null  and ycslgjcjg != ''">ycslgjcjg = #{ycslgjcjg},</if>
+            <if test="zcslgjcjg != null  and zcslgjcjg != ''">zcslgjcjg = #{zcslgjcjg},</if>
+            <if test="zgdx != null ">zgdx = #{zgdx},</if>
+            <if test="zgwz != null ">zgwz = #{zgwz},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChJhsyById" parameterType="Long">
+        delete from tb_ch_jhsy where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChJhsyByIds" parameterType="String">
+        delete from tb_ch_jhsy where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

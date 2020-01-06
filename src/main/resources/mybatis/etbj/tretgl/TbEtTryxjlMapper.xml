@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.tretgl.tryxjl.mapper.TbEtTryxjlMapper">
+    
+    <resultMap type="TbEtTryxjl" id="TbEtTryxjlResult">
+        <result property="id"    column="id"    />
+        <result property="fzxm"    column="fzxm"    />
+        <result property="jcjg"    column="jcjg"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcry"    column="jcry"    />
+        <result property="jcjgmc"    column="jcjgmc"    />
+        <result property="djid"    column="djid"    />
+    </resultMap>
+
+    <sql id="selectTbEtTryxjlVo">
+        select id, fzxm, jcjg, jcrq, jcry, jcjgmc, djid from tb_et_tryxjl
+    </sql>
+
+    <select id="selectTbEtTryxjlList" parameterType="TbEtTryxjlVo" resultType="TbEtTryxjlVo">
+        select jl.id, jl.fzxm, jl.jcjg, jl.jcrq, jl.jcry, jl.jcjgmc, jl.djid,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_tryxjl jl inner join tb_et_tretdj dj  on jl.djid=dj.id
+        <where>  
+            <if test="fzxm != null  and fzxm != ''"> and jl.fzxm = #{fzxm}</if>
+            <if test="jcjg != null  and jcjg != ''"> and jl.jcjg = #{jcjg}</if>
+            <if test="jcrq != null "> and jl.jcrq = #{jcrq}</if>
+            <if test="jcry != null  and jcry != ''"> and jl.jcry = #{jcry}</if>
+            <if test="jcjgmc != null  and jcjgmc != ''"> and jl.jcjgmc = #{jcjgmc}</if>
+            <if test="djid != null "> and jl.djid = #{djid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtTryxjlById" parameterType="Long" resultType="TbEtTryxjlVo">
+        select jl.id, jl.fzxm, jl.jcjg, jl.jcrq, jl.jcry, jl.jcjgmc, jl.djid,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_tryxjl jl inner join tb_et_tretdj dj  on jl.djid=dj.id
+        where jl.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtTryxjl" parameterType="TbEtTryxjl" useGeneratedKeys="true">
+        insert into tb_et_tryxjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fzxm != null  and fzxm != ''">fzxm,</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcry != null  and jcry != ''">jcry,</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc,</if>
+            <if test="djid != null ">djid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fzxm != null  and fzxm != ''">#{fzxm},</if>
+            <if test="jcjg != null  and jcjg != ''">#{jcjg},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">#{jcry},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">#{jcjgmc},</if>
+            <if test="djid != null ">#{djid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtTryxjl" parameterType="TbEtTryxjl">
+        update tb_et_tryxjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fzxm != null  and fzxm != ''">fzxm = #{fzxm},</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg = #{jcjg},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">jcry = #{jcry},</if>
+            <if test="jcjgmc != null  and jcjgmc != ''">jcjgmc = #{jcjgmc},</if>
+            <if test="djid != null ">djid = #{djid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtTryxjlById" parameterType="Long">
+        delete from tb_et_tryxjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtTryxjlByIds" parameterType="String">
+        delete from tb_et_tryxjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

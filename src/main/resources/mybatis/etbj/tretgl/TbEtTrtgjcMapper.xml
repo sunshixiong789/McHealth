@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.tretgl.trtgjc.mapper.TbEtTrtgjcMapper">
+    
+    <resultMap type="TbEtTrtgjc" id="TbEtTrtgjcResult">
+        <result property="id"    column="id"    />
+        <result property="djid"    column="djid"    />
+        <result property="wxjlid"    column="wxjlid"    />
+        <result property="zz"    column="zz"    />
+        <result property="tzz"    column="tzz"    />
+        <result property="jcrq"    column="jcrq"    />
+        <result property="jcry"    column="jcry"    />
+        <result property="jcjg"    column="jcjg"    />
+    </resultMap>
+
+    <sql id="selectTbEtTrtgjcVo">
+        select id, djid, wxjlid, zz, tzz, jcrq, jcry, jcjg from tb_et_trtgjc
+    </sql>
+
+    <select id="selectTbEtTrtgjcList" parameterType="TbEtTrtgjcVo" resultType="TbEtTrtgjcVo">
+        select jc.id, jc.djid, jc.wxjlid, jc.zz, jc.tzz, jc.jcrq, jc.jcry, jc.jcjg,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_trtgjc jc inner join tb_et_tretdj dj  on jc.djid=dj.id
+        <where>  
+            <if test="djid != null "> and jc.djid = #{djid}</if>
+            <if test="wxjlid != null "> and jc.wxjlid = #{wxjlid}</if>
+            <if test="zz != null  and zz != ''"> and jc.zz = #{zz}</if>
+            <if test="tzz != null  and tzz != ''"> and jc.tzz = #{tzz}</if>
+            <if test="jcrq != null "> and jc.jcrq = #{jcrq}</if>
+            <if test="jcry != null  and jcry != ''"> and jc.jcry = #{jcry}</if>
+            <if test="jcjg != null  and jcjg != ''"> and jc.jcjg = #{jcjg}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtTrtgjcById" parameterType="Long" resultType="TbEtTrtgjcVo">
+       select jc.id, jc.djid, jc.wxjlid, jc.zz, jc.tzz, jc.jcrq, jc.jcry, jc.jcjg,dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_trtgjc jc inner join tb_et_tretdj dj  on jc.djid=dj.id
+        where jc.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtTrtgjc" parameterType="TbEtTrtgjc" useGeneratedKeys="true">
+        insert into tb_et_trtgjc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">djid,</if>
+            <if test="wxjlid != null ">wxjlid,</if>
+            <if test="zz != null  and zz != ''">zz,</if>
+            <if test="tzz != null  and tzz != ''">tzz,</if>
+            <if test="jcrq != null ">jcrq,</if>
+            <if test="jcry != null  and jcry != ''">jcry,</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="djid != null ">#{djid},</if>
+            <if test="wxjlid != null ">#{wxjlid},</if>
+            <if test="zz != null  and zz != ''">#{zz},</if>
+            <if test="tzz != null  and tzz != ''">#{tzz},</if>
+            <if test="jcrq != null ">#{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">#{jcry},</if>
+            <if test="jcjg != null  and jcjg != ''">#{jcjg},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtTrtgjc" parameterType="TbEtTrtgjc">
+        update tb_et_trtgjc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="djid != null ">djid = #{djid},</if>
+            <if test="wxjlid != null ">wxjlid = #{wxjlid},</if>
+            <if test="zz != null  and zz != ''">zz = #{zz},</if>
+            <if test="tzz != null  and tzz != ''">tzz = #{tzz},</if>
+            <if test="jcrq != null ">jcrq = #{jcrq},</if>
+            <if test="jcry != null  and jcry != ''">jcry = #{jcry},</if>
+            <if test="jcjg != null  and jcjg != ''">jcjg = #{jcjg},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtTrtgjcById" parameterType="Long">
+        delete from tb_et_trtgjc where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtTrtgjcByIds" parameterType="String">
+        delete from tb_et_trtgjc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

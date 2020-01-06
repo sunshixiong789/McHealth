@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.xsefs.xsefsdj.mapper.TbEtXsefsdjMapper">
+    
+    <resultMap type="TbEtXsefsdj" id="TbEtXsefsdjResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="xbdm"    column="xbdm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqxm"    column="mqxm"    />
+        <result property="mqcsrq"    column="mqcsrq"    />
+        <result property="mqsfzj"    column="mqsfzj"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="xzqhdm"    column="xzqhdm"    />
+        <result property="dzsheng"    column="dzsheng"    />
+        <result property="dzshi"    column="dzshi"    />
+        <result property="dzxian"    column="dzxian"    />
+        <result property="dzxiang"    column="dzxiang"    />
+        <result property="dzcun"    column="dzcun"    />
+        <result property="dzmp"    column="dzmp"    />
+        <result property="yzbm"    column="yzbm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="xzz"    column="xzz"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="healthFileId"    column="healthFileId"    />
+    </resultMap>
+
+    <sql id="selectTbEtXsefsdjVo">
+        select id, xm, xbdm, csrq, mqxm, mqcsrq, mqsfzj, mqsfzjhm, xzqhdm, dzsheng, dzshi, dzxian, dzxiang, dzcun, dzmp, yzbm, lxfs,xzz,djrq,healthFileId from tb_et_xsefsdj
+    </sql>
+
+    <select id="selectTbEtXsefsdjList" parameterType="TbEtXsefsdj" resultMap="TbEtXsefsdjResult">
+        <include refid="selectTbEtXsefsdjVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="xbdm != null  and xbdm != ''"> and xbdm = #{xbdm}</if>
+            <if test="csrq != null and csrq!=''"> and csrq = #{csrq}</if>
+            <if test="mqxm != null  and mqxm != ''"> and mqxm = #{mqxm}</if>
+            <if test="mqcsrq != null "> and mqcsrq = #{mqcsrq}</if>
+            <if test="mqsfzj != null  and mqsfzj != ''"> and mqsfzj = #{mqsfzj}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="xzqhdm != null  and xzqhdm != ''"> and xzqhdm = #{xzqhdm}</if>
+            <if test="dzsheng != null  and dzsheng != ''"> and dzsheng = #{dzsheng}</if>
+            <if test="dzshi != null  and dzshi != ''"> and dzshi = #{dzshi}</if>
+            <if test="dzxian != null  and dzxian != ''"> and dzxian = #{dzxian}</if>
+            <if test="dzxiang != null  and dzxiang != ''"> and dzxiang = #{dzxiang}</if>
+            <if test="dzcun != null  and dzcun != ''"> and dzcun = #{dzcun}</if>
+            <if test="dzmp != null  and dzmp != ''"> and dzmp = #{dzmp}</if>
+            <if test="yzbm != null  and yzbm != ''"> and yzbm = #{yzbm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="xzz != null  and xzz != ''"> and xzz = #{lxfs}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="healthFileId != null "> and healthFileId = #{healthFileId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtXsefsdjById" parameterType="Long" resultMap="TbEtXsefsdjResult">
+        <include refid="selectTbEtXsefsdjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbEtXsefsdj" parameterType="TbEtXsefsdj" useGeneratedKeys="true">
+        insert into tb_et_xsefsdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="xbdm != null  and xbdm != ''">xbdm,</if>
+            <if test="csrq != null and csrq!=''">csrq,</if>
+            <if test="mqxm != null  and mqxm != ''">mqxm,</if>
+            <if test="mqcsrq != null ">mqcsrq,</if>
+            <if test="mqsfzj != null  and mqsfzj != ''">mqsfzj,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="xzqhdm != null  and xzqhdm != ''">xzqhdm,</if>
+            <if test="dzsheng != null  and dzsheng != ''">dzsheng,</if>
+            <if test="dzshi != null  and dzshi != ''">dzshi,</if>
+            <if test="dzxian != null  and dzxian != ''">dzxian,</if>
+            <if test="dzxiang != null  and dzxiang != ''">dzxiang,</if>
+            <if test="dzcun != null  and dzcun != ''">dzcun,</if>
+            <if test="dzmp != null  and dzmp != ''">dzmp,</if>
+            <if test="yzbm != null  and yzbm != ''">yzbm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="xzz != null  and xzz != ''"> xzz,</if>
+            <if test="djrq != null">djrq,</if>
+            <if test="healthFileId != null ">healthFileId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="xbdm != null  and xbdm != ''">#{xbdm},</if>
+            <if test="csrq != null and csrq!=''">#{csrq},</if>
+            <if test="mqxm != null  and mqxm != ''">#{mqxm},</if>
+            <if test="mqcsrq != null ">#{mqcsrq},</if>
+            <if test="mqsfzj != null  and mqsfzj != ''">#{mqsfzj},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="xzqhdm != null  and xzqhdm != ''">#{xzqhdm},</if>
+            <if test="dzsheng != null  and dzsheng != ''">#{dzsheng},</if>
+            <if test="dzshi != null  and dzshi != ''">#{dzshi},</if>
+            <if test="dzxian != null  and dzxian != ''">#{dzxian},</if>
+            <if test="dzxiang != null  and dzxiang != ''">#{dzxiang},</if>
+            <if test="dzcun != null  and dzcun != ''">#{dzcun},</if>
+            <if test="dzmp != null  and dzmp != ''">#{dzmp},</if>
+            <if test="yzbm != null  and yzbm != ''">#{yzbm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="xzz != null  and xzz != ''"> #{xzz},</if>
+            <if test="djrq != null">#{djrq},</if>
+            <if test="healthFileId != null ">#{healthFileId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtXsefsdj" parameterType="TbEtXsefsdj">
+        update tb_et_xsefsdj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mqcsrq != null ">mqcsrq = #{mqcsrq},</if>
+            <if test="dzsheng != null  and dzsheng != ''">dzsheng = #{dzsheng},</if>
+            <if test="dzshi != null  and dzshi != ''">dzshi = #{dzshi},</if>
+            <if test="dzxian != null  and dzxian != ''">dzxian = #{dzxian},</if>
+            <if test="dzxiang != null  and dzxiang != ''">dzxiang = #{dzxiang},</if>
+            <if test="dzcun != null  and dzcun != ''">dzcun = #{dzcun},</if>
+            <if test="dzmp != null  and dzmp != ''">dzmp = #{dzmp},</if>
+            <if test="yzbm != null  and yzbm != ''">yzbm = #{yzbm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="xzz != null  and xzz != ''"> xzz = #{xzz},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtXsefsdjById" parameterType="Long">
+        delete from tb_et_xsefsdj where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtXsefsdjByIds" parameterType="String">
+        delete from tb_et_xsefsdj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

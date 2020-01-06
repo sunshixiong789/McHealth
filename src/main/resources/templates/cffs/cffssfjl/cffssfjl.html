@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('产妇访视随访记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                           <!-- <li>
+                                <p>妇女访视登记id：</p>
+                                <input type="text" name="healthfileid"/>
+                            </li>-->
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="chName"/>
+                            </li>
+                            <li class="select-time">
+                                <p>访视日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginChFsrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endChFsrq]"/>
+                            </li>
+                            <li>
+                                <p>访视人员姓名：</p>
+                                <input type="text" name="chFsryxm"/>
+                            </li>
+                            <li>
+                                <p>访视机构姓名：</p>
+                                <input type="text" name="chFsjgmc"/>
+                            </li>
+                            <li>
+                                <p>产后天数：</p>
+                                <input type="text" name="chChts"/>
+                            </li>
+                            <li>
+                                <p>体温：</p>
+                                <input type="text" name="chTw"/>
+                            </li>
+                            <li>
+                                <p>收缩压：</p>
+                                <input type="text" name="chSsy"/>
+                            </li>
+                            <li>
+                                <p>舒张压：</p>
+                                <input type="text" name="chSzy"/>
+                            </li>
+                            <li>
+                                <p>乳头检查结果：</p>
+                                <input type="text" name="chRtjcjg"/>
+                            </li>
+                          <!--  <li>
+                                <p>乳汁量代码：</p>
+                                <input type="text" name="chRzldm"/>
+                            </li>-->
+                            <li>
+                                <p>宫底高度：</p>
+                                <input type="text" name="chGdgd"/>
+                            </li>
+                          <!--  <li>
+                                <p>伤口愈合状况代码：</p>
+                                <input type="text" name="chSkyhzkdm"/>
+                            </li>-->
+                            <li>
+                                <p>恶露状况：</p>
+                                <input type="text" name="chElzk"/>
+                            </li>
+                           <!-- <li>
+                                <p>大便状况记录：</p>
+                                <input type="text" name="chDbzkjl"/>
+                            </li>
+                            <li>
+                                <p>小便状况记录：</p>
+                                <input type="text" name="chXbzkjl"/>
+                            </li>
+                            <li>
+                                <p>特殊情况记录：</p>
+                                <input type="text" name="chTsqkjl"/>
+                            </li>
+                            <li>
+                                <p>宣教内容：</p>
+                                <input type="text" name="chXjnr"/>
+                            </li>
+                            <li class="select-time">
+                                <p>填表日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginChTbrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endChTbrq]"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="cffs:cffssfjl:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="cffs:cffssfjl:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="cffs:cffssfjl:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="cffs:cffssfjl:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('cffs:cffssfjl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('cffs:cffssfjl:remove')}]];
+        var prefix = ctx + "cffs/cffssfjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "产妇访视随访记录",
+                columns: [{
+                    checkbox: true
+                },
+               /* {
+                    field : 'chId', 
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'healthfileid', 
+                    title : '妇女档案id'
+                },*/
+                {
+                    field : 'chName', 
+                    title : '姓名'
+                },
+                {
+                    field : 'chFsrq', 
+                    title : '访视日期'
+                },
+                {
+                    field : 'chFsryxm', 
+                    title : '访视人员姓名'
+                },
+                {
+                    field : 'chFsjgmc', 
+                    title : '访视机构姓名'
+                },
+                {
+                    field : 'chChts', 
+                    title : '产后天数'
+                },
+                {
+                    field : 'chTw', 
+                    title : '体温'
+                },
+                {
+                    field : 'chSsy', 
+                    title : '收缩压'
+                },
+                {
+                    field : 'chSzy', 
+                    title : '舒张压'
+                },
+                {
+                    field : 'chRtjcjg', 
+                    title : '乳头检查结果'
+                },
+               /* {
+                    field : 'chRzldm', 
+                    title : '乳汁量代码'
+                },*/
+                {
+                    field : 'chGdgd', 
+                    title : '宫底高度'
+                },
+              /*  {
+                    field : 'chSkyhzkdm', 
+                    title : '伤口愈合状况代码'
+                },*/
+                {
+                    field : 'chElzk', 
+                    title : '恶露状况'
+                },
+               /* {
+                    field : 'chDbzkjl', 
+                    title : '大便状况记录'
+                },
+                {
+                    field : 'chXbzkjl', 
+                    title : '小便状况记录'
+                },
+                {
+                    field : 'chTsqkjl', 
+                    title : '特殊情况记录'
+                },
+                {
+                    field : 'chXjnr', 
+                    title : '宣教内容'
+                },
+                {
+                    field : 'chTbrq', 
+                    title : '填表日期'
+                },*/
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.chId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.chId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

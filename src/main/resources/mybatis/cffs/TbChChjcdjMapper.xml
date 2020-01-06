@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.chjc.chjcdj.mapper.TbChChjcdjMapper">
+    
+    <resultMap type="TbChChjcdj" id="TbChChjcdjResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mz"    column="mz"    />
+        <result property="whcd"    column="whcd"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="xzqhdm"    column="xzqhdm"    />
+        <result property="dzsheng"    column="dzsheng"    />
+        <result property="dzshi"    column="dzshi"    />
+        <result property="dzxian"    column="dzxian"    />
+        <result property="dzxiang"    column="dzxiang"    />
+        <result property="dzcun"    column="dzcun"    />
+        <result property="dzmp"    column="dzmp"    />
+        <result property="yzbm"    column="yzbm"    />
+        <result property="lxfs"    column="lxfs"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="healthfileid"    column="healthFileId"    />
+        <result property="dzlbdm"    column="dzlbdm"    />
+        <result property="mqsfzjlbdm"    column="mqsfzjlbdm"    />
+    </resultMap>
+
+    <sql id="selectTbChChjcdjVo">
+        select id, xm, csrq, mz, whcd, mqsfzjhm, xzqhdm, dzsheng, dzshi, dzxian, dzxiang, dzcun, dzmp, yzbm, lxfs, djrq, healthFileId, dzlbdm, mqsfzjlbdm from tb_ch_chjcdj
+    </sql>
+
+    <select id="selectTbChChjcdjList" parameterType="TbChChjcdj" resultMap="TbChChjcdjResult">
+        <include refid="selectTbChChjcdjVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mz != null  and mz != ''"> and mz = #{mz}</if>
+            <if test="whcd != null  and whcd != ''"> and whcd = #{whcd}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="xzqhdm != null  and xzqhdm != ''"> and xzqhdm = #{xzqhdm}</if>
+            <if test="dzsheng != null  and dzsheng != ''"> and dzsheng = #{dzsheng}</if>
+            <if test="dzshi != null  and dzshi != ''"> and dzshi = #{dzshi}</if>
+            <if test="dzxian != null  and dzxian != ''"> and dzxian = #{dzxian}</if>
+            <if test="dzxiang != null  and dzxiang != ''"> and dzxiang = #{dzxiang}</if>
+            <if test="dzcun != null  and dzcun != ''"> and dzcun = #{dzcun}</if>
+            <if test="dzmp != null  and dzmp != ''"> and dzmp = #{dzmp}</if>
+            <if test="yzbm != null  and yzbm != ''"> and yzbm = #{yzbm}</if>
+            <if test="lxfs != null  and lxfs != ''"> and lxfs = #{lxfs}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="healthfileid != null "> and healthFileId = #{healthfileid}</if>
+            <if test="dzlbdm != null  and dzlbdm != ''"> and dzlbdm = #{dzlbdm}</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''"> and mqsfzjlbdm = #{mqsfzjlbdm}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChChjcdjById" parameterType="Long" resultMap="TbChChjcdjResult">
+        <include refid="selectTbChChjcdjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChChjcdj" parameterType="TbChChjcdj" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_chjcdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mz != null  and mz != ''">mz,</if>
+            <if test="whcd != null  and whcd != ''">whcd,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="xzqhdm != null  and xzqhdm != ''">xzqhdm,</if>
+            <if test="dzsheng != null  and dzsheng != ''">dzsheng,</if>
+            <if test="dzshi != null  and dzshi != ''">dzshi,</if>
+            <if test="dzxian != null  and dzxian != ''">dzxian,</if>
+            <if test="dzxiang != null  and dzxiang != ''">dzxiang,</if>
+            <if test="dzcun != null  and dzcun != ''">dzcun,</if>
+            <if test="dzmp != null  and dzmp != ''">dzmp,</if>
+            <if test="yzbm != null  and yzbm != ''">yzbm,</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs,</if>
+            <if test="djrq != null ">djrq,</if>
+            <if test="healthfileid != null ">healthFileId,</if>
+            <if test="dzlbdm != null  and dzlbdm != ''">dzlbdm,</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mz != null  and mz != ''">#{mz},</if>
+            <if test="whcd != null  and whcd != ''">#{whcd},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="xzqhdm != null  and xzqhdm != ''">#{xzqhdm},</if>
+            <if test="dzsheng != null  and dzsheng != ''">#{dzsheng},</if>
+            <if test="dzshi != null  and dzshi != ''">#{dzshi},</if>
+            <if test="dzxian != null  and dzxian != ''">#{dzxian},</if>
+            <if test="dzxiang != null  and dzxiang != ''">#{dzxiang},</if>
+            <if test="dzcun != null  and dzcun != ''">#{dzcun},</if>
+            <if test="dzmp != null  and dzmp != ''">#{dzmp},</if>
+            <if test="yzbm != null  and yzbm != ''">#{yzbm},</if>
+            <if test="lxfs != null  and lxfs != ''">#{lxfs},</if>
+            <if test="djrq != null ">#{djrq},</if>
+            <if test="healthfileid != null ">#{healthfileid},</if>
+            <if test="dzlbdm != null  and dzlbdm != ''">#{dzlbdm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">#{mqsfzjlbdm},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChChjcdj" parameterType="TbChChjcdj">
+        update tb_ch_chjcdj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mz != null  and mz != ''">mz = #{mz},</if>
+            <if test="whcd != null  and whcd != ''">whcd = #{whcd},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="xzqhdm != null  and xzqhdm != ''">xzqhdm = #{xzqhdm},</if>
+            <if test="dzsheng != null  and dzsheng != ''">dzsheng = #{dzsheng},</if>
+            <if test="dzshi != null  and dzshi != ''">dzshi = #{dzshi},</if>
+            <if test="dzxian != null  and dzxian != ''">dzxian = #{dzxian},</if>
+            <if test="dzxiang != null  and dzxiang != ''">dzxiang = #{dzxiang},</if>
+            <if test="dzcun != null  and dzcun != ''">dzcun = #{dzcun},</if>
+            <if test="dzmp != null  and dzmp != ''">dzmp = #{dzmp},</if>
+            <if test="yzbm != null  and yzbm != ''">yzbm = #{yzbm},</if>
+            <if test="lxfs != null  and lxfs != ''">lxfs = #{lxfs},</if>
+            <if test="djrq != null ">djrq = #{djrq},</if>
+            <if test="healthfileid != null ">healthFileId = #{healthfileid},</if>
+            <if test="dzlbdm != null  and dzlbdm != ''">dzlbdm = #{dzlbdm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm = #{mqsfzjlbdm},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChChjcdjById" parameterType="Long">
+        delete from tb_ch_chjcdj where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChChjcdjByIds" parameterType="String">
+        delete from tb_ch_chjcdj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.tretgl.trpgbg.mapper.TbEtTrpgbgMapper">
+    
+    <resultMap type="TbEtTrpgbg" id="TbEtTrpgbgResult">
+        <result property="id"    column="id"    />
+        <result property="gzdm"    column="gzdm"    />
+        <result property="jarq"    column="jarq"    />
+        <result property="jays"    column="jays"    />
+        <result property="jajg"    column="jajg"    />
+        <result property="djid"    column="djid"    />
+    </resultMap>
+
+    <sql id="selectTbEtTrpgbgVo">
+        select id, gzdm, jarq, jays, jajg, djid from tb_et_trpgbg
+    </sql>
+
+    <select id="selectTbEtTrpgbgList" parameterType="TbEtTrpgbgVo" resultType="TbEtTrpgbgVo">
+        select bg.id, bg.gzdm, bg.jarq, bg.jays, bg.jajg, bg.djid, dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_trpgbg bg inner join tb_et_tretdj dj  on bg.djid=dj.id
+        <where>  
+            <if test="gzdm != null "> and bg.gzdm = #{gzdm}</if>
+            <if test="jarq != null "> and bg.jarq = #{jarq}</if>
+            <if test="jays != null  and jays != ''"> and bg.jays = #{jays}</if>
+            <if test="jajg != null  and jajg != ''"> and bg.jajg = #{jajg}</if>
+            <if test="djid != null "> and bg.djid = #{djid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtTrpgbgById" parameterType="Long" resultType="TbEtTrpgbgVo">
+        select bg.id, bg.gzdm, bg.jarq, bg.jays, bg.jajg, bg.djid, dj.xm, dj.xbdm, dj.csrq, dj.mqxm,dj.mqxm
+        from tb_et_trpgbg bg inner join tb_et_tretdj dj  on bg.djid=dj.id
+        where bg.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtTrpgbg" parameterType="TbEtTrpgbg" useGeneratedKeys="true" keyColumn="id">
+        insert into tb_et_trpgbg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="gzdm != null ">gzdm,</if>
+            <if test="jarq != null ">jarq,</if>
+            <if test="jays != null  and jays != ''">jays,</if>
+            <if test="jajg != null  and jajg != ''">jajg,</if>
+            <if test="djid != null ">djid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="gzdm != null ">#{gzdm},</if>
+            <if test="jarq != null ">#{jarq},</if>
+            <if test="jays != null  and jays != ''">#{jays},</if>
+            <if test="jajg != null  and jajg != ''">#{jajg},</if>
+            <if test="djid != null ">#{djid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtTrpgbg" parameterType="TbEtTrpgbg">
+        update tb_et_trpgbg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gzdm != null ">gzdm = #{gzdm},</if>
+            <if test="jarq != null ">jarq = #{jarq},</if>
+            <if test="jays != null  and jays != ''">jays = #{jays},</if>
+            <if test="jajg != null  and jajg != ''">jajg = #{jajg},</if>
+            <if test="djid != null ">djid = #{djid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtTrpgbgById" parameterType="Long">
+        delete from tb_et_trpgbg where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtTrpgbgByIds" parameterType="String">
+        delete from tb_et_trpgbg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

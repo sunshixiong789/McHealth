@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增产前诊断诊断记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-cqzdzdjl-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input class="form-control" type="text" onclick="listFsdj()" id="xm" name="xm" readonly placeholder="选择登记信息" required>
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input id="csrq" name="csrq" class="form-control" placeholder="yyyy-MM-dd" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">身份证件-号码：</label>
+                <div class="col-sm-8">
+                    <input id="mqsfzjhm" name="mqsfzjhm" class="form-control" type="text" readonly>
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">身份证件-类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="mqsfzjlbdm" class="form-control" type="text">
+                </div>
+            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">诊断项目：</label>
+                <div class="col-sm-8">
+                    <input name="zdxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">诊断结果：</label>
+                <div class="col-sm-8">
+                    <input name="zdjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">诊断日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="zdrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产前诊断医师姓名：</label>
+                <div class="col-sm-8">
+                    <input name="cqzdysxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">诊断机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="cqzdjgmc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">登记日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="djrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+           <!-- <div class="form-group">
+                <label class="col-sm-3 control-label">登记ID：</label>
+                <div class="col-sm-8">
+                    <input name="cqzddjid" class="form-control" type="text">
+                </div>
+            </div>-->
+            <input id="cqzddjid" name="cqzddjid"  type="hidden">
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cffs/cqzdzdjl"
+        $("#form-cqzdzdjl-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-cqzdzdjl-add').serialize());
+            }
+        }
+
+        $("input[name='csrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='zdrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='djrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function listFsdj() {
+            localStorage.removeItem("selectFs")
+            var title="选择登记信息";
+            var url="/cffs/cqzddj/list";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectFs");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return;
+            }
+            var data=JSON.parse(json);
+            $("#xm").val(data[0].xm);
+            $("#cqzddjid").val(data[0].id);
+            $("#mqsfzjhm").val(data[0].mqsfzjhm);
+            $("#csrq").val(data[0].csrq);
+            //$("#lxfs").val(data[0].lxfs);
+            layer.close(index);
+        }
+    </script>
+</body>
+</html>

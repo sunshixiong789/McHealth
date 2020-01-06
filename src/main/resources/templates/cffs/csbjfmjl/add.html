@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增分娩记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-csbjfmjl-add">
+           <!-- <div class="form-group">
+                <label class="col-sm-3 control-label">妇女档案ID：</label>
+                <div class="col-sm-8">
+                </div>
+            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="xm" class="form-control" type="text" onclick="listetda()" id="xm" readonly placeholder="选择登记信息" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input id="csrq" name="csrq" class="form-control" placeholder="yyyy-MM-dd" type="text" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">登记日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="djrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">分娩孕周：</label>
+                <div class="col-sm-8">
+                    <input name="fmyz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">分娩日期时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="fmrqsj" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">分娩方式代码：</label>
+                <div class="col-sm-8">
+                    <input name="fmfsdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总产程时长：</label>
+                <div class="col-sm-8">
+                    <input name="zccsc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">第一产程时长：</label>
+                <div class="col-sm-8">
+                    <input name="dyccsc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">第二产程时长：</label>
+                <div class="col-sm-8">
+                    <input name="deccsc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">第三产程时长：</label>
+                <div class="col-sm-8">
+                    <input name="dsccsc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产后开奶时长：</label>
+                <div class="col-sm-8">
+                    <input name="chknsc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产后天数：</label>
+                <div class="col-sm-8">
+                    <input name="chts" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产时并发症代码：</label>
+                <div class="col-sm-8">
+                    <input name="csbfzdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">分娩结局：</label>
+                <div class="col-sm-8">
+                    <input name="fmjj" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总出血量：</label>
+                <div class="col-sm-8">
+                    <input name="zcxl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产时出血量：</label>
+                <div class="col-sm-8">
+                    <input name="cscxl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产后两小时出血量：</label>
+                <div class="col-sm-8">
+                    <input name="chlxscxl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">会阴-切开标志：</label>
+                <div class="col-sm-8">
+                    <input name="hyqkbz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">会阴-缝合针数：</label>
+                <div class="col-sm-8">
+                    <input name="hyfhzs" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">会阴裂伤程度代码：</label>
+                <div class="col-sm-8">
+                    <input name="hylscddm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">危重孕产妇标志：</label>
+                <div class="col-sm-8">
+                    <input name="wzycfbz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">Apgar评分值：</label>
+                <div class="col-sm-8">
+                    <input name="apgarpfz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">妊娠合并症/并发症史：</label>
+                <div class="col-sm-8">
+                    <input name="rshbzbfzs" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生缺陷标志：</label>
+                <div class="col-sm-8">
+                    <input name="csqxbz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生缺陷类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="csqxlbdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生缺陷儿例数：</label>
+                <div class="col-sm-8">
+                    <input name="csqxels" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">新生儿并发症-标志：</label>
+                <div class="col-sm-8">
+                    <input name="xsebfzbz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">新生儿并发症-代码：</label>
+                <div class="col-sm-8">
+                    <input name="xsebfadm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">新生儿抢救标志：</label>
+                <div class="col-sm-8">
+                    <input name="xseqjbz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">新生儿抢救方法代码：</label>
+                <div class="col-sm-8">
+                    <input name="xseqjffdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">孕产妇死亡时间类别代码：</label>
+                <div class="col-sm-8">
+                    <input name="ycfswsjlbdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">助产人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="zcryxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">助产机构名称：</label>
+                <div class="col-sm-8">
+                    <input name="zcjgmc" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cffs/csbjfmjl"
+        $("#form-csbjfmjl-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-csbjfmjl-add').serialize());
+            }
+        }
+
+        $("input[name='csrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='djrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='fmrqsj']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function listetda(){
+            localStorage.removeItem("selectEtda")
+            var title="选择妇女信息";
+            var url="/jbda/fnda/listfnda";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectEtda");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return
+            }
+            var data=JSON.parse(json);
+
+            $("#xm").val(data[0].name);
+            $("#healthfileid").val(data[0].healthFileId);
+            $("#mqsfzjhm").val(data[0].cardid);
+            $("#csrq").val(data[0].birthday);
+            //$("#mz").val(data[0].nation);
+            //  $("#whcd").val(data[0].birthday);
+            layer.close(index);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('产前筛查登记列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li class="select-time">
+                                <p>出生日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCsrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCsrq]"/>
+                            </li>
+                            <!--<li>
+                                <p>身份证件-类别代码：</p>
+                                <select name="mqsfzjlbdm" th:with="type=${@dict.getType('sys_user_paperwork')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>-->
+                            <li>
+                                <p>身份证件-号码：</p>
+                                <input type="text" name="mqsfzjhm"/>
+                            </li>
+                           <!-- <li>
+                                <p>地址类别代码：</p>
+                                <input type="text" name="dzlbdm"/>
+                            </li>
+                            <li>
+                                <p>行政区划代码：</p>
+                                <input type="text" name="xzqhdm"/>
+                            </li>
+                            <li>
+                                <p>地址-省/直辖市、自治区：</p>
+                                <input type="text" name="dzsheng"/>
+                            </li>
+                            <li>
+                                <p>地址-市/地区：</p>
+                                <input type="text" name="dzshi"/>
+                            </li>
+                            <li>
+                                <p>地址-区/县：</p>
+                                <input type="text" name="dzxian"/>
+                            </li>
+                            <li>
+                                <p>地址-乡镇/街道办事处：</p>
+                                <input type="text" name="dzxiang"/>
+                            </li>
+                            <li>
+                                <p>地址-村/街/路/弄：</p>
+                                <input type="text" name="dzcun"/>
+                            </li>
+                            <li>
+                                <p>地址-门牌号码：</p>
+                                <input type="text" name="dzmp"/>
+                            </li>
+                            <li>
+                                <p>邮政编码：</p>
+                                <input type="text" name="yzbm"/>
+                            </li>
+                            <li>
+                                <p>联系电话-类别：</p>
+                                <input type="text" name="lxdhlb"/>
+                            </li>
+                            <li>
+                                <p>联系电话-类别代码：</p>
+                                <input type="text" name="lxdhlbdm"/>
+                            </li>-->
+                            <li>
+                                <p>联系方式：</p>
+                                <input type="text" name="lxfs"/>
+                            </li>
+                            <li class="select-time">
+                                <p>登记日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDjrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDjrq]"/>
+                            </li>
+                           <!-- <li>
+                                <p>档案ID：</p>
+                                <input type="text" name="healthfileid"/>
+                            </li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="formtalbe"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "cffs/cqscdj";
+        localStorage.removeItem("selectFs")//清除历史选择
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                id:"formtalbe",
+                modalName: "产前筛查登记",
+                onCheck:function(){
+                    var data = $("#formtalbe").bootstrapTable('getSelections');
+                    localStorage.setItem("selectFs", JSON.stringify(data));
+                },
+                onUncheck:function(){
+                    localStorage.removeItem("selectFs")//清除历史选择
+                },
+                columns: [{
+                    radio: true
+                },
+                {
+                    field : 'id', 
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'xm', 
+                    title : '姓名'
+                },
+                {
+                    field : 'csrq', 
+                    title : '出生日期'
+                },
+               /* {
+                    field : 'mqsfzjlbdm', 
+                    title : '身份证件-类别代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(mqsfzjlbdmDatas, value);
+                    }
+                },*/
+                {
+                    field : 'mqsfzjhm', 
+                    title : '身份证件-号码'
+                },
+                /*{
+                    field : 'dzlbdm', 
+                    title : '地址类别代码'
+                },
+                {
+                    field : 'xzqhdm', 
+                    title : '行政区划代码'
+                },
+                {
+                    field : 'dzsheng', 
+                    title : '地址-省/直辖市、自治区'
+                },
+                {
+                    field : 'dzshi', 
+                    title : '地址-市/地区'
+                },
+                {
+                    field : 'dzxian', 
+                    title : '地址-区/县'
+                },
+                {
+                    field : 'dzxiang', 
+                    title : '地址-乡镇/街道办事处'
+                },
+                {
+                    field : 'dzcun', 
+                    title : '地址-村/街/路/弄'
+                },
+                {
+                    field : 'dzmp', 
+                    title : '地址-门牌号码'
+                },
+                {
+                    field : 'yzbm', 
+                    title : '邮政编码'
+                },
+                {
+                    field : 'lxdhlb', 
+                    title : '联系电话-类别'
+                },
+                {
+                    field : 'lxdhlbdm', 
+                    title : '联系电话-类别代码'
+                },*/
+                {
+                    field : 'lxfs', 
+                    title : '联系方式'
+                },
+                {
+                    field : 'djrq', 
+                    title : '登记日期'
+                }
+               /* {
+                    field : 'healthfileid', 
+                    title : '档案ID'
+                },*/
+                ]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

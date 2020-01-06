@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.fnbj.cqzd.cqzdyxzd.mapper.TbChCqzdyxzdMapper">
+    
+    <resultMap type="TbChCqzdyxzd" id="TbChCqzdyxzdResult">
+        <result property="id"    column="id"    />
+        <result property="xm"    column="xm"    />
+        <result property="csrq"    column="csrq"    />
+        <result property="mqsfzjhm"    column="mqsfzjhm"    />
+        <result property="mqsfzjlbdm"    column="mqsfzjlbdm"    />
+        <result property="cqzdyxyj"    column="cqzdyxyj"    />
+        <result property="cqzdysxm"    column="cqzdysxm"    />
+        <result property="cqzdjgmc"    column="cqzdjgmc"    />
+        <result property="djrq"    column="djrq"    />
+        <result property="cqzddjid"    column="cqzddjid"    />
+    </resultMap>
+
+    <sql id="selectTbChCqzdyxzdVo">
+        select id, xm, csrq, mqsfzjhm, mqsfzjlbdm, cqzdyxyj, cqzdysxm, cqzdjgmc, djrq, cqzddjid from tb_ch_cqzdyxzd
+    </sql>
+
+    <select id="selectTbChCqzdyxzdList" parameterType="TbChCqzdyxzd" resultMap="TbChCqzdyxzdResult">
+        <include refid="selectTbChCqzdyxzdVo"/>
+        <where>  
+            <if test="xm != null  and xm != ''"> and xm = #{xm}</if>
+            <if test="csrq != null "> and csrq = #{csrq}</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''"> and mqsfzjhm = #{mqsfzjhm}</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''"> and mqsfzjlbdm = #{mqsfzjlbdm}</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''"> and cqzdyxyj = #{cqzdyxyj}</if>
+            <if test="cqzdysxm != null  and cqzdysxm != ''"> and cqzdysxm = #{cqzdysxm}</if>
+            <if test="cqzdjgmc != null  and cqzdjgmc != ''"> and cqzdjgmc = #{cqzdjgmc}</if>
+            <if test="djrq != null "> and djrq = #{djrq}</if>
+            <if test="cqzddjid != null "> and cqzddjid = #{cqzddjid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbChCqzdyxzdById" parameterType="Long" resultMap="TbChCqzdyxzdResult">
+        <include refid="selectTbChCqzdyxzdVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbChCqzdyxzd" parameterType="TbChCqzdyxzd" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_ch_cqzdyxzd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm,</if>
+            <if test="csrq != null ">csrq,</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm,</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm,</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''">cqzdyxyj,</if>
+            <if test="cqzdysxm != null  and cqzdysxm != ''">cqzdysxm,</if>
+            <if test="cqzdjgmc != null  and cqzdjgmc != ''">cqzdjgmc,</if>
+            <if test="djrq != null ">djrq,</if>
+            <if test="cqzddjid != null ">cqzddjid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">#{xm},</if>
+            <if test="csrq != null ">#{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">#{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">#{mqsfzjlbdm},</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''">#{cqzdyxyj},</if>
+            <if test="cqzdysxm != null  and cqzdysxm != ''">#{cqzdysxm},</if>
+            <if test="cqzdjgmc != null  and cqzdjgmc != ''">#{cqzdjgmc},</if>
+            <if test="djrq != null ">#{djrq},</if>
+            <if test="cqzddjid != null ">#{cqzddjid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbChCqzdyxzd" parameterType="TbChCqzdyxzd">
+        update tb_ch_cqzdyxzd
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xm != null  and xm != ''">xm = #{xm},</if>
+            <if test="csrq != null ">csrq = #{csrq},</if>
+            <if test="mqsfzjhm != null  and mqsfzjhm != ''">mqsfzjhm = #{mqsfzjhm},</if>
+            <if test="mqsfzjlbdm != null  and mqsfzjlbdm != ''">mqsfzjlbdm = #{mqsfzjlbdm},</if>
+            <if test="cqzdyxyj != null  and cqzdyxyj != ''">cqzdyxyj = #{cqzdyxyj},</if>
+            <if test="cqzdysxm != null  and cqzdysxm != ''">cqzdysxm = #{cqzdysxm},</if>
+            <if test="cqzdjgmc != null  and cqzdjgmc != ''">cqzdjgmc = #{cqzdjgmc},</if>
+            <if test="djrq != null ">djrq = #{djrq},</if>
+            <if test="cqzddjid != null ">cqzddjid = #{cqzddjid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbChCqzdyxzdById" parameterType="Long">
+        delete from tb_ch_cqzdyxzd where id = #{id}
+    </delete>
+
+    <delete id="deleteTbChCqzdyxzdByIds" parameterType="String">
+        delete from tb_ch_cqzdyxzd where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

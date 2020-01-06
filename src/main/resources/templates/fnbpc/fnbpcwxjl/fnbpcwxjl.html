@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('妇女病普查问询记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li>
+                                <p>身份证件-号码：</p>
+                                <input type="text" name="sfzjHm"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="fnbpc:fnbpcwxjl:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="fnbpc:fnbpcwxjl:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="fnbpc:fnbpcwxjl:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="fnbpc:fnbpcwxjl:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('fnbpc:fnbpcwxjl:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('fnbpc:fnbpcwxjl:remove')}]];
+        var fkjrxbszzdmDatas = [[${@dict.getType('fkjrxbszzdm')}]];
+        var yjcxllbdmDatas = [[${@dict.getType('sys_fn_yjl')}]];
+        var tjbzDatas = [[${@dict.getType('sys_fn_tongjing')}]];
+        var jjbzDatas = [[${@dict.getType('sys_fn_jj')}]];
+        var ssjjbzDatas = [[${@dict.getType('sys_fn_ssjj')}]];
+        var byfsdmDatas = [[${@dict.getType('byfsdm')}]];
+        var prefix = ctx + "fnbpc/fnbpcwxjl";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "妇女病普查问询记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : 'null',
+                    visible: false
+                },
+                {
+                    field : 'xm', 
+                    title : '姓名'
+                },
+                {
+                    field : 'csrq', 
+                    title : '出生日期'
+                },
+                {
+                    field : 'sfzjHm', 
+                    title : '身份证件-号码'
+                },
+                {
+                    field : 'xjcxs', 
+                    title : '性交出血史'
+                },
+                {
+                    field : 'rshbs', 
+                    title : '妊娠合并史/并发症史'
+                },
+                {
+                    field : 'jwjbs', 
+                    title : '既往疾病史'
+                },
+                {
+                    field : 'jzzls', 
+                    title : '家族肿瘤史'
+                },
+                {
+                    field : 'fkjrxbszzdm', 
+                    title : '妇科及乳腺不适症状代码',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(fkjrxbszzdmDatas, value);
+                    }
+                },
+                {
+                    field : 'ccnl', 
+                    title : '初潮年龄'
+                },
+                {
+                    field : 'yjzq', 
+                    title : '月经周期'
+                },
+                {
+                    field : 'yjcxsj', 
+                    title : '月经持续时间'
+                },
+                {
+                    field : 'yjcxllbdm', 
+                    title : '月经出血量类别',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(yjcxllbdmDatas, value);
+                    }
+                },
+                {
+                    field : 'tjbz', 
+                    title : '痛经',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(tjbzDatas, value);
+                    }
+                },
+                {
+                    field : 'mcyjrq', 
+                    title : '末次月经日期'
+                },
+                {
+                    field : 'jjbz', 
+                    title : '绝经',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(jjbzDatas, value);
+                    }
+                },
+                {
+                    field : 'ssjjbz', 
+                    title : '手术绝经',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(ssjjbzDatas, value);
+                    }
+                },
+                {
+                    field : 'jjnl', 
+                    title : '绝经年龄'
+                },
+                {
+                    field : 'yc', 
+                    title : '孕次'
+                },
+                {
+                    field : 'cc', 
+                    title : '产次'
+                },
+                {
+                    field : 'zrlccs', 
+                    title : '自然流产次数'
+                },
+                {
+                    field : 'rglccs', 
+                    title : '人工流产次数'
+                },
+                {
+                    field : 'zqyccs', 
+                    title : '中期引产次数'
+                },
+                {
+                    field : 'czcs', 
+                    title : '早产次数'
+                },
+                {
+                    field : 'ssccs', 
+                    title : '手术产次数'
+                },
+                {
+                    field : 'pgccs', 
+                    title : '剖宫产次数'
+                },
+                {
+                    field : 'stls', 
+                    title : '死胎例数'
+                },
+                {
+                    field : 'scls', 
+                    title : '死产例数'
+                },
+                {
+                    field : 'csqxrls', 
+                    title : '出生缺陷儿例数'
+                },
+                {
+                    field : 'mcrszzrq', 
+                    title : '末次妊娠终止日期'
+                },
+                {
+                    field : 'mcrszzfsdm', 
+                    title : '末次妊娠终止方式'
+                },
+                {
+                    field : 'mcfmrq', 
+                    title : '末次分娩日期'
+                },
+                {
+                    field : 'mcfmfsdm', 
+                    title : '末次分娩方式'
+                },
+                {
+                    field : 'qtycycs', 
+                    title : '其他异常孕产史'
+                },
+                {
+                    field : 'byfsdm', 
+                    title : '避孕方式',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(byfsdmDatas, value);
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增产妇访视随访记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-cffssfjl-add">
+           <div class="form-group">
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input class="form-control" type="text" onclick="listFsdj()" id="chName" name="chName" readonly placeholder="选择登记信息" required>
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">访视日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="chFsrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">访视人员姓名：</label>
+                <div class="col-sm-8">
+                    <input name="chFsryxm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">访视机构姓名：</label>
+                <div class="col-sm-8">
+                    <input name="chFsjgmc" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产后天数：</label>
+                <div class="col-sm-8">
+                    <input name="chChts" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">体温：</label>
+                <div class="col-sm-8">
+                    <input name="chTw" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收缩压：</label>
+                <div class="col-sm-8">
+                    <input name="chSsy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">舒张压：</label>
+                <div class="col-sm-8">
+                    <input name="chSzy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乳头检查结果：</label>
+                <div class="col-sm-8">
+                    <input name="chRtjcjg" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">乳汁量代码：</label>
+                <div class="col-sm-8">
+                    <input name="chRzldm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宫底高度：</label>
+                <div class="col-sm-8">
+                    <input name="chGdgd" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">伤口愈合状况代码：</label>
+                <div class="col-sm-8">
+                    <input name="chSkyhzkdm" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">恶露状况：</label>
+                <div class="col-sm-8">
+                    <input name="chElzk" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">大便状况记录：</label>
+                <div class="col-sm-8">
+                    <input name="chDbzkjl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">小便状况记录：</label>
+                <div class="col-sm-8">
+                    <input name="chXbzkjl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">特殊情况记录：</label>
+                <div class="col-sm-8">
+                    <input name="chTsqkjl" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宣教内容：</label>
+                <div class="col-sm-8">
+                    <input name="chXjnr" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">填表日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="chTbrq" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="healthfileid" id="healthfileid">
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "cffs/cffssfjl"
+        $("#form-cffssfjl-add").validate({
+            focusCleanup: true
+        });
+        $("input[name='chFsrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='chTbrq']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function listFsdj() {
+            localStorage.removeItem("selectFs")
+            var title="选择访视登记信息";
+            var url="/cffs/cffsdj/list";
+            //如果是移动端，就使用自适应大小弹窗
+            var options = {
+                title: title,
+                width: "780",
+                url: url,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+        function doSubmit(index, layero){
+            var json=localStorage.getItem("selectFs");
+            if(!json){
+                $.modal.alertWarning("请至少选择一条记录");
+                return;
+            }
+            var data=JSON.parse(json);
+            $("#chName").val(data[0].xm);
+            $("#healthfileid").val(data[0].id)
+            layer.close(index);
+        }
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-cffssfjl-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

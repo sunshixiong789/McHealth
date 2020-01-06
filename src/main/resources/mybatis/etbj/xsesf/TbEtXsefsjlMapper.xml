@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imedcare.project.etbj.xsefs.xsefsjl.mapper.TbEtXsefsjlMapper">
+    
+    <resultMap type="TbEtXsefsjl" id="TbEtXsefsjlResult">
+        <result property="id"    column="id"    />
+        <result property="fsdjid"    column="fsdjid"    />
+        <result property="tz"    column="tz"    />
+        <result property="sc"    column="sc"    />
+        <result property="tw"    column="tw"    />
+        <result property="hddm"    column="hddm"    />
+        <result property="wyfs"    column="wyfs"    />
+        <result property="xbzkdm"    column="xbzkdm"    />
+        <result property="xbzk"    column="xbzk"    />
+        <result property="dbzkdm"    column="dbzkdm"    />
+        <result property="dbzk"    column="dbzk"    />
+        <result property="tsqk"    column="tsqk"    />
+        <result property="tsqksm"    column="tsqksm"    />
+        <result property="bfz"    column="bfz"    />
+        <result property="bfzdm"    column="bfzdm"    />
+        <result property="zdyj"    column="zdyj"    />
+        <result property="fsrq"    column="fsrq"    />
+        <result property="jgmc"    column="jgmc"    />
+        <result property="ysxm"    column="ysxm"    />
+    </resultMap>
+
+    <select id="selectTbEtXsefsjlList" parameterType="com.imedcare.project.etbj.xsefs.xsefsjl.domain.TbEtXsefsjlVo" resultType="com.imedcare.project.etbj.xsefs.xsefsjl.domain.TbEtXsefsjlVo">
+        select jl.id, jl.fsdjid, jl.tz, jl.sc, jl.tw, jl.hddm,
+        jl.wyfs, jl.xbzkdm, jl.xbzk, jl.dbzkdm, jl.dbzk, jl.tsqk,
+        jl.tsqksm, jl.bfz, jl.bfzdm, jl.zdyj, jl.fsrq, jl.jgmc, jl.ysxm,
+        dj.mqxm,dj.lxfs,dj.dzsheng,dj.dzshi,dj.dzxian,dj.dzxiang,dj.dzcun,
+        dj.dzmp,dj.csrq,dj.xm,dj.xzz from tb_et_xsefsjl jl
+        inner join tb_et_xsefsdj dj on dj.id=jl.fsdjid
+        <where>
+            <if test="fsrq != null "> and jl.fsrq = #{fsrq}</if>
+            <if test="jgmc != null  and jgmc != ''"> and jl.jgmc = #{jgmc}</if>
+            <if test="ysxm != null  and ysxm != ''"> and jl.ysxm = #{ysxm}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbEtXsefsjlById" parameterType="Long" resultType="com.imedcare.project.etbj.xsefs.xsefsjl.domain.TbEtXsefsjlVo">
+         select jl.id, jl.fsdjid, jl.tz, jl.sc, jl.tw, jl.hddm,
+         jl.wyfs, jl.xbzkdm, jl.xbzk, jl.dbzkdm, jl.dbzk, jl.tsqk,
+         jl.tsqksm, jl.bfz, jl.bfzdm, jl.zdyj, jl.fsrq, jl.jgmc, jl.ysxm,
+         dj.mqxm,dj.lxfs,dj.dzsheng,dj.dzshi,dj.dzxian,dj.dzxiang,dj.dzcun,
+         dj.dzmp,dj.csrq,dj.xm,dj.xzz from tb_et_xsefsjl jl
+         inner join tb_et_xsefsdj dj on dj.id=jl.fsdjid
+        where jl.id = #{id}
+    </select>
+        
+    <insert id="insertTbEtXsefsjl" parameterType="TbEtXsefsjl" useGeneratedKeys="true">
+        insert into tb_et_xsefsjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="fsdjid != null ">fsdjid,</if>
+            <if test="tz != null  and tz != ''">tz,</if>
+            <if test="sc != null  and sc != ''">sc,</if>
+            <if test="tw != null  and tw != ''">tw,</if>
+            <if test="hddm != null  and hddm != ''">hddm,</if>
+            <if test="wyfs != null  and wyfs != ''">wyfs,</if>
+            <if test="xbzkdm != null  and xbzkdm != ''">xbzkdm,</if>
+            <if test="xbzk != null  and xbzk != ''">xbzk,</if>
+            <if test="dbzkdm != null  and dbzkdm != ''">dbzkdm,</if>
+            <if test="dbzk != null  and dbzk != ''">dbzk,</if>
+            <if test="tsqk != null  and tsqk != ''">tsqk,</if>
+            <if test="tsqksm != null  and tsqksm != ''">tsqksm,</if>
+            <if test="bfz != null  and bfz != ''">bfz,</if>
+            <if test="bfzdm != null  and bfzdm != ''">bfzdm,</if>
+            <if test="zdyj != null  and zdyj != ''">zdyj,</if>
+            <if test="fsrq != null ">fsrq,</if>
+            <if test="jgmc != null  and jgmc != ''">jgmc,</if>
+            <if test="ysxm != null  and ysxm != ''">ysxm,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="fsdjid != null ">#{fsdjid},</if>
+            <if test="tz != null  and tz != ''">#{tz},</if>
+            <if test="sc != null  and sc != ''">#{sc},</if>
+            <if test="tw != null  and tw != ''">#{tw},</if>
+            <if test="hddm != null  and hddm != ''">#{hddm},</if>
+            <if test="wyfs != null  and wyfs != ''">#{wyfs},</if>
+            <if test="xbzkdm != null  and xbzkdm != ''">#{xbzkdm},</if>
+            <if test="xbzk != null  and xbzk != ''">#{xbzk},</if>
+            <if test="dbzkdm != null  and dbzkdm != ''">#{dbzkdm},</if>
+            <if test="dbzk != null  and dbzk != ''">#{dbzk},</if>
+            <if test="tsqk != null  and tsqk != ''">#{tsqk},</if>
+            <if test="tsqksm != null  and tsqksm != ''">#{tsqksm},</if>
+            <if test="bfz != null  and bfz != ''">#{bfz},</if>
+            <if test="bfzdm != null  and bfzdm != ''">#{bfzdm},</if>
+            <if test="zdyj != null  and zdyj != ''">#{zdyj},</if>
+            <if test="fsrq != null ">#{fsrq},</if>
+            <if test="jgmc != null  and jgmc != ''">#{jgmc},</if>
+            <if test="ysxm != null  and ysxm != ''">#{ysxm},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbEtXsefsjl" parameterType="TbEtXsefsjl">
+        update tb_et_xsefsjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fsdjid != null ">fsdjid = #{fsdjid},</if>
+            <if test="tz != null  and tz != ''">tz = #{tz},</if>
+            <if test="sc != null  and sc != ''">sc = #{sc},</if>
+            <if test="tw != null  and tw != ''">tw = #{tw},</if>
+            <if test="hddm != null  and hddm != ''">hddm = #{hddm},</if>
+            <if test="wyfs != null  and wyfs != ''">wyfs = #{wyfs},</if>
+            <if test="xbzkdm != null  and xbzkdm != ''">xbzkdm = #{xbzkdm},</if>
+            <if test="xbzk != null  and xbzk != ''">xbzk = #{xbzk},</if>
+            <if test="dbzkdm != null  and dbzkdm != ''">dbzkdm = #{dbzkdm},</if>
+            <if test="dbzk != null  and dbzk != ''">dbzk = #{dbzk},</if>
+            <if test="tsqk != null  and tsqk != ''">tsqk = #{tsqk},</if>
+            <if test="tsqksm != null  and tsqksm != ''">tsqksm = #{tsqksm},</if>
+            <if test="bfz != null  and bfz != ''">bfz = #{bfz},</if>
+            <if test="bfzdm != null  and bfzdm != ''">bfzdm = #{bfzdm},</if>
+            <if test="zdyj != null  and zdyj != ''">zdyj = #{zdyj},</if>
+            <if test="fsrq != null ">fsrq = #{fsrq},</if>
+            <if test="jgmc != null  and jgmc != ''">jgmc = #{jgmc},</if>
+            <if test="ysxm != null  and ysxm != ''">ysxm = #{ysxm},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbEtXsefsjlById" parameterType="Long">
+        delete from tb_et_xsefsjl where id = #{id}
+    </delete>
+
+    <delete id="deleteTbEtXsefsjlByIds" parameterType="String">
+        delete from tb_et_xsefsjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

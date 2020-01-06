@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('产妇访视登记列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>姓名：</p>
+                                <input type="text" name="xm"/>
+                            </li>
+                            <li class="select-time">
+                                <p>出生日期：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCsrq]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCsrq]"/>
+                            </li>
+                            <li>
+                                <p>民族：</p>
+                                <input type="text" name="mz"/>
+                            </li>
+                            <li>
+                                <p>文化程度：</p>
+                                <input type="text" name="whcd"/>
+                            </li>
+                            <li>
+                                <p>身份证件-号码：</p>
+                                <input type="text" name="mqsfzjhm"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="cffsdjtable"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "cffs/cffsdj";
+        localStorage.removeItem("selectFs")//清除历史选择
+        $(function() {
+            var options = {
+                id:"cffsdjtable",
+                url: prefix + "/list",
+                modalName: "产妇访视登记",
+                onCheck:function(){
+                    var data = $("#cffsdjtable").bootstrapTable('getSelections');
+                    localStorage.setItem("selectFs", JSON.stringify(data));
+                },
+                onUncheck:function(){
+                    localStorage.removeItem("selectFs")//清除历史选择
+                },
+                columns: [{
+                    radio: true
+                },
+                    {
+                        field : 'id',
+                        title : '主键',
+                        visible: false
+                    },
+                    {
+                        field : 'xm',
+                        title : '姓名'
+                    },
+                    {
+                        field : 'csrq',
+                        title : '出生日期'
+                    },
+                    {
+                        field : 'mz',
+                        title : '民族'
+                    },
+                    {
+                        field : 'whcd',
+                        title : '文化程度'
+                    },
+                    {
+                        field : 'mqsfzjhm',
+                        title : '身份证件-号码'
+                    },
+                    {
+                        field : 'lxfs',
+                        title : '联系方式'
+                    }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
