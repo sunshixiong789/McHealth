@@ -32,4 +32,20 @@ public class DemoViewController {
   public String yangxing(){
     return "/demoview/yangxing/zzjl";
   }
+  @GetMapping("jianche")
+  public String jianche(){
+    return "/demoview/jianche/zzjl";
+  }
+  @GetMapping("shenghe")
+  public String shenghe(){
+    return "/demoview/shenghe/zzjl";
+  }
+  @GetMapping("pingsheng")
+  public String pingsheng(){
+    return "/demoview/pingsheng/zzjl";
+  }
+  @GetMapping("yujing")
+  public String yujing(){
+    return "/demoview/yujing/zzjl";
+  }
 }
